@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://bx213twqsep8w"]
+
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_2h2bg"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_ti6nr"]
+[ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="2_cax20"]
+[ext_resource type="Texture2D" uid="uid://7xg3vh8g2nyu" path="res://assets/sprites/guns/ak47.png" id="3_t1ocg"]
+
+[sub_resource type="Resource" id="Resource_hruqe"]
+script = ExtResource("1_2h2bg")
+bullet_type = "bullet"
+bullet_speed = 100.0
+knockback_amount = 0.2
+piercing = true
+collision_polygon_verticies = PackedVector2Array()
+
+[resource]
+script = ExtResource("1_ti6nr")
+rate_of_fire = 0.09
+damage = 15.0
+weapon_name = "AK-47"
+texture = ExtResource("3_t1ocg")
+position = Vector2(0, 4)
+gun_tip_position = Vector2(11, -2)
+bullet_res = SubResource("Resource_hruqe")
+fire_sound = ExtResource("2_cax20")
+clip_size = 20
+max_ammo = 21
+reload_time = 1.0

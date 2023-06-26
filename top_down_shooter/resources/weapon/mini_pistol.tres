@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://ckrus8b3wgwyu"]
+
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_hsp3s"]
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_n5eww"]
+[ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="2_goitx"]
+[ext_resource type="Texture2D" uid="uid://2s2r7jyvhh2c" path="res://assets/sprites/guns/mini_pistol.png" id="3_r8dc5"]
+
+[sub_resource type="Resource" id="Resource_ctxxk"]
+script = ExtResource("1_n5eww")
+bullet_type = "bullet"
+bullet_speed = 80.0
+knockback_amount = 1.0
+piercing = true
+collision_polygon_verticies = PackedVector2Array()
+
+[resource]
+script = ExtResource("1_hsp3s")
+rate_of_fire = 0.4
+damage = 3.0
+weapon_name = "Mini Pistol"
+texture = ExtResource("3_r8dc5")
+position = Vector2(1, 2)
+gun_tip_position = Vector2(5, -2)
+bullet_res = SubResource("Resource_ctxxk")
+fire_sound = ExtResource("2_goitx")
+clip_size = 0
+max_ammo = 0
+reload_time = 0.0
