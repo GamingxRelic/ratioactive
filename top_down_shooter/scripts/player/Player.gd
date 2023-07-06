@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var movement_speed := 100.0
+@export var movement_speed := 70.0
 @export var accel := 8.0 
 @export var decel := 10.0 
 
@@ -13,6 +13,10 @@ func _ready():
 	World.player_pos = position
 	World.player_hp = health_comp.health
 	
+	World.player_weapons.append(preload("res://resources/weapon/mini_pistol.tres").duplicate())
+	World.player_weapons.append(preload("res://resources/weapon/ak-47.tres").duplicate())
+	
+	gun.set_gun_res(World.player_weapons[0])
 
 func _physics_process(delta):
 	movement(delta)
@@ -22,8 +26,8 @@ func _physics_process(delta):
 	World.player_pos = position
 	World.player_hp = health_comp.health
 	
-	World.player_ammo = gun.gun_res.ammo
-	World.player_max_ammo = gun.gun_res.total_ammo
+	World.player_ammo = World.player_gun.ammo
+	World.player_max_ammo = World.player_gun.total_ammo
 		
 	move_and_slide()
 	
@@ -45,3 +49,9 @@ func input():
 		gun.fire()
 	if Input.is_action_just_pressed("reload"):
 		gun.reload()
+	if Input.is_action_just_pressed("1") and !gun.is_reloading():
+		World.player_gun = World.player_weapons[0]
+		gun.set_gun_res(World.player_weapons[0])
+	if Input.is_action_just_pressed("2") and World.player_weapons[1] != null and !gun.is_reloading():
+		World.player_gun = World.player_weapons[1]
+		gun.set_gun_res(World.player_weapons[1])

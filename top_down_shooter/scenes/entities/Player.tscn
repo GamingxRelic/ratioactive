@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://2a5hu5k24rwo"]
+[gd_scene load_steps=6 format=3 uid="uid://2a5hu5k24rwo"]
 
 [ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_0mq3o"]
 [ext_resource type="PackedScene" uid="uid://cxjymoqn8dvxr" path="res://components/scenes/Health_Component.tscn" id="2_muamj"]
-[ext_resource type="Resource" uid="uid://bx213twqsep8w" path="res://resources/weapon/ak-47.tres" id="3_hh4ig"]
 [ext_resource type="PackedScene" uid="uid://bfa8y7t30127n" path="res://scenes/Gun.tscn" id="4_2s6eo"]
 [ext_resource type="Texture2D" uid="uid://b30ygclpoe7qq" path="res://assets/sprites/rat/rat.png" id="4_ryhdu"]
 
@@ -25,4 +24,3 @@ position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_cav7v")
 
 [node name="Gun" parent="." instance=ExtResource("4_2s6eo")]
-gun_res = ExtResource("3_hh4ig")

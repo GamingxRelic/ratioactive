@@ -100,7 +100,7 @@ shape = SubResource("CapsuleShape2D_c8upc")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 16.0
-debug_enabled = true
+path_postprocessing = 1
 
 [node name="Health_Component" parent="." instance=ExtResource("3_n25gn")]
 

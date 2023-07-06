@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 10
+@export var speed := 20
 @onready var target_pos : Vector2 = World.player_pos
 @export var navigation_agent : NavigationAgent2D
 @onready var sprite : Sprite2D = $Sprite2D as Sprite2D

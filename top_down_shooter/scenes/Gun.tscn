@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfa8y7t30127n"]
+[gd_scene load_steps=8 format=3 uid="uid://bfa8y7t30127n"]
 
 [ext_resource type="Script" path="res://scripts/gun/Gun.gd" id="1_7h4nn"]
+[ext_resource type="Texture2D" uid="uid://dhtnygocwnedw" path="res://assets/UI/health/health_ui_high.png" id="2_66mwc"]
 
 [sub_resource type="Gradient" id="Gradient_ehbwv"]
 offsets = PackedFloat32Array(0, 0.540741, 1)
@@ -46,6 +47,7 @@ position = Vector2(2, -1)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Firing_Particles" type="GPUParticles2D" parent="."]
+visible = false
 emitting = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_o41xv")
@@ -55,5 +57,14 @@ explosiveness = 0.29
 [node name="Reload_Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ReloadProgress" type="TextureProgressBar" parent="."]
+offset_right = 368.0
+offset_bottom = 64.0
+fill_mode = 3
+texture_progress = ExtResource("2_66mwc")
+
+[node name="ReloadProgTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Fire_Cooldown" to="." method="_on_fire_cooldown_timeout"]
 [connection signal="timeout" from="Reload_Timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="ReloadProgTimer" to="." method="_on_reload_prog_timer_timeout"]
