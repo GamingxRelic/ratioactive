@@ -29,6 +29,18 @@ text = "100/100
 label_settings = SubResource("LabelSettings_u3177")
 metadata/_edit_use_anchors_ = true
 
+[node name="PointsLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.210938
+offset_left = 17.0
+offset_top = 924.0
+offset_right = 264.0
+offset_bottom = 1015.0
+text = "$0"
+label_settings = SubResource("LabelSettings_u3177")
+text_overrun_behavior = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="HealthProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0

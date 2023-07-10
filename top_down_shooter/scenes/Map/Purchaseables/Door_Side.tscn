@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbpvcr7ku0hiq"]
+
+[ext_resource type="Script" path="res://scripts/purchaseables/Door.gd" id="1_t6kvq"]
+[ext_resource type="Texture2D" uid="uid://bn3evmm7e0uft" path="res://assets/tiles/test_room/Door.png" id="2_o2ip8"]
+[ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="3_autxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p5pa"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhqig"]
+size = Vector2(32, 32)
+
+[node name="Door_Side" type="StaticBody2D"]
+position = Vector2(0, 8)
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_t6kvq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7p5pa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_o2ip8")
+
+[node name="Buyable_Component" parent="." instance=ExtResource("3_autxb")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Buyable_Component"]
+shape = SubResource("RectangleShape2D_jhqig")
+
+[connection signal="failed_purchase" from="Buyable_Component" to="." method="_on_purchaseable_component_failed_purchase"]
+[connection signal="purchased" from="Buyable_Component" to="." method="_on_purchaseable_component_purchased"]

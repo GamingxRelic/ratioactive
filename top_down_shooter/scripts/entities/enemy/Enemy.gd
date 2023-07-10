@@ -15,7 +15,6 @@ var knockback_tween_stop_time := 1.0
 var damage_color_tween : Tween
 var damage_color_tween_stop_time := 0.1
 var alive := true
-	
 
 func _ready():
 #	set_movement_target(target_pos)
@@ -23,22 +22,6 @@ func _ready():
 	pass
 
 func _physics_process(_delta):
-#	target_pos = World.player_pos
-#	set_movement_target(target_pos)
-
-	
-#	if navigation_agent.is_navigation_finished():
-#		if knockback != Vector2.ZERO:
-#			velocity+=knockback
-#			move_and_slide()
-#		return
-
-#	var angle_to_player := rad_to_deg(get_angle_to(target_pos))
-#	flip_sprite(angle_to_player)
-
-#	var dir = to_local(navigation_agent.get_next_path_position()).normalized()
-#	velocity = dir*speed + knockback
-
 	if alive:
 		health_bar.value = health_component.health
 		
@@ -70,8 +53,6 @@ func _on_health_component_death():
 	anim.play("death")
 
 func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2):
-	#print("took ", dmg_amnt, " dmg and ", knockback_amnt, " knockback") #Debug
-	#anim_tree.set("parameters/Sound_Player/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	if alive:
 		audio.play()
 		knockback = knockback_amnt
@@ -86,12 +67,11 @@ func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector
 		health_component.take_damage(dmg_amnt)
 
 func _on_navigation_timer_timeout():
-#	print("nav = ", World.player_pos) #Debug
 	set_movement_target(World.player_pos)
 
 
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:
 		"death":
+			alive = false
 			queue_free()
-			#print("hi") #It will still run this after deleting. This is super useful.

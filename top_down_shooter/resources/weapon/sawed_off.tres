@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://dxche03huugfr"]
+
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_23e5d"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_84xm1"]
+[ext_resource type="Texture2D" uid="uid://d30ig27fy7s7s" path="res://assets/sprites/bullets/sawed_off_bullet.png" id="2_0mnhl"]
+[ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="2_ww5ki"]
+[ext_resource type="Texture2D" uid="uid://lygfpwjpai2d" path="res://assets/sprites/guns/sawed_off.png" id="4_mmjev"]
+
+[sub_resource type="Resource" id="Resource_kaw4q"]
+script = ExtResource("1_23e5d")
+bullet_type = "bullet"
+bullet_speed = 80.0
+knockback_amount = 1.2
+piercing = true
+texture = ExtResource("2_0mnhl")
+collision_polygon_verticies = PackedVector2Array()
+
+[resource]
+script = ExtResource("1_84xm1")
+rate_of_fire = 0.5
+damage = 12.0
+name = "Sawed-Off Shotgun"
+texture = ExtResource("4_mmjev")
+position = Vector2(1, 2)
+gun_tip_position = Vector2(8, -2)
+bullet_res = SubResource("Resource_kaw4q")
+fire_sound = ExtResource("2_ww5ki")
+clip_size = 2
+max_ammo = 32
+bullet_count = 4
+reload_time = 2.0
+bullet_spread = 0.3

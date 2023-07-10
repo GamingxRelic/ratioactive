@@ -10,14 +10,14 @@ script = ExtResource("1_2h2bg")
 bullet_type = "bullet"
 bullet_speed = 100.0
 knockback_amount = 0.2
-piercing = true
+piercing = false
 collision_polygon_verticies = PackedVector2Array()
 
 [resource]
 script = ExtResource("1_ti6nr")
 rate_of_fire = 0.09
-damage = 15.0
-weapon_name = "AK-47"
+damage = 10.0
+name = "AK-47"
 texture = ExtResource("3_t1ocg")
 position = Vector2(0, 4)
 gun_tip_position = Vector2(11, -2)
@@ -25,4 +25,6 @@ bullet_res = SubResource("Resource_hruqe")
 fire_sound = ExtResource("2_cax20")
 clip_size = 20
 max_ammo = 180
+bullet_count = 1
 reload_time = 2.0
+bullet_spread = 0.0
