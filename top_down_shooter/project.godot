@@ -27,6 +27,10 @@ window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 move_left={
@@ -120,6 +124,7 @@ scroll_up={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Door"
+2d_physics/layer_5="Tail"
 
 [rendering]
 

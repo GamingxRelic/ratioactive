@@ -83,6 +83,7 @@ gradient = SubResource("Gradient_uovxi")
 width = 16
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent") groups=["enemy", "player_can_damage"]]
+z_index = 1
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1

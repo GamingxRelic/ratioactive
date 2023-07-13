@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4dt5lw0c5bct"
-path="res://.godot/imported/rat_tail.png-3c7b427596dbb7a65a40d825e840a47d.ctex"
+uid="uid://cpfnpytx4xpd7"
+path="res://.godot/imported/rat_spritesheet.png-a3d6599e4dbb291a34d190ca994adc48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/rat/rat_tail.png"
-dest_files=["res://.godot/imported/rat_tail.png-3c7b427596dbb7a65a40d825e840a47d.ctex"]
+source_file="res://assets/sprites/rat/rat_spritesheet.png"
+dest_files=["res://.godot/imported/rat_spritesheet.png-a3d6599e4dbb291a34d190ca994adc48.ctex"]
 
 [params]
 

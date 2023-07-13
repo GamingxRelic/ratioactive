@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctxdlh5yirxb2"]
+[gd_scene load_steps=7 format=3 uid="uid://ctxdlh5yirxb2"]
 
 [ext_resource type="Script" path="res://scripts/purchaseables/Door.gd" id="1_2ha6v"]
 [ext_resource type="Texture2D" uid="uid://bn3evmm7e0uft" path="res://assets/tiles/test_room/Door.png" id="2_lg6jx"]
 [ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="3_sic6i"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="4_ma81j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7p5pa"]
 size = Vector2(32, 16)
@@ -10,7 +11,7 @@ size = Vector2(32, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhqig"]
 size = Vector2(32, 32)
 
-[node name="Door_Up" type="StaticBody2D"]
+[node name="Door_Up" type="StaticBody2D" groups=["buyable", "can_change_label_visibility"]]
 position = Vector2(8, 0)
 collision_layer = 8
 collision_mask = 2
@@ -26,6 +27,13 @@ texture = ExtResource("2_lg6jx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Buyable_Component"]
 shape = SubResource("RectangleShape2D_jhqig")
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("4_ma81j")]
+offset_left = 105.0
+offset_top = 41.0
+offset_right = 105.0
+offset_bottom = 41.0
+text = "300"
 
 [connection signal="failed_purchase" from="Buyable_Component" to="." method="_on_purchaseable_component_failed_purchase"]
 [connection signal="purchased" from="Buyable_Component" to="." method="_on_purchaseable_component_purchased"]

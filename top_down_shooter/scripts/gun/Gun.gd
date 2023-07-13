@@ -21,7 +21,7 @@ func _physics_process(_delta):
 	mouse_pos = get_global_mouse_position()
 	look_at(get_global_mouse_position())
 	flip_sprite()
-	if World.player_gun.ammo < World.player_gun.clip_size and World.player_gun.total_ammo > 0:
+	if World.player_gun.ammo < World.player_gun.clip_size and World.player_gun.total_ammo > 0 and !is_reloading():
 		can_reload = true
 		
 	if World.player_gun.ammo == 0 and can_reload and !is_reloading():
@@ -80,6 +80,7 @@ func reload():
 	if World.player_gun.total_ammo == 0 or World.player_gun.ammo == World.player_gun.clip_size:
 		return
 	elif reload_timer.is_stopped():
+		can_reload = false
 		reloading = true
 		reload_timer.start()
 		reload_signal.emit()
