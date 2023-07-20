@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://5dwbbxlj7ose"]
+
+[ext_resource type="Script" path="res://scripts/entities/drops/Dropped_Weapon.gd" id="1_82l5x"]
+[ext_resource type="Texture2D" uid="uid://bfkufta0nroot" path="res://assets/environment/light.png" id="3_5hjji"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="3_8bjf3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1afu"]
+
+[node name="Dropped_Weapon" type="Area2D" groups=["interactable"]]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_82l5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["interactable"]]
+shape = SubResource("CircleShape2D_r1afu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("3_8bjf3")]
+z_index = 1
+offset_top = -8.0
+offset_bottom = -8.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.06
+blend_mode = 1
+texture = ExtResource("3_5hjji")
+texture_scale = 0.05
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

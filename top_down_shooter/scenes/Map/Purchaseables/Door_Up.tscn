@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctxdlh5yirxb2"]
+[gd_scene load_steps=11 format=3 uid="uid://ctxdlh5yirxb2"]
 
 [ext_resource type="Script" path="res://scripts/purchaseables/Door.gd" id="1_2ha6v"]
 [ext_resource type="Texture2D" uid="uid://bn3evmm7e0uft" path="res://assets/tiles/test_room/Door.png" id="2_lg6jx"]
@@ -10,6 +10,46 @@ size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhqig"]
 size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_87yo1"]
+polygon = PackedVector2Array(-16, -8, 16, -8, 16, 8, -16, 8)
+
+[sub_resource type="Animation" id="Animation_whmqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b4ga7"]
+resource_name = "remove_door"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72boj"]
+_data = {
+"RESET": SubResource("Animation_whmqv"),
+"remove_door": SubResource("Animation_b4ga7")
+}
 
 [node name="Door_Up" type="StaticBody2D" groups=["buyable", "can_change_label_visibility"]]
 position = Vector2(8, 0)
@@ -29,11 +69,17 @@ texture = ExtResource("2_lg6jx")
 shape = SubResource("RectangleShape2D_jhqig")
 
 [node name="Text_Label_Component" parent="." instance=ExtResource("4_ma81j")]
-offset_left = 105.0
-offset_top = 41.0
-offset_right = 105.0
-offset_bottom = 41.0
+z_index = 1
 text = "300"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_87yo1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_72boj")
+}
 
 [connection signal="failed_purchase" from="Buyable_Component" to="." method="_on_purchaseable_component_failed_purchase"]
 [connection signal="purchased" from="Buyable_Component" to="." method="_on_purchaseable_component_purchased"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

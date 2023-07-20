@@ -14,6 +14,9 @@ knockback_amount = 1.0
 piercing = false
 texture = ExtResource("2_sykax")
 collision_polygon_verticies = PackedVector2Array()
+sprite_rotating = false
+sprite_rotate_speed = 0.0
+homing = false
 
 [resource]
 script = ExtResource("1_hsp3s")
@@ -25,8 +28,16 @@ position = Vector2(1, 2)
 gun_tip_position = Vector2(5, -2)
 bullet_res = SubResource("Resource_ctxxk")
 fire_sound = ExtResource("2_goitx")
+ammo = 8
+total_ammo = 64
 clip_size = 8
 max_ammo = 64
 bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
 reload_time = 1.5
 bullet_spread = 0.0
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.901961, 0.815686, 0.4, 1)
+fire_flash_energy = 1.0

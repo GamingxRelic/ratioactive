@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://cftcsem7hcgdk"]
+
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_q6yne"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_u6fge"]
+[ext_resource type="Texture2D" uid="uid://dbj4j7sxvijyb" path="res://assets/sprites/bullets/ruahil_bullet.png" id="2_0o5h1"]
+[ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="3_a5mrw"]
+[ext_resource type="Texture2D" uid="uid://dji60jvwkgorq" path="res://assets/sprites/guns/ruahil.png" id="4_qq1ya"]
+
+[sub_resource type="Resource" id="Resource_ealyr"]
+script = ExtResource("1_q6yne")
+bullet_type = "Bean"
+bullet_speed = 90.0
+knockback_amount = 0.4
+piercing = false
+texture = ExtResource("2_0o5h1")
+collision_polygon_verticies = PackedVector2Array(0, -0.5, 1, -0.5, 1, 0.5, 1, 1.5, -1, 1.5, -1, 0.5, -2, 0.5, -2, -1.5, 0, -1.5)
+sprite_rotating = true
+sprite_rotate_speed = 10.0
+homing = false
+
+[resource]
+script = ExtResource("1_u6fge")
+rate_of_fire = 0.15
+damage = 7.0
+name = "Ruahil"
+texture = ExtResource("4_qq1ya")
+position = Vector2(3, -1)
+gun_tip_position = Vector2(6, -1)
+bullet_res = SubResource("Resource_ealyr")
+fire_sound = ExtResource("3_a5mrw")
+ammo = 25
+total_ammo = 75
+clip_size = 25
+max_ammo = 75
+bullet_count = 1
+randomize_bullet_count = true
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 3
+reload_time = 3.5
+bullet_spread = 0.5
+fire_flash_scale = 0.2
+fire_flash_color = Color(0.239216, 0.129412, 0.00392157, 1)
+fire_flash_energy = 1.0

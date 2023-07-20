@@ -6,6 +6,7 @@ extends Node2D
 @onready var gun_tip = $Gun_Tip
 @onready var audio : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var fire_particles : GPUParticles2D = $Firing_Particles
+@onready var firing_light : PointLight2D = $Firing_Light
 var bullet = preload("res://scenes/Bullet.tscn")
 
 var mouse_pos
@@ -26,11 +27,14 @@ func _physics_process(_delta):
 		
 	if World.player_gun.ammo == 0 and can_reload and !is_reloading():
 		reload()
-		
+	
+	firing_light.position = gun_tip.position
+	
 	if is_shooting:
 		fire_particles.emitting = true
 	else:
 		fire_particles.emitting = false
+		firing_light.energy = lerp(firing_light.energy, 0.0, 0.7)
 	
 func set_gun_res(res : Weapon):
 	World.player_gun = res
@@ -42,11 +46,16 @@ func set_gun_res(res : Weapon):
 	World.player_gun.total_ammo = World.player_weapons[World.player_weapon_index].total_ammo
 	reload_timer.wait_time = World.player_gun.reload_time
 	
+	firing_light.texture_scale = World.player_gun.fire_flash_scale
+	firing_light.color = World.player_gun.fire_flash_color
+	firing_light.energy = World.player_gun.fire_flash_energy
+	
 	gun_tip.position = World.player_gun.gun_tip_position
 	position = World.player_gun.position
 	fire_particles.position = World.player_gun.gun_tip_position
 	
 	World.player_gun.bullet_res.damage = World.player_gun.damage
+	
 	
 	
 
@@ -62,12 +71,24 @@ func fire():
 		audio.play()
 		is_shooting = true
 		fire_cooldown.start()
-		for i in World.player_gun.bullet_count:
+		
+		
+		$Firing_Light.energy = 1.0
+		$Firing_Light.enabled = true
+		
+		var bullet_count
+		if World.player_gun.randomize_bullet_count:
+			bullet_count = randi_range(World.player_gun.randomized_bullet_count_min, World.player_gun.randomized_bullet_count_max)
+		else:
+			bullet_count = World.player_gun.bullet_count
+			
+		for i in bullet_count:
 			var new_bullet = bullet.instantiate()
 			new_bullet.global_position = gun_tip.global_position
 			new_bullet.bullet_res = World.player_gun.bullet_res
 			new_bullet.aim_rotation_rad = rotation+randf_range(-World.player_gun.bullet_spread,World.player_gun.bullet_spread)
 			get_node("/root/World").add_child(new_bullet)
+			
 		can_fire = false
 		World.player_gun.ammo -= 1
 		return
@@ -88,6 +109,7 @@ func reload():
 	
 func _on_fire_cooldown_timeout():
 	can_fire = true
+	$Firing_Light.enabled = false
 	return
 
 func _on_reload_timer_timeout():

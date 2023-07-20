@@ -9,3 +9,9 @@ var damage : float
 @export var shader_mat : ShaderMaterial
 @export var texture : Texture
 @export var collision_polygon_verticies : PackedVector2Array
+
+## If the bullet should be spinning in circles as it moves
+@export var sprite_rotating : bool = false
+@export var sprite_rotate_speed : float = 0.0
+
+@export var homing : bool = false

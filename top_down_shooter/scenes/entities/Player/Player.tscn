@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://2a5hu5k24rwo"]
+[gd_scene load_steps=34 format=3 uid="uid://2a5hu5k24rwo"]
 
 [ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_0mq3o"]
 [ext_resource type="PackedScene" uid="uid://cxjymoqn8dvxr" path="res://components/scenes/Health_Component.tscn" id="2_muamj"]
@@ -356,11 +356,21 @@ nodes/run_up/position = Vector2(-280, 20)
 node_connections = [&"output", 0, &"MoveOrIdle", &"MoveOrIdle", 0, &"RunTimescale", &"MoveOrIdle", 1, &"idle_anim", &"RunTimescale", 0, &"run_anim", &"idle_anim", 0, &"idle_left", &"idle_anim", 1, &"idle_right", &"idle_anim", 2, &"idle_up", &"idle_anim", 3, &"idle_down", &"run_anim", 0, &"run_left", &"run_anim", 1, &"run_right", &"run_anim", 2, &"run_up", &"run_anim", 3, &"run_down"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fwpai"]
-radius = 22.0227
+radius = 12.0
+
+[sub_resource type="Gradient" id="Gradient_fady5"]
+offsets = PackedFloat32Array(0, 0.754839)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ell5p"]
+gradient = SubResource("Gradient_fady5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_comp") groups=["player"]]
 collision_layer = 6
-collision_mask = 15
+collision_mask = 47
 script = ExtResource("1_0mq3o")
 health_comp = NodePath("Health_Component")
 
@@ -411,17 +421,35 @@ parameters/run_anim/current_index = 0
 [node name="Gun" parent="." instance=ExtResource("4_2s6eo")]
 
 [node name="Tail" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(-23, -4)
 texture = ExtResource("6_7jbgf")
 centered = false
 
-[node name="View_Price" type="Area2D" parent="."]
-collision_layer = 9
-collision_mask = 9
+[node name="View_Price" type="Area2D" parent="." groups=["player"]]
+collision_layer = 41
+collision_mask = 41
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View_Price"]
 shape = SubResource("CircleShape2D_fwpai")
 
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="MainLight" type="PointLight2D" parent="Lights"]
+energy = 0.2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 2.0
+texture = SubResource("GradientTexture2D_ell5p")
+
+[node name="MainLight2" type="PointLight2D" parent="Lights"]
+energy = 0.2
+shadow_filter = 1
+shadow_filter_smooth = 2.0
+texture = SubResource("GradientTexture2D_ell5p")
+
 [connection signal="timeout" from="ReloadProgTimer" to="." method="_on_reload_prog_timer_timeout"]
+[connection signal="area_entered" from="View_Price" to="." method="_on_view_price_area_entered"]
+[connection signal="area_exited" from="View_Price" to="." method="_on_view_price_area_exited"]
 [connection signal="body_entered" from="View_Price" to="." method="_on_view_price_body_entered"]
 [connection signal="body_exited" from="View_Price" to="." method="_on_view_price_body_exited"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://d20xrhbdjreun"]
+[gd_scene load_steps=14 format=3 uid="uid://d20xrhbdjreun"]
 
 [ext_resource type="Script" path="res://scripts/entities/enemy/Enemy.gd" id="1_4c23b"]
 [ext_resource type="Texture2D" uid="uid://deymmaw4qgjuq" path="res://assets/sprites/enemies/test_cheese_1/cheese-sheet.png" id="1_hp1kb"]
 [ext_resource type="PackedScene" uid="uid://cxjymoqn8dvxr" path="res://components/scenes/Health_Component.tscn" id="3_n25gn"]
 [ext_resource type="PackedScene" uid="uid://cn7f8fv4egtsq" path="res://components/scenes/Hurtbox_Component.tscn" id="4_80d3p"]
 [ext_resource type="AudioStream" uid="uid://d13f5evpunwgw" path="res://assets/audio/entities/enemies/enemy1_1.wav" id="5_xjlie"]
+[ext_resource type="AudioStream" uid="uid://c08ao58xcao3h" path="res://assets/audio/weapons/guns/fart.mp3" id="6_4qv54"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8upc"]
 radius = 7.0
@@ -39,10 +40,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_xjlie")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_f41kl"]
 resource_name = "death"
-length = 0.3
+length = 0.37
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -67,6 +92,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_4qv54")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q0odk"]
 _data = {
@@ -83,7 +132,7 @@ gradient = SubResource("Gradient_uovxi")
 width = 16
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent") groups=["enemy", "player_can_damage"]]
-z_index = 1
+z_index = 2
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1

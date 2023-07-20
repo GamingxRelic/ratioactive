@@ -14,7 +14,21 @@ func _ready():
 	
 func _physics_process(_delta):
 	velocity = transform.x * bullet_res.bullet_speed
+	
+	
+	
+	if bullet_res.sprite_rotating:
+		spin(bullet_res.sprite_rotate_speed)
+	
+	if bullet_res.homing:
+		look_at(get_global_mouse_position())
+		
+		
+
 	move_and_slide()
+
+func spin(rotate_speed : float):
+	sprite.rotation_degrees += rotate_speed
 
 func _on_despawn_timer_timeout():
 	self.queue_free()

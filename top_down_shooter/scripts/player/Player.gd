@@ -21,7 +21,7 @@ func _ready():
 	World.player = self
 	World.player_pos = position
 	World.player_hp = health_comp.health
-	World.player_points = 1000
+	World.player_points = 11110
 	
 	# Give mini pistol
 	World.player_weapons.append(preload("res://resources/weapon/mini_pistol.tres").duplicate())
@@ -29,6 +29,7 @@ func _ready():
 	# Give test guns
 	World.player_weapons.append(preload("res://resources/weapon/ak-47.tres").duplicate())
 	World.player_weapons.append(preload("res://resources/weapon/sawed_off.tres").duplicate())
+	World.player_weapons.append(preload("res://resources/weapon/ruahil.tres").duplicate())
 	
 	for i in World.player_weapons:
 		i.ammo = i.clip_size
@@ -48,6 +49,7 @@ func _physics_process(delta):
 	movement(delta)
 	input()
 	animation()
+	
 	
 	World.player_pos = position
 	World.player_hp = health_comp.health
@@ -97,6 +99,10 @@ func animation():
 #		anim_tree.set("parameters/run_anim/transition_request", "run_up")
 #		anim_tree.set("parameters/idle_anim/transition_request", "idle_up")
 
+# Last working on making it so that if the player is 
+# idle but shooting, the idle animation shouldnt play. it should just be the 
+# first frame of the idle animation. maybe, see how it looks.
+
 func input():
 	if Input.is_action_just_pressed("mouse_5"):
 		var new_enemy = preload("res://scenes/entities/enemies/Enemy.tscn").instantiate()
@@ -114,23 +120,47 @@ func input():
 	if Input.is_action_just_pressed("reload"):
 		gun.reload()
 		
+	if Input.is_action_just_pressed("drop_weapon") and World.player_weapons.size() > 1:
+		drop_weapon()
+		
 		# Weapon selections
 	if Input.is_action_just_pressed("scroll_down"):
 		next_weapon()
 	if Input.is_action_just_pressed("scroll_up"):
 		previous_weapon()
 
-	if Input.is_action_just_pressed("1") and World.player_weapons[0] != null and World.player_weapon_index != 0 :# and !gun.is_reloading():
+	if Input.is_action_just_pressed("1") and World.player_weapons.size() >= 1 and World.player_weapons[0] != null and World.player_weapon_index != 0: # and !gun.is_reloading():
 		select_weapon(0)
-	if Input.is_action_just_pressed("2") and World.player_weapons[1] != null and World.player_weapon_index != 1:# and !gun.is_reloading():
+	if Input.is_action_just_pressed("2") and World.player_weapons.size() >= 2 and World.player_weapons[1] != null and World.player_weapon_index != 1: # and !gun.is_reloading():
 		select_weapon(1)
-	if Input.is_action_just_pressed("3") and World.player_weapons[2] != null and World.player_weapon_index != 2:# and !gun.is_reloading():
+	if Input.is_action_just_pressed("3") and World.player_weapons.size() >= 3 and World.player_weapons[2] != null and World.player_weapon_index != 2: # and !gun.is_reloading():
 		select_weapon(2)
+	if Input.is_action_just_pressed("4") and World.player_weapons.size() >= 4 and World.player_weapons[3] != null and World.player_weapon_index != 3: # and !gun.is_reloading():
+		select_weapon(3)
+	
+	
+func drop_weapon() -> void:
+	stop_reload_prog()
+	
+	# Spawn dropped gun
+	var dropped_gun = preload("res://scenes/entities/drops/Dropped_Weapon.tscn").instantiate()
+	dropped_gun.weapon_res = World.player_gun
+	dropped_gun.global_position = global_position
+	get_node("/root/World").add_child(dropped_gun)
+	
+	# Remove gun from player inventory
+	World.player_weapons.pop_at(World.player_weapon_index)
+	print(World.player_weapons.size())
+	next_weapon()
+	print(World.player_weapon_index)
+	#select_weapon(0)
+	
+	
+	# It has an error when trying to drop the last weapon in player inventory. Plz fix <3 xoxo love you me. Good luck dawg you got this :)
 	
 	
 func select_weapon(selection : int):
 	if World.player_weapons[selection] != null:
-		save_weapon_info()
 		World.player_gun = World.player_weapons[selection]
 		World.player_weapon_index = selection
 		gun.set_gun_res(World.player_gun)
@@ -140,10 +170,10 @@ func select_weapon(selection : int):
 		gun.fire_cooldown.start()
 		set_reload_prog_timer()
 
-func next_weapon():
-	if World.player_weapon_index == World.player_weapons.size()-1:
+func next_weapon() -> void:
+	if World.player_weapon_index == World.player_weapons.size()-1 or World.player_weapons.size() == 1:
 		select_weapon(0)
-	elif World.player_weapon_index+1 < World.player_weapons.size() and World.player_weapons[World.player_weapon_index+1] != null:
+	elif World.player_weapon_index+1 <= World.player_weapons.size()-1 and World.player_weapons[World.player_weapon_index+1] != null:
 		select_weapon(World.player_weapon_index+1)
 	return
 	
@@ -158,10 +188,11 @@ func previous_weapon():
 		select_weapon(World.player_weapon_index-1)
 	return
 
-func save_weapon_info():
-	World.player_weapons[World.player_weapon_index].ammo = World.player_gun.ammo
-	World.player_weapons[World.player_weapon_index].total_ammo = World.player_gun.total_ammo
-	return
+# I guess I set things up in a way that doesn't even require this method. Nice, good job me :)
+#func save_weapon_info():
+#	World.player_weapons[World.player_weapon_index].ammo = World.player_gun.ammo
+#	World.player_weapons[World.player_weapon_index].total_ammo = World.player_gun.total_ammo
+#	return
 
 func set_reload_prog_timer():
 	reload_progress.max_value = World.player_gun.reload_time
@@ -184,17 +215,26 @@ func gun_reload():
 func _on_reload_prog_timer_timeout():
 	reload_progress.value += float(reload_progress.max_value)/10
 	if reload_progress.value > reload_progress.max_value:
-#		reload_progress.value = 0
 		reload_prog_timer.stop()
-#	else:
-#		reload_progress.value += float(reload_progress.max_value)/10
 	return
 
 func _on_view_price_body_entered(body):
 	if body.is_in_group("buyable") and body.is_in_group("can_change_label_visibility"):
-		print(body)
 		body.find_child("Text_Label_Component").show()
+		body.sprite.material = preload("res://assets/shaders/outline.tres")
+		
 
 func _on_view_price_body_exited(body):
 	if body.is_in_group("buyable") and body.is_in_group("can_change_label_visibility"):
 		body.find_child("Text_Label_Component").hide()
+		body.sprite.material = null
+
+func _on_view_price_area_entered(area):
+	if area.is_in_group("interactable"):
+		area.find_child("Text_Label_Component").show()
+		area.sprite.material = preload("res://assets/shaders/outline.tres")
+
+func _on_view_price_area_exited(area):
+	if area.is_in_group("interactable"):
+		area.find_child("Text_Label_Component").hide()
+		area.sprite.material = null

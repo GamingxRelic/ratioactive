@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" path="res://components/script/TextLabelComponent.gd" id="1_qvik7"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_dk3sg"]
+[sub_resource type="LabelSettings" id="LabelSettings_i1xgi"]
+line_spacing = 0.0
 font_size = 64
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 0.392157)
 
 [node name="Text_Label_Component" type="Control"]
 layout_mode = 3
@@ -16,19 +21,13 @@ script = ExtResource("1_qvik7")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -116.5
-offset_top = -45.5
-offset_right = 116.5
-offset_bottom = 45.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -32.0
+offset_top = -5.0
+offset_right = 608.0
+offset_bottom = 86.0
 scale = Vector2(0.1, 0.1)
-text = "0"
-label_settings = SubResource("LabelSettings_dk3sg")
+text = "test"
+label_settings = SubResource("LabelSettings_i1xgi")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
