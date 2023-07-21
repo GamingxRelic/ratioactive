@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://5dwbbxlj7ose"]
+[gd_scene load_steps=6 format=3 uid="uid://5dwbbxlj7ose"]
 
 [ext_resource type="Script" path="res://scripts/entities/drops/Dropped_Weapon.gd" id="1_82l5x"]
 [ext_resource type="Texture2D" uid="uid://bfkufta0nroot" path="res://assets/environment/light.png" id="3_5hjji"]
 [ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="3_8bjf3"]
+[ext_resource type="Texture2D" uid="uid://7xg3vh8g2nyu" path="res://assets/sprites/guns/ak47.png" id="3_enwb6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1afu"]
 
@@ -15,6 +16,7 @@ script = ExtResource("1_82l5x")
 shape = SubResource("CircleShape2D_r1afu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_enwb6")
 
 [node name="Text_Label_Component" parent="." instance=ExtResource("3_8bjf3")]
 z_index = 1

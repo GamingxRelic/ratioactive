@@ -120,6 +120,9 @@ func input():
 	if Input.is_action_just_pressed("drop_weapon") and World.player_weapons.size() > 1:
 		drop_weapon()
 		
+	if Input.is_action_just_pressed("interact") and World.pickup_queue.size() > 0:
+		pickup_weapon()
+		
 		# Weapon selections
 	if Input.is_action_just_pressed("scroll_down"):
 		previous_weapon()
@@ -157,6 +160,8 @@ func drop_weapon() -> void:
 	
 	# It has an error when trying to drop the last weapon in player inventory. Plz fix <3 xoxo love you me. Good luck dawg you got this :)
 	
+func pickup_weapon() -> void:
+	World.pickup_queue[0].pickup()
 	
 func select_weapon(selection : int):
 	if World.player_weapons[selection] != null:

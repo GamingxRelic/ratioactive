@@ -9,6 +9,8 @@ var player_gun : Weapon
 var player_points : int
 var add_points : int
 
+var pickup_queue : Array
+
 var UI : Control
 
 signal spawn_enemies
