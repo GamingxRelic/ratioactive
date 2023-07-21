@@ -45,7 +45,6 @@ func flip_sprite(angle):
 	else:
 		sprite.scale.x = 1
 
-
 func _on_health_component_death():
 	alive = false
 	hurtbox_component.set_process(false)

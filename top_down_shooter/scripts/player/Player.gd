@@ -21,15 +21,15 @@ func _ready():
 	World.player = self
 	World.player_pos = position
 	World.player_hp = health_comp.health
-	World.player_points = 11110
+	World.player_points = 0
 	
 	# Give mini pistol
 	World.player_weapons.append(preload("res://resources/weapon/mini_pistol.tres").duplicate())
 	
 	# Give test guns
-	World.player_weapons.append(preload("res://resources/weapon/ak-47.tres").duplicate())
-	World.player_weapons.append(preload("res://resources/weapon/sawed_off.tres").duplicate())
-	World.player_weapons.append(preload("res://resources/weapon/ruahil.tres").duplicate())
+	#World.player_weapons.append(preload("res://resources/weapon/ak-47.tres").duplicate())
+	#World.player_weapons.append(preload("res://resources/weapon/sawed_off.tres").duplicate())
+	#World.player_weapons.append(preload("res://resources/weapon/ruahil.tres").duplicate())
 	
 	for i in World.player_weapons:
 		i.ammo = i.clip_size
@@ -106,13 +106,10 @@ func animation():
 func input():
 	if Input.is_action_just_pressed("mouse_5"):
 		var new_enemy = preload("res://scenes/entities/enemies/Enemy.tscn").instantiate()
-		#new_enemy.translate(get_global_mouse_position())
 		new_enemy.global_position = get_global_mouse_position()
 		get_node("/root/World").add_child(new_enemy)
 	if Input.is_action_just_pressed("space"):
-		print("pg - ", World.player_gun.ammo)
-		print("0 - ", World.player_weapons[0].ammo)
-		print(World.player_weapons[0].name)
+		World.spawn_enemies.emit()
 		
 		
 	if Input.is_action_pressed("left_click"):
@@ -125,9 +122,9 @@ func input():
 		
 		# Weapon selections
 	if Input.is_action_just_pressed("scroll_down"):
-		next_weapon()
-	if Input.is_action_just_pressed("scroll_up"):
 		previous_weapon()
+	if Input.is_action_just_pressed("scroll_up"):
+		next_weapon()
 
 	if Input.is_action_just_pressed("1") and World.player_weapons.size() >= 1 and World.player_weapons[0] != null and World.player_weapon_index != 0: # and !gun.is_reloading():
 		select_weapon(0)
@@ -150,10 +147,12 @@ func drop_weapon() -> void:
 	
 	# Remove gun from player inventory
 	World.player_weapons.pop_at(World.player_weapon_index)
-	print(World.player_weapons.size())
-	next_weapon()
-	print(World.player_weapon_index)
-	#select_weapon(0)
+	
+	if World.player_weapons.size() == 1:
+		select_weapon(0)
+	else:
+		previous_weapon()
+	return
 	
 	
 	# It has an error when trying to drop the last weapon in player inventory. Plz fix <3 xoxo love you me. Good luck dawg you got this :)
@@ -171,21 +170,23 @@ func select_weapon(selection : int):
 		set_reload_prog_timer()
 
 func next_weapon() -> void:
-	if World.player_weapon_index == World.player_weapons.size()-1 or World.player_weapons.size() == 1:
+	if World.player_weapon_index == World.player_weapons.size()-1 and World.player_weapons.size() > 1:
 		select_weapon(0)
 	elif World.player_weapon_index+1 <= World.player_weapons.size()-1 and World.player_weapons[World.player_weapon_index+1] != null:
 		select_weapon(World.player_weapon_index+1)
 	return
 	
 func previous_weapon():
-	if World.player_weapon_index-1 < 0:
+	if World.player_weapon_index-1 < 0 and World.player_weapons.size() != 1:
 		for i in World.player_weapons.size():
+			print(i)
 			var selection = World.player_weapons.size()-1-i
 			if World.player_weapons[selection] != null:
 				select_weapon(selection)
 				return
-	elif World.player_weapons[World.player_weapon_index-1] != null:
+	elif World.player_weapons[World.player_weapon_index-1] != null and World.player_weapons.size() != 1:
 		select_weapon(World.player_weapon_index-1)
+		return
 	return
 
 # I guess I set things up in a way that doesn't even require this method. Nice, good job me :)

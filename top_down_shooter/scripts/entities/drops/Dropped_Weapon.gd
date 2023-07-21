@@ -22,6 +22,7 @@ func set_weapon() -> void:
 
 func pickup() -> void:
 	World.player_weapons.append(weapon_res)
+	World.player.select_weapon(World.player_weapons.size()-1)
 	queue_free()
 
 func _on_area_entered(area):

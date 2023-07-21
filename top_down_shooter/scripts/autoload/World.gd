@@ -10,3 +10,5 @@ var player_points : int
 var add_points : int
 
 var UI : Control
+
+signal spawn_enemies
