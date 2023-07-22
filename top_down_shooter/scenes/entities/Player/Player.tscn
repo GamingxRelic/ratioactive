@@ -327,7 +327,7 @@ animation = &"run_right"
 animation = &"run_down"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bddrp"]
-graph_offset = Vector2(-466, -121)
+graph_offset = Vector2(-337.109, -102.182)
 nodes/MoveOrIdle/node = SubResource("AnimationNodeTransition_pmxa6")
 nodes/MoveOrIdle/position = Vector2(340, 220)
 nodes/RunTimescale/node = SubResource("AnimationNodeTimeScale_sef41")
@@ -381,6 +381,7 @@ position = Vector2(0, -4)
 texture = ExtResource("4_aphve")
 hframes = 8
 vframes = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -411,18 +412,18 @@ parameters/MoveOrIdle/current_state = "idle"
 parameters/MoveOrIdle/transition_request = ""
 parameters/MoveOrIdle/current_index = 1
 parameters/RunTimescale/scale = 1.0
-parameters/idle_anim/current_state = "idle_left"
+parameters/idle_anim/current_state = "idle_right"
 parameters/idle_anim/transition_request = ""
-parameters/idle_anim/current_index = 0
+parameters/idle_anim/current_index = 1
 parameters/run_anim/current_state = "run_left"
-parameters/run_anim/transition_request = ""
+parameters/run_anim/transition_request = "run_right"
 parameters/run_anim/current_index = 0
 
 [node name="Gun" parent="." instance=ExtResource("4_2s6eo")]
 
 [node name="Tail" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(-23, -4)
+position = Vector2(-22, -4)
 texture = ExtResource("6_7jbgf")
 centered = false
 
