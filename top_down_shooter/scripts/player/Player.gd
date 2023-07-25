@@ -15,6 +15,10 @@ extends CharacterBody2D
 ## Max distance for the gun circling the player
 var gun_dist := 3.0
 
+@onready var yellow_outline = preload("res://assets/shaders/yellow_outline.tres")
+
+
+
 func _ready():
 	anim_tree.active = true
 	
@@ -44,6 +48,10 @@ func _ready():
 	
 	gun.reload_signal.connect(gun_reload)
 	
+
+func _process(_delta):
+	if World.pickup_queue.size() != 0:
+		World.pickup_queue[0].sprite.material = yellow_outline
 
 func _physics_process(delta):
 	movement(delta)
@@ -109,7 +117,8 @@ func input():
 		new_enemy.global_position = get_global_mouse_position()
 		get_node("/root/World").add_child(new_enemy)
 	if Input.is_action_just_pressed("space"):
-		World.spawn_enemies.emit()
+		#World.spawn_enemies.emit()
+		World.emit_signal("next_wave")
 		
 		
 	if Input.is_action_pressed("left_click"):

@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://ckfpwdsuh03do"]
+[gd_scene load_steps=22 format=3 uid="uid://bou4bx58fhv88"]
 
-[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_3hlc2"]
+[ext_resource type="Script" path="res://scripts/levels/Level.gd" id="1_d04df"]
 [ext_resource type="PackedScene" uid="uid://5dwbbxlj7ose" path="res://scenes/entities/drops/Dropped_Weapon.tscn" id="1_o2d06"]
 [ext_resource type="Resource" uid="uid://bx213twqsep8w" path="res://resources/weapon/ak-47.tres" id="2_pb3wc"]
-[ext_resource type="Resource" uid="uid://ckrus8b3wgwyu" path="res://resources/weapon/mini_pistol.tres" id="3_nr1g5"]
+[ext_resource type="Resource" uid="uid://cr0jvxbd4rlfh" path="res://resources/weapon/god_pistol.tres" id="4_ds0tu"]
 [ext_resource type="Resource" uid="uid://dxche03huugfr" path="res://resources/weapon/sawed_off.tres" id="4_jo2ff"]
 [ext_resource type="Resource" uid="uid://cftcsem7hcgdk" path="res://resources/weapon/ruahil.tres" id="5_dyddw"]
 [ext_resource type="Texture2D" uid="uid://uucawxreih0j" path="res://assets/tiles/test_room/TestTiles.png" id="6_1l43v"]
@@ -111,34 +111,6 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_6ef6n")
 sources/1 = SubResource("TileSetScenesCollectionSource_0k73y")
 
-[sub_resource type="Animation" id="Animation_xs37p"]
-resource_name = "reveal_map"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1.41421, 1.41421),
-"update": 0,
-"values": [1.5, 0.79]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Player:process_mode")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 0]
-}
-
 [sub_resource type="Animation" id="Animation_il0sj"]
 length = 0.001
 tracks/0/type = "value"
@@ -165,6 +137,58 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Game_UI/CanvasLayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xs37p"]
+resource_name = "reveal_map"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1.41421, 1.41421),
+"update": 0,
+"values": [1.5, 0.79]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Game_UI/CanvasLayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yfabn"]
 _data = {
@@ -174,7 +198,8 @@ _data = {
 
 [node name="Level_Test" type="Node2D"]
 process_mode = 1
-script = ExtResource("1_3hlc2")
+script = ExtResource("1_d04df")
+max_enemy_count = 24
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -184,7 +209,7 @@ weapon_res = ExtResource("2_pb3wc")
 
 [node name="Dropped_Weapon2" parent="Entities" instance=ExtResource("1_o2d06")]
 position = Vector2(18, -45)
-weapon_res = ExtResource("3_nr1g5")
+weapon_res = ExtResource("4_ds0tu")
 
 [node name="Dropped_Weapon3" parent="Entities" instance=ExtResource("1_o2d06")]
 position = Vector2(43, -43)
@@ -242,40 +267,13 @@ price = 1250
 [node name="Spawners" type="Node2D" parent="Ground"]
 
 [node name="Basic_Enemy_Spawner" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(1, -46)
+position = Vector2(99, -39)
 
 [node name="Basic_Enemy_Spawner2" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(51, -126)
+position = Vector2(97, 2)
 
 [node name="Basic_Enemy_Spawner3" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(244, -68)
-
-[node name="Basic_Enemy_Spawner4" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(201, -142)
-
-[node name="Basic_Enemy_Spawner5" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(241, 21)
-
-[node name="Basic_Enemy_Spawner6" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(104, 82)
-
-[node name="Basic_Enemy_Spawner7" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(-133, 140)
-
-[node name="Basic_Enemy_Spawner8" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(-257, 33)
-
-[node name="Basic_Enemy_Spawner9" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(-235, -132)
-
-[node name="Basic_Enemy_Spawner10" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(-315, -63)
-
-[node name="Basic_Enemy_Spawner11" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(-174, -46)
-
-[node name="Basic_Enemy_Spawner12" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(-42, 83)
+position = Vector2(100, 46)
 
 [node name="Player" parent="." instance=ExtResource("10_nkvw8")]
 
@@ -292,7 +290,12 @@ blend_mode = 1
 
 [node name="Game_UI" parent="." instance=ExtResource("13_yix76")]
 
+[node name="CanvasLayer" parent="Game_UI" index="0"]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yfabn")
 }
+
+[editable path="Game_UI"]

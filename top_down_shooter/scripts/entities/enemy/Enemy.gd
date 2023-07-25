@@ -15,14 +15,16 @@ var knockback_tween_stop_time := 1.0
 var damage_color_tween : Tween
 var damage_color_tween_stop_time := 0.1
 var alive := true
+@export var active := true
 
 func _ready():
-#	set_movement_target(target_pos)
+	World.enemy_count += 1
+	anim.play("spawn")
 	set_movement_target(World.player_pos)
 	pass
 
 func _physics_process(_delta):
-	if alive:
+	if alive and active:
 		health_bar.value = health_component.health
 		
 		var current_agent_position : Vector2 = global_position
@@ -47,8 +49,9 @@ func flip_sprite(angle):
 
 func _on_health_component_death():
 	alive = false
-	hurtbox_component.set_process(false)
+	#World.enemy_count -= 1
 	health_bar.visible = false
+	hurtbox_component.set_process(false)
 	anim.play("death")
 
 func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2):
@@ -72,5 +75,6 @@ func _on_navigation_timer_timeout():
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:
 		"death":
-			alive = false
+			#alive = false
+			World.enemy_count -= 1
 			queue_free()

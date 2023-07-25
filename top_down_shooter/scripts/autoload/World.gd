@@ -13,4 +13,15 @@ var pickup_queue : Array
 
 var UI : Control
 
+var max_enemy_count : int
+var enemy_count : int:
+	get:
+		return enemy_count
+	set(value):
+		enemy_count = value
+		emit_signal("enemy_count_changed")
+var enemy_spawn_queue : Array
+
+signal next_wave
 signal spawn_enemies
+signal enemy_count_changed

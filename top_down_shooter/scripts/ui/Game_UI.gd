@@ -3,6 +3,9 @@ extends Control
 @onready var ammo_label : Label = $CanvasLayer/AmmoLabel
 @onready var health_prog_bar : TextureProgressBar = $CanvasLayer/HealthProgressBar
 @onready var points_label : Label = $CanvasLayer/PointsLabel
+@onready var wave_label : Label = $CanvasLayer/WaveLabel
+
+@onready var anim_player : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	World.UI = self
@@ -37,3 +40,7 @@ func subtract_points(points: int):
 func update_points():
 	set_points_text(World.player_points)
 	return
+	
+func set_wave_label(wave : int):
+	wave_label.text = "Wave " + str(wave)
+	anim_player.play("change_wave_label")
