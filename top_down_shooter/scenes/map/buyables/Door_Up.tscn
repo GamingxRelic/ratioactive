@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctxdlh5yirxb2"]
+
+[ext_resource type="Script" path="res://scripts/buyables/Door.gd" id="1_2ha6v"]
+[ext_resource type="Texture2D" uid="uid://bn3evmm7e0uft" path="res://assets/tiles/test_room/Door.png" id="2_lg6jx"]
+[ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="3_sic6i"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="4_ma81j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p5pa"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhqig"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_87yo1"]
+polygon = PackedVector2Array(-16, -8, 16, -8, 16, 8, -16, 8)
+
+[sub_resource type="Animation" id="Animation_whmqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b4ga7"]
+resource_name = "remove_door"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72boj"]
+_data = {
+"RESET": SubResource("Animation_whmqv"),
+"remove_door": SubResource("Animation_b4ga7")
+}
+
+[node name="Door_Up" type="StaticBody2D" groups=["buyable", "can_change_label_visibility"]]
+position = Vector2(8, 0)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_2ha6v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7p5pa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lg6jx")
+
+[node name="Buyable_Component" parent="." instance=ExtResource("3_sic6i")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Buyable_Component"]
+shape = SubResource("RectangleShape2D_jhqig")
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("4_ma81j")]
+z_index = 1
+text = "300"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_87yo1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_72boj")
+}
+
+[connection signal="failed_purchase" from="Buyable_Component" to="." method="_on_purchaseable_component_failed_purchase"]
+[connection signal="purchased" from="Buyable_Component" to="." method="_on_purchaseable_component_purchased"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

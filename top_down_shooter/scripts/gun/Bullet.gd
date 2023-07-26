@@ -36,8 +36,6 @@ func _on_despawn_timer_timeout():
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player_can_damage"):
 		body.hurtbox_component.damage(bullet_res.damage, velocity * bullet_res.knockback_amount)
-		World.UI.add_points(10)
-		World.player_points+=10
 		if !bullet_res.piercing:
 			self.queue_free()
 	elif !body.is_in_group("player"):

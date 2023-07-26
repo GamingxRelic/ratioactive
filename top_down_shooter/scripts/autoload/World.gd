@@ -2,7 +2,8 @@ extends Node2D
 
 var player : CharacterBody2D
 var player_pos : Vector2 
-var player_hp 
+var player_hp
+var player_hurtbox : Area2D
 var player_weapons : Array[Weapon]
 var player_weapon_index : int
 var player_gun : Weapon
@@ -20,8 +21,18 @@ var enemy_count : int:
 	set(value):
 		enemy_count = value
 		emit_signal("enemy_count_changed")
-var enemy_spawn_queue : Array
+#var enemy_spawn_queue : Array
+var total_wave_enemies_spawned : int
+var max_wave_enemy_count : int
+var remaining_wave_enemy_count : int:
+	get:
+		return remaining_wave_enemy_count
+	set(value):
+		remaining_wave_enemy_count = value
+		emit_signal("remaining_wave_enemy_count_changed")
 
 signal next_wave
 signal spawn_enemies
 signal enemy_count_changed
+signal remaining_wave_enemy_count_changed
+signal kill_all_enemies

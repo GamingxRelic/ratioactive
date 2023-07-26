@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d20xrhbdjreun"]
+[gd_scene load_steps=17 format=3 uid="uid://d20xrhbdjreun"]
 
 [ext_resource type="Script" path="res://scripts/entities/enemy/Enemy.gd" id="1_4c23b"]
 [ext_resource type="Texture2D" uid="uid://deymmaw4qgjuq" path="res://assets/sprites/enemies/test_cheese_1/cheese-sheet.png" id="1_hp1kb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cn7f8fv4egtsq" path="res://components/scenes/Hurtbox_Component.tscn" id="4_80d3p"]
 [ext_resource type="AudioStream" uid="uid://d13f5evpunwgw" path="res://assets/audio/entities/enemies/enemy1_1.wav" id="5_xjlie"]
 [ext_resource type="AudioStream" uid="uid://c08ao58xcao3h" path="res://assets/audio/weapons/guns/fart.mp3" id="6_4qv54"]
+[ext_resource type="PackedScene" uid="uid://d4ab403iyuxsk" path="res://components/scenes/Attackbox_Component.tscn" id="7_3ewax"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8upc"]
 radius = 7.0
@@ -268,6 +269,9 @@ colors = PackedColorArray(0, 0.909804, 0.384314, 1, 0, 0.909804, 0.384314, 1)
 gradient = SubResource("Gradient_uovxi")
 width = 16
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_alp86"]
+radius = 7.28011
+
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent") groups=["enemy", "player_can_damage"]]
 modulate = Color(1, 1, 1, 0)
 z_index = 2
@@ -323,7 +327,27 @@ value = 100.0
 rounded = true
 texture_progress = SubResource("GradientTexture1D_2w6tt")
 
+[node name="Immunity_Frames_Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="Attackbox_Component" parent="." instance=ExtResource("7_3ewax")]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox_Component"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_alp86")
+
+[node name="Attempt_Player_Damage_Timer" type="Timer" parent="."]
+wait_time = 0.15
+
 [connection signal="death" from="Health_Component" to="." method="_on_health_component_death"]
 [connection signal="took_damage" from="Hurtbox_Component" to="." method="_on_hurtbox_component_took_damage"]
 [connection signal="timeout" from="Navigation_Timer" to="." method="_on_navigation_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Immunity_Frames_Timer" to="." method="_on_immunity_frames_timer_timeout"]
+[connection signal="area_entered" from="Attackbox_Component" to="." method="_on_attackbox_component_area_entered"]
+[connection signal="area_exited" from="Attackbox_Component" to="." method="_on_attackbox_component_area_exited"]
+[connection signal="timeout" from="Attempt_Player_Damage_Timer" to="." method="_on_attempt_player_damage_timer_timeout"]

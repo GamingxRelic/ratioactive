@@ -1,20 +1,31 @@
 extends Node2D
 
-#@onready var spawn_queue : Array = 
+@export var active := false
+@onready var reattempt_timer : Timer = $Reattempt_Spawn_Timer as Timer
 
 func _ready() -> void:
 	World.spawn_enemies.connect(_on_spawn_enemy)
-	World.enemy_count_changed.connect(_on_enemy_count_changed)
+	World.remaining_wave_enemy_count_changed.connect(_on_remaining_wave_enemy_count_changed)
+	
 
 func _on_spawn_enemy() -> void:
-	var new_enemy = preload("res://scenes/entities/enemies/Enemy.tscn").instantiate()
-	new_enemy.global_position = global_position
-	if World.enemy_count != World.max_enemy_count:
-		get_node("/root/World").add_child(new_enemy)
-	else:
-		World.enemy_spawn_queue.append(new_enemy)
+	attempt_enemy_spawn()
 		
-func _on_enemy_count_changed() -> void:
-	if World.enemy_spawn_queue.size() > 0 and World.enemy_count != World.max_enemy_count:
-		get_node("/root/World").add_child(World.enemy_spawn_queue.pop_front())
-		#get_node("/root/World").call_deferred("add_child", spawn_queue.pop_front())
+func _on_remaining_wave_enemy_count_changed() -> void:
+	if World.remaining_wave_enemy_count < World.max_wave_enemy_count:
+		attempt_enemy_spawn()
+
+
+func _on_reattempt_spawn_timer_timeout():
+	if World.remaining_wave_enemy_count > 0 and World.enemy_count < World.max_enemy_count and active:
+		attempt_enemy_spawn()
+	else:
+		reattempt_timer.stop()
+
+func attempt_enemy_spawn() -> void:
+	if World.remaining_wave_enemy_count > 0 and World.enemy_count < World.max_enemy_count and World.total_wave_enemies_spawned < World.max_wave_enemy_count and active:
+		var new_enemy = preload("res://scenes/entities/enemies/Enemy.tscn").instantiate()
+		new_enemy.global_position = global_position
+		get_node("/root/World").add_child(new_enemy)
+		
+		reattempt_timer.start()

@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scripts/levels/Level.gd" id="1_d04df"]
 [ext_resource type="PackedScene" uid="uid://5dwbbxlj7ose" path="res://scenes/entities/drops/Dropped_Weapon.tscn" id="1_o2d06"]
 [ext_resource type="Resource" uid="uid://bx213twqsep8w" path="res://resources/weapon/ak-47.tres" id="2_pb3wc"]
-[ext_resource type="Resource" uid="uid://cr0jvxbd4rlfh" path="res://resources/weapon/god_pistol.tres" id="4_ds0tu"]
+[ext_resource type="Resource" uid="uid://cr0jvxbd4rlfh" path="res://resources/weapon/dev_pistol.tres" id="4_durwv"]
 [ext_resource type="Resource" uid="uid://dxche03huugfr" path="res://resources/weapon/sawed_off.tres" id="4_jo2ff"]
 [ext_resource type="Resource" uid="uid://cftcsem7hcgdk" path="res://resources/weapon/ruahil.tres" id="5_dyddw"]
 [ext_resource type="Texture2D" uid="uid://uucawxreih0j" path="res://assets/tiles/test_room/TestTiles.png" id="6_1l43v"]
-[ext_resource type="PackedScene" uid="uid://bbpvcr7ku0hiq" path="res://scenes/map/purchaseables/Door_Side.tscn" id="7_bt1lf"]
-[ext_resource type="PackedScene" uid="uid://ctxdlh5yirxb2" path="res://scenes/map/purchaseables/Door_Up.tscn" id="8_72q3q"]
+[ext_resource type="PackedScene" uid="uid://bbpvcr7ku0hiq" path="res://scenes/map/buyables/Door_Side.tscn" id="7_bt1lf"]
+[ext_resource type="PackedScene" uid="uid://ctxdlh5yirxb2" path="res://scenes/map/buyables/Door_Up.tscn" id="8_72q3q"]
 [ext_resource type="PackedScene" uid="uid://dpb1nr8xulbbn" path="res://scenes/map/spawners/Basic_Enemy_Spawner.tscn" id="9_o11f6"]
 [ext_resource type="PackedScene" uid="uid://2a5hu5k24rwo" path="res://scenes/entities/Player/Player.tscn" id="10_nkvw8"]
 [ext_resource type="Script" path="res://scripts/camera/Camera.gd" id="11_c6enf"]
@@ -199,7 +199,6 @@ _data = {
 [node name="Level_Test" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_d04df")
-max_enemy_count = 24
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -209,7 +208,7 @@ weapon_res = ExtResource("2_pb3wc")
 
 [node name="Dropped_Weapon2" parent="Entities" instance=ExtResource("1_o2d06")]
 position = Vector2(18, -45)
-weapon_res = ExtResource("4_ds0tu")
+weapon_res = ExtResource("4_durwv")
 
 [node name="Dropped_Weapon3" parent="Entities" instance=ExtResource("1_o2d06")]
 position = Vector2(43, -43)
@@ -297,5 +296,15 @@ visible = false
 libraries = {
 "": SubResource("AnimationLibrary_yfabn")
 }
+
+[node name="Wave_Intermission_Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Wave_Countdown_Timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Wave_Intermission_Timer" to="." method="_on_wave_intermission_timer_timeout"]
+[connection signal="timeout" from="Wave_Countdown_Timer" to="." method="_on_wave_countdown_timer_timeout"]
 
 [editable path="Game_UI"]

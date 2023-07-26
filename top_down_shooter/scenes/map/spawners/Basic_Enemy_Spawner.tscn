@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpb1nr8xulbbn"]
+[gd_scene load_steps=3 format=3 uid="uid://dpb1nr8xulbbn"]
 
 [ext_resource type="Script" path="res://scripts/world/spawners/Basic_Enemy_Spawner.gd" id="1_38tfa"]
 
-[node name="Basic_Enemy_Spawner" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf725"]
+radius = 4.0
+
+[node name="Basic_Enemy_Spawner" type="Area2D" groups=["spawner"]]
+collision_layer = 64
+collision_mask = 2
+monitoring = false
 script = ExtResource("1_38tfa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jf725")
+
+[node name="Reattempt_Spawn_Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="Reattempt_Spawn_Timer" to="." method="_on_reattempt_spawn_timer_timeout"]

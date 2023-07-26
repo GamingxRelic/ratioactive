@@ -41,6 +41,26 @@ func update_points():
 	set_points_text(World.player_points)
 	return
 	
-func set_wave_label(wave : int):
-	wave_label.text = "Wave " + str(wave)
+func play_animation(anim_name : String):
+	match anim_name:
+		"show_wave_label":
+			anim_player.play("show_wave_label")
+			return
+		"hide_wave_label":
+			anim_player.play("hide_wave_label")
+			return
+		"change_wave_label":
+			anim_player.play("change_wave_label")
+			return
+
+## For changing the wave number
+func change_wave_label(wave : int):
 	anim_player.play("change_wave_label")
+	wave_label.text = "Wave " + str(wave)
+	
+	
+## For setting the wave label text
+func set_wave_label(value : String):
+	wave_label.text = value
+
+

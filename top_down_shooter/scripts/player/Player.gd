@@ -5,19 +5,24 @@ extends CharacterBody2D
 @export var decel := 10.0 
 
 @export var health_comp : Node
+var alive := true
 @onready var gun = $Gun
 @onready var sprite = $Sprite2D
 @onready var reload_progress : TextureProgressBar = $ReloadProgress
 @onready var reload_prog_timer : Timer = $ReloadProgTimer
 
 @onready var anim_tree : AnimationTree = $AnimationTree
+@onready var anim_player : AnimationPlayer = $AnimationPlayer
 
 ## Max distance for the gun circling the player
 var gun_dist := 3.0
 
 @onready var yellow_outline = preload("res://assets/shaders/yellow_outline.tres")
 
+@onready var immunity_frames_timer : Timer = $Immunity_Frames_Timer as Timer
 
+var damage_color_tween : Tween
+var damage_color_tween_stop_time := 0.1
 
 func _ready():
 	anim_tree.active = true
@@ -26,6 +31,7 @@ func _ready():
 	World.player_pos = position
 	World.player_hp = health_comp.health
 	World.player_points = 0
+	World.player_hurtbox = $Hurtbox_Component
 	
 	# Give mini pistol
 	World.player_weapons.append(preload("res://resources/weapon/mini_pistol.tres").duplicate())
@@ -54,20 +60,25 @@ func _process(_delta):
 		World.pickup_queue[0].sprite.material = yellow_outline
 
 func _physics_process(delta):
-	movement(delta)
-	input()
-	animation()
-	
-	
-	World.player_pos = position
-	World.player_hp = health_comp.health
+	if alive:
+		movement(delta)
+		input()
+		animation()
 		
-	if reload_progress.value > reload_progress.max_value:
-		reload_progress.value = 0
-	
-	gun_circle_player()
-	
-	move_and_slide()
+		#velocity += knockback
+	#	if knockback != Vector2.ZERO:
+	#		velocity.x += lerp(knockback.x, 0.0, 0.9)
+	#		velocity.y += lerp(knockback.y, 0.0, 0.9)
+		
+		World.player_pos = position
+		World.player_hp = health_comp.health
+			
+		if reload_progress.value > reload_progress.max_value:
+			reload_progress.value = 0
+		
+		gun_circle_player()
+		
+		move_and_slide()
 	
 	
 func movement(delta):
@@ -253,3 +264,42 @@ func _on_view_price_area_exited(area):
 	if area.is_in_group("interactable"):
 		area.find_child("Text_Label_Component").hide()
 		area.sprite.material = null
+
+
+# For detecting if spawners should be considered active or not
+func _on_enemy_spawner_range_area_entered(area):
+	if area.is_in_group("spawner"):
+		area.active = true
+		area.attempt_enemy_spawn()
+
+func _on_enemy_spawner_range_area_exited(area):
+	if area.is_in_group("spawner"):
+		area.active = false
+
+func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2) -> void:	
+	if alive:
+		if !health_comp.immune:
+			print("ow")
+			health_comp.take_damage(dmg_amnt)
+			velocity += knockback_amnt
+			health_comp.immune = true
+			immunity_frames_timer.start()
+			damage_color_tween = get_tree().create_tween()
+			sprite.modulate = Color(1,0,0,1)
+			damage_color_tween.parallel().tween_property(sprite, "modulate",Color(1,1,1,1), damage_color_tween_stop_time)
+	return
+
+func _on_immunity_frames_timer_timeout() -> void:
+	health_comp.immune = false
+
+
+func _on_health_component_death():
+	alive = false
+	anim_tree.active = false
+	World.player_hp = 0.0
+	anim_player.play("death")
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		World.kill_all_enemies.emit()
+		process_mode = Node.PROCESS_MODE_DISABLED

@@ -2,6 +2,7 @@ extends Node
 signal healed
 signal death
 
+@export var immune := false
 @export var max_health := 100.0
 var health := 100.0
 
