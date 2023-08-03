@@ -1,22 +1,10 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://bx213twqsep8w"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://bx213twqsep8w"]
 
-[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_2h2bg"]
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_hiaob"]
 [ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_ti6nr"]
 [ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="2_cax20"]
-[ext_resource type="Texture2D" uid="uid://35x6qha8hisd" path="res://assets/sprites/bullets/bullet.png" id="2_vowec"]
+[ext_resource type="Resource" uid="uid://bg6i32bt5sfv0" path="res://resources/bullet/Standard_Bullet.tres" id="2_li3v4"]
 [ext_resource type="Texture2D" uid="uid://7xg3vh8g2nyu" path="res://assets/sprites/guns/ak47.png" id="3_t1ocg"]
-
-[sub_resource type="Resource" id="Resource_hruqe"]
-script = ExtResource("1_2h2bg")
-bullet_type = "bullet"
-bullet_speed = 100.0
-knockback_amount = 0.2
-piercing = false
-texture = ExtResource("2_vowec")
-collision_polygon_verticies = PackedVector2Array()
-sprite_rotating = false
-sprite_rotate_speed = 0.0
-homing = false
 
 [resource]
 script = ExtResource("1_ti6nr")
@@ -26,18 +14,19 @@ name = "AK-47"
 texture = ExtResource("3_t1ocg")
 position = Vector2(0, 4)
 gun_tip_position = Vector2(9, -2)
-bullet_res = SubResource("Resource_hruqe")
-fire_sound = ExtResource("2_cax20")
-ammo = 20
-total_ammo = 180
-clip_size = 20
-max_ammo = 180
+bullet = ExtResource("1_hiaob")
+bullet_res = ExtResource("2_li3v4")
+ammo = 25
+total_ammo = 100
+clip_size = 25
+max_ammo = 100
+reload_time = 2.0
+bullet_spread = 0.0
 bullet_count = 1
 randomize_bullet_count = false
 randomized_bullet_count_min = 1
 randomized_bullet_count_max = 1
-reload_time = 2.0
-bullet_spread = 0.0
+fire_sound = ExtResource("2_cax20")
 fire_flash_scale = 0.05
 fire_flash_color = Color(0.901961, 0.815686, 0.4, 1)
 fire_flash_energy = 1.0

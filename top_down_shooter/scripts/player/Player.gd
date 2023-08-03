@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var decel := 10.0 
 
 @export var health_comp : Node
+@onready var hurtbox_component = $Hurtbox_Component
 var alive := true
 @onready var gun = $Gun
 @onready var sprite = $Sprite2D
@@ -31,29 +32,25 @@ func _ready():
 	World.player_pos = position
 	World.player_hp = health_comp.health
 	World.player_points = 0
-	World.player_hurtbox = $Hurtbox_Component
+	World.player_hurtbox = hurtbox_component
 	
 	# Give mini pistol
-	World.player_weapons.append(preload("res://resources/weapon/mini_pistol.tres").duplicate())
+	PlayerGun.weapons.append(preload("res://resources/weapon/mini_pistol.tres").duplicate())
 	
-	# Give test guns
-	#World.player_weapons.append(preload("res://resources/weapon/ak-47.tres").duplicate())
-	#World.player_weapons.append(preload("res://resources/weapon/sawed_off.tres").duplicate())
-	#World.player_weapons.append(preload("res://resources/weapon/ruahil.tres").duplicate())
-	
-	for i in World.player_weapons:
+	for i in PlayerGun.weapons:
 		i.ammo = i.clip_size
 		i.total_ammo = i.max_ammo
 	
 	
 	# Set starting weapon as basic pistol
-	World.player_gun = World.player_weapons[0]
-	gun.set_gun_res(World.player_gun)
+	PlayerGun.gun = PlayerGun.weapons[0]
+	gun.set_gun_res(PlayerGun.gun)
 	
 	set_reload_prog_timer()
 	
 	gun.reload_signal.connect(gun_reload)
-	
+	PlayerGun.stop_reload.connect(stop_reload_prog)
+	PlayerGun.gun_added.connect(_on_gun_added)
 
 func _process(_delta):
 	if World.pickup_queue.size() != 0:
@@ -120,15 +117,16 @@ func animation():
 
 # Last working on making it so that if the player is 
 # idle but shooting, the idle animation shouldnt play. it should just be the 
-# first frame of the idle animation. maybe, see how it looks.
+# first frame of the idle animation. maybe, see how it looks.-=
 
 func input():
-	if Input.is_action_just_pressed("mouse_5"):
-		var new_enemy = preload("res://scenes/entities/enemies/Enemy.tscn").instantiate()
-		new_enemy.global_position = get_global_mouse_position()
-		get_node("/root/World").add_child(new_enemy)
+	if Input.is_action_just_pressed("throw_grenade"):
+		var grenade = preload("res://scenes/weapons/bullets/Grenade.tscn").instantiate()
+		grenade.global_position = global_position
+		grenade.rotation = get_angle_to(get_global_mouse_position())
+		get_node("/root/World").add_child(grenade)
+		
 	if Input.is_action_just_pressed("space"):
-		#World.spawn_enemies.emit()
 		World.emit_signal("next_wave")
 		
 		
@@ -137,7 +135,7 @@ func input():
 	if Input.is_action_just_pressed("reload"):
 		gun.reload()
 		
-	if Input.is_action_just_pressed("drop_weapon") and World.player_weapons.size() > 1:
+	if Input.is_action_just_pressed("drop_weapon") and PlayerGun.weapons.size() > 1:
 		drop_weapon()
 		
 	if Input.is_action_just_pressed("interact") and World.pickup_queue.size() > 0:
@@ -149,29 +147,31 @@ func input():
 	if Input.is_action_just_pressed("scroll_up"):
 		next_weapon()
 
-	if Input.is_action_just_pressed("1") and World.player_weapons.size() >= 1 and World.player_weapons[0] != null and World.player_weapon_index != 0: # and !gun.is_reloading():
+	if Input.is_action_just_pressed("1") and PlayerGun.weapons.size() >= 1 and PlayerGun.weapons[0] != null and PlayerGun.weapon_index != 0: # and !gun.is_reloading():
 		select_weapon(0)
-	if Input.is_action_just_pressed("2") and World.player_weapons.size() >= 2 and World.player_weapons[1] != null and World.player_weapon_index != 1: # and !gun.is_reloading():
+	if Input.is_action_just_pressed("2") and PlayerGun.weapons.size() >= 2 and PlayerGun.weapons[1] != null and PlayerGun.weapon_index != 1: # and !gun.is_reloading():
 		select_weapon(1)
-	if Input.is_action_just_pressed("3") and World.player_weapons.size() >= 3 and World.player_weapons[2] != null and World.player_weapon_index != 2: # and !gun.is_reloading():
+	if Input.is_action_just_pressed("3") and PlayerGun.weapons.size() >= 3 and PlayerGun.weapons[2] != null and PlayerGun.weapon_index != 2: # and !gun.is_reloading():
 		select_weapon(2)
-	if Input.is_action_just_pressed("4") and World.player_weapons.size() >= 4 and World.player_weapons[3] != null and World.player_weapon_index != 3: # and !gun.is_reloading():
+	if Input.is_action_just_pressed("4") and PlayerGun.weapons.size() >= 4 and PlayerGun.weapons[3] != null and PlayerGun.weapon_index != 3: # and !gun.is_reloading():
 		select_weapon(3)
 	
+func _on_gun_added() -> void:
+	select_weapon(PlayerGun.weapons.size()-1)
 	
 func drop_weapon() -> void:
 	stop_reload_prog()
 	
 	# Spawn dropped gun
 	var dropped_gun = preload("res://scenes/entities/drops/Dropped_Weapon.tscn").instantiate()
-	dropped_gun.weapon_res = World.player_gun
+	dropped_gun.weapon_res = PlayerGun.gun
 	dropped_gun.global_position = global_position
 	get_node("/root/World").add_child(dropped_gun)
 	
 	# Remove gun from player inventory
-	World.player_weapons.pop_at(World.player_weapon_index)
+	PlayerGun.weapons.pop_at(PlayerGun.weapon_index)
 	
-	if World.player_weapons.size() == 1:
+	if PlayerGun.weapons.size() == 1:
 		select_weapon(0)
 	else:
 		previous_weapon()
@@ -184,10 +184,10 @@ func pickup_weapon() -> void:
 	World.pickup_queue[0].pickup()
 	
 func select_weapon(selection : int):
-	if World.player_weapons[selection] != null:
-		World.player_gun = World.player_weapons[selection]
-		World.player_weapon_index = selection
-		gun.set_gun_res(World.player_gun)
+	if PlayerGun.weapons[selection] != null:
+		PlayerGun.gun = PlayerGun.weapons[selection]
+		PlayerGun.weapon_index = selection
+		gun.set_gun_res(PlayerGun.gun)
 		stop_reload_prog()
 		gun.reloading = false
 		gun.reload_timer.stop()
@@ -195,35 +195,34 @@ func select_weapon(selection : int):
 		set_reload_prog_timer()
 
 func next_weapon() -> void:
-	if World.player_weapon_index == World.player_weapons.size()-1 and World.player_weapons.size() > 1:
+	if PlayerGun.weapon_index == PlayerGun.weapons.size()-1 and PlayerGun.weapons.size() > 1:
 		select_weapon(0)
-	elif World.player_weapon_index+1 <= World.player_weapons.size()-1 and World.player_weapons[World.player_weapon_index+1] != null:
-		select_weapon(World.player_weapon_index+1)
+	elif PlayerGun.weapon_index+1 <= PlayerGun.weapons.size()-1 and PlayerGun.weapons[PlayerGun.weapon_index+1] != null:
+		select_weapon(PlayerGun.weapon_index+1)
 	return
 	
 func previous_weapon():
-	if World.player_weapon_index-1 < 0 and World.player_weapons.size() != 1:
-		for i in World.player_weapons.size():
-			print(i)
-			var selection = World.player_weapons.size()-1-i
-			if World.player_weapons[selection] != null:
+	if PlayerGun.weapon_index-1 < 0 and PlayerGun.weapons.size() != 1:
+		for i in PlayerGun.weapons.size():
+			var selection = PlayerGun.weapons.size()-1-i
+			if PlayerGun.weapons[selection] != null:
 				select_weapon(selection)
 				return
-	elif World.player_weapons[World.player_weapon_index-1] != null and World.player_weapons.size() != 1:
-		select_weapon(World.player_weapon_index-1)
+	elif PlayerGun.weapons[PlayerGun.weapon_index-1] != null and PlayerGun.weapons.size() != 1:
+		select_weapon(PlayerGun.weapon_index-1)
 		return
 	return
 
 # I guess I set things up in a way that doesn't even require this method. Nice, good job me :)
 #func save_weapon_info():
-#	World.player_weapons[World.player_weapon_index].ammo = World.player_gun.ammo
-#	World.player_weapons[World.player_weapon_index].total_ammo = World.player_gun.total_ammo
+#	PlayerGun.weapons[PlayerGun.weapon_index].ammo = PlayerGun.gun.ammo
+#	PlayerGun.weapons[PlayerGun.weapon_index].total_ammo = PlayerGun.gun.total_ammo
 #	return
 
 func set_reload_prog_timer():
-	reload_progress.max_value = World.player_gun.reload_time
-	reload_progress.step = World.player_gun.reload_time/10
-	reload_prog_timer.wait_time = float(World.player_gun.reload_time)/10
+	reload_progress.max_value = PlayerGun.gun.reload_time
+	reload_progress.step = PlayerGun.gun.reload_time/10
+	reload_prog_timer.wait_time = float(PlayerGun.gun.reload_time)/10
 	return
 
 func stop_reload_prog():

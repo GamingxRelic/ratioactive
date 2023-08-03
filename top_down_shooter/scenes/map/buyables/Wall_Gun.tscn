@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://co5s2oouy6v45"]
+
+[ext_resource type="Script" path="res://scripts/buyables/Wall_Gun.gd" id="1_64phi"]
+[ext_resource type="Texture2D" uid="uid://7xg3vh8g2nyu" path="res://assets/sprites/guns/ak47.png" id="1_ewb6r"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="4_q0abk"]
+[ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="5_01wbn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5dt3"]
+radius = 12.0
+
+[node name="Wall_Gun" type="Node2D"]
+script = ExtResource("1_64phi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ewb6r")
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("4_q0abk")]
+
+[node name="Buyable_Component" parent="." instance=ExtResource("5_01wbn")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buyable_Component"]
+shape = SubResource("CircleShape2D_o5dt3")
+
+[connection signal="player_entered_range" from="Buyable_Component" to="." method="_on_buyable_component_player_entered_range"]
+[connection signal="player_exited_range" from="Buyable_Component" to="." method="_on_buyable_component_player_exited_range"]
+[connection signal="purchased" from="Buyable_Component" to="." method="_on_buyable_component_purchased"]

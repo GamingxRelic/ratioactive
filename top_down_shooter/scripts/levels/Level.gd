@@ -25,7 +25,7 @@ func _on_next_wave() -> void:
 	if wave == 0:
 		wave_timer.wait_time = 3
 	else:
-		wave_timer.wait_time = 10
+		wave_timer.wait_time = 1
 	timer_countdown_value = int(wave_timer.wait_time)
 	World.UI.set_wave_label("New Wave In " + str(timer_countdown_value))
 	World.UI.play_animation("show_wave_label")
@@ -39,6 +39,7 @@ func _on_wave_intermission_timer_timeout():
 	countdown_timer.stop()
 	
 	wave += 1
+	World.wave = wave
 	World.UI.change_wave_label(wave)
 	
 	wave_enemy_amount = clamp(floor(0.15*(wave*wave)+0.3*(wave)+8), 1, 285)
@@ -62,4 +63,5 @@ func _on_remaining_wave_enemy_count_changed() -> void:
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "reveal_map":
-		World.next_wave.emit()
+		pass
+		#World.next_wave.emit()

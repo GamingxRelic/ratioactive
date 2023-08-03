@@ -293,7 +293,8 @@ shape = SubResource("CapsuleShape2D_c8upc")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 process_mode = 4
-path_desired_distance = 16.0
+path_desired_distance = 4.0
+target_desired_distance = 4.0
 path_postprocessing = 1
 
 [node name="Health_Component" parent="." instance=ExtResource("3_n25gn")]
@@ -319,6 +320,7 @@ libraries = {
 }
 
 [node name="Health_Bar" type="TextureProgressBar" parent="."]
+visible = false
 offset_left = -8.0
 offset_top = -10.0
 offset_right = 248.0

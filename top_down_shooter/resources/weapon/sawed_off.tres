@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://dxche03huugfr"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://dxche03huugfr"]
 
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_5aq2e"]
 [ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_23e5d"]
 [ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_84xm1"]
 [ext_resource type="Texture2D" uid="uid://d30ig27fy7s7s" path="res://assets/sprites/bullets/sawed_off_bullet.png" id="2_0mnhl"]
@@ -8,7 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_kaw4q"]
 script = ExtResource("1_23e5d")
-bullet_type = "bullet"
 bullet_speed = 80.0
 knockback_amount = 1.2
 piercing = true
@@ -21,23 +21,24 @@ homing = false
 [resource]
 script = ExtResource("1_84xm1")
 rate_of_fire = 0.5
-damage = 15.0
+damage = 55.0
 name = "Sawed-Off Shotgun"
 texture = ExtResource("4_mmjev")
 position = Vector2(1, 2)
 gun_tip_position = Vector2(8, -2)
+bullet = ExtResource("1_5aq2e")
 bullet_res = SubResource("Resource_kaw4q")
-fire_sound = ExtResource("2_ww5ki")
 ammo = 2
 total_ammo = 32
 clip_size = 2
 max_ammo = 32
+reload_time = 2.0
+bullet_spread = 0.3
 bullet_count = 4
 randomize_bullet_count = false
 randomized_bullet_count_min = 1
 randomized_bullet_count_max = 1
-reload_time = 2.0
-bullet_spread = 0.3
+fire_sound = ExtResource("2_ww5ki")
 fire_flash_scale = 0.1
 fire_flash_color = Color(0.901961, 0.815686, 0.4, 1)
 fire_flash_energy = 1.0

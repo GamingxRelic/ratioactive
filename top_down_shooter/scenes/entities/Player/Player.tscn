@@ -62,6 +62,22 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_nigc8"]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_x623x"]
 resource_name = "idle_down"
 
@@ -264,22 +280,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_4ri0e"]
 resource_name = "run_up"
 
-[sub_resource type="Animation" id="Animation_nigc8"]
-resource_name = "death"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dh8b8"]
 _data = {
 "RESET": SubResource("Animation_ss5im"),
@@ -386,7 +386,6 @@ nodes/run_up/position = Vector2(-280, 20)
 node_connections = [&"output", 0, &"MoveOrIdle", &"MoveOrIdle", 0, &"RunTimescale", &"MoveOrIdle", 1, &"idle_anim", &"RunTimescale", 0, &"run_anim", &"idle_anim", 0, &"idle_left", &"idle_anim", 1, &"idle_right", &"idle_anim", 2, &"idle_up", &"idle_anim", 3, &"idle_down", &"run_anim", 0, &"run_left", &"run_anim", 1, &"run_right", &"run_anim", 2, &"run_up", &"run_anim", 3, &"run_down"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fwpai"]
-radius = 12.0
 
 [sub_resource type="Gradient" id="Gradient_fady5"]
 offsets = PackedFloat32Array(0, 0.754839)
@@ -408,6 +407,7 @@ script = ExtResource("1_0mq3o")
 health_comp = NodePath("Health_Component")
 
 [node name="Health_Component" parent="." instance=ExtResource("2_muamj")]
+immune = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
@@ -498,7 +498,7 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_cav7v")
 
 [node name="Immunity_Frames_Timer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.5
 one_shot = true
 
 [connection signal="death" from="Health_Component" to="." method="_on_health_component_death"]

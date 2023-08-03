@@ -51,7 +51,7 @@ _data = {
 "remove_door": SubResource("Animation_b4ga7")
 }
 
-[node name="Door_Side" type="StaticBody2D" groups=["buyable", "can_change_label_visibility"]]
+[node name="Door_Side" type="StaticBody2D" groups=["buyable", "can_change_label_visibility", "door"]]
 position = Vector2(0, 8)
 collision_layer = 8
 collision_mask = 2

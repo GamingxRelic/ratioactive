@@ -12,7 +12,7 @@ func _ready():
 	update_points()
 
 func _process(_delta):
-	set_ammo_text(World.player_gun.ammo, World.player_gun.total_ammo)
+	set_ammo_text(PlayerGun.gun.ammo, PlayerGun.gun.total_ammo)
 	set_health_value(World.player_hp)
 
 func set_ammo_text(ammo_min : int, ammo_max : int):

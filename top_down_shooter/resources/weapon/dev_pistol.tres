@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://cr0jvxbd4rlfh"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://cr0jvxbd4rlfh"]
 
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_rp61q"]
 [ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_vqbto"]
 [ext_resource type="Texture2D" uid="uid://35x6qha8hisd" path="res://assets/sprites/bullets/bullet.png" id="2_6r2ov"]
 [ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="3_cro54"]
 [ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="4_e5sbq"]
 [ext_resource type="Texture2D" uid="uid://dfrehtu1lsrvu" path="res://assets/sprites/guns/dev_pistol.png" id="5_gt5xp"]
 
-[sub_resource type="Resource" id="Resource_ctxxk"]
+[sub_resource type="Resource" id="Resource_qelws"]
 script = ExtResource("1_vqbto")
-bullet_type = "bullet"
 bullet_speed = 80.0
 knockback_amount = 1.0
 piercing = false
@@ -26,18 +26,19 @@ name = "God Pistol"
 texture = ExtResource("5_gt5xp")
 position = Vector2(1, 2)
 gun_tip_position = Vector2(5, -1)
-bullet_res = SubResource("Resource_ctxxk")
-fire_sound = ExtResource("3_cro54")
+bullet = ExtResource("1_rp61q")
+bullet_res = SubResource("Resource_qelws")
 ammo = 1000
 total_ammo = 1000
 clip_size = 1000
 max_ammo = 1000
+reload_time = 0.1
+bullet_spread = 0.0
 bullet_count = 1
 randomize_bullet_count = false
 randomized_bullet_count_min = 1
 randomized_bullet_count_max = 1
-reload_time = 0.1
-bullet_spread = 0.0
+fire_sound = ExtResource("3_cro54")
 fire_flash_scale = 0.05
 fire_flash_color = Color(0.529412, 0.929412, 0.411765, 1)
 fire_flash_energy = 1.0

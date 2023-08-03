@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/world/spawners/Basic_Enemy_Spawner.gd" id="1_38tfa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jf725"]
-radius = 4.0
+radius = 8.0
 
 [node name="Basic_Enemy_Spawner" type="Area2D" groups=["spawner"]]
 collision_layer = 64
@@ -17,4 +17,6 @@ shape = SubResource("CircleShape2D_jf725")
 [node name="Reattempt_Spawn_Timer" type="Timer" parent="."]
 wait_time = 1.5
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="Reattempt_Spawn_Timer" to="." method="_on_reattempt_spawn_timer_timeout"]

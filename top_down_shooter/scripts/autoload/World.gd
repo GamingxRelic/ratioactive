@@ -4,15 +4,14 @@ var player : CharacterBody2D
 var player_pos : Vector2 
 var player_hp
 var player_hurtbox : Area2D
-var player_weapons : Array[Weapon]
-var player_weapon_index : int
-var player_gun : Weapon
 var player_points : int
 var add_points : int
 
 var pickup_queue : Array
 
 var UI : Control
+
+var wave : int
 
 var max_enemy_count : int
 var enemy_count : int:

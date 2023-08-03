@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdg603v00ec1w"]
+
+[ext_resource type="Script" path="res://scripts/gun/Bullet.gd" id="1_5h44i"]
+
+[node name="Bullet" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_5h44i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Despawn_Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 13
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -0.5, 1, -0.5, 1, 0.5, 1, 1.5, -1, 1.5, -1, 0.5, -2, 0.5, -2, -1.5, 0, -1.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -0.5, 1, -0.5, 1, 0.5, 1, 1.5, -1, 1.5, -1, 0.5, -2, 0.5, -2, -1.5, 0, -1.5)
+
+[connection signal="timeout" from="Despawn_Timer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -7,7 +7,7 @@ extends Node2D
 @onready var audio : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var fire_particles : GPUParticles2D = $Firing_Particles
 @onready var firing_light : PointLight2D = $Firing_Light
-var bullet = preload("res://scenes/Bullet.tscn")
+var bullet : PackedScene
 
 var mouse_pos
 var can_fire := true
@@ -22,10 +22,10 @@ func _physics_process(_delta):
 	mouse_pos = get_global_mouse_position()
 	look_at(get_global_mouse_position())
 	flip_sprite()
-	if World.player_gun.ammo < World.player_gun.clip_size and World.player_gun.total_ammo > 0 and !is_reloading():
+	if PlayerGun.gun.ammo < PlayerGun.gun.clip_size and PlayerGun.gun.total_ammo > 0 and !is_reloading():
 		can_reload = true
 		
-	if World.player_gun.ammo == 0 and can_reload and !is_reloading():
+	if PlayerGun.gun.ammo == 0 and can_reload and !is_reloading():
 		reload()
 	
 	firing_light.position = gun_tip.position
@@ -37,27 +37,25 @@ func _physics_process(_delta):
 		firing_light.energy = lerp(firing_light.energy, 0.0, 0.7)
 	
 func set_gun_res(res : Weapon):
-	World.player_gun = res
-	audio.stream = World.player_gun.fire_sound
-	fire_cooldown.wait_time = World.player_gun.rate_of_fire
-	sprite.texture = World.player_gun.texture
+	PlayerGun.gun = res
+	bullet = res.bullet
+	audio.stream = PlayerGun.gun.fire_sound
+	fire_cooldown.wait_time = PlayerGun.gun.rate_of_fire
+	sprite.texture = PlayerGun.gun.texture
 	
-	World.player_gun.ammo = World.player_weapons[World.player_weapon_index].ammo
-	World.player_gun.total_ammo = World.player_weapons[World.player_weapon_index].total_ammo
-	reload_timer.wait_time = World.player_gun.reload_time
+	PlayerGun.gun.ammo = PlayerGun.weapons[PlayerGun.weapon_index].ammo
+	PlayerGun.gun.total_ammo = PlayerGun.weapons[PlayerGun.weapon_index].total_ammo
+	reload_timer.wait_time = PlayerGun.gun.reload_time
 	
-	firing_light.texture_scale = World.player_gun.fire_flash_scale
-	firing_light.color = World.player_gun.fire_flash_color
-	firing_light.energy = World.player_gun.fire_flash_energy
+	firing_light.texture_scale = PlayerGun.gun.fire_flash_scale
+	firing_light.color = PlayerGun.gun.fire_flash_color
+	firing_light.energy = PlayerGun.gun.fire_flash_energy
 	
-	gun_tip.position = World.player_gun.gun_tip_position
-	position = World.player_gun.position
-	fire_particles.position = World.player_gun.gun_tip_position
+	gun_tip.position = PlayerGun.gun.gun_tip_position
+	position = PlayerGun.gun.position
+	fire_particles.position = PlayerGun.gun.gun_tip_position
 	
-	World.player_gun.bullet_res.damage = World.player_gun.damage
-	
-	
-	
+	#PlayerGun.gun.bullet_res.damage = PlayerGun.gun.damage
 
 func flip_sprite():
 	if global_rotation_degrees < -90 or global_rotation_degrees > 90:
@@ -67,7 +65,7 @@ func flip_sprite():
 	return
 
 func fire():
-	if can_fire and World.player_gun.ammo > 0 and !reloading:
+	if can_fire and PlayerGun.gun.ammo > 0 and !reloading:
 		audio.play()
 		is_shooting = true
 		fire_cooldown.start()
@@ -77,28 +75,28 @@ func fire():
 		$Firing_Light.enabled = true
 		
 		var bullet_count
-		if World.player_gun.randomize_bullet_count:
-			bullet_count = randi_range(World.player_gun.randomized_bullet_count_min, World.player_gun.randomized_bullet_count_max)
+		if PlayerGun.gun.randomize_bullet_count:
+			bullet_count = randi_range(PlayerGun.gun.randomized_bullet_count_min, PlayerGun.gun.randomized_bullet_count_max)
 		else:
-			bullet_count = World.player_gun.bullet_count
-			
+			bullet_count = PlayerGun.gun.bullet_count
+
 		for i in bullet_count:
 			var new_bullet = bullet.instantiate()
 			new_bullet.global_position = gun_tip.global_position
-			new_bullet.bullet_res = World.player_gun.bullet_res
-			new_bullet.aim_rotation_rad = rotation+randf_range(-World.player_gun.bullet_spread,World.player_gun.bullet_spread)
+			new_bullet.bullet_res = PlayerGun.gun.bullet_res
+			new_bullet.aim_rotation_rad = rotation+randf_range(-PlayerGun.gun.bullet_spread,PlayerGun.gun.bullet_spread)
 			get_node("/root/World").add_child(new_bullet)
 			
 		can_fire = false
-		World.player_gun.ammo -= 1
+		PlayerGun.gun.ammo -= 1
 		return
-	elif World.player_gun.ammo == 0 and can_reload:
+	elif PlayerGun.gun.ammo == 0 and can_reload:
 		reload()
 	is_shooting = false
 	return
 	
 func reload():
-	if World.player_gun.total_ammo == 0 or World.player_gun.ammo == World.player_gun.clip_size:
+	if PlayerGun.gun.total_ammo <= 0 or PlayerGun.gun.ammo >= PlayerGun.gun.clip_size:
 		return
 	elif reload_timer.is_stopped():
 		can_reload = false
@@ -113,13 +111,13 @@ func _on_fire_cooldown_timeout():
 	return
 
 func _on_reload_timer_timeout():
-	if World.player_gun.total_ammo-(World.player_gun.clip_size-World.player_gun.ammo) >= 0:
-		World.player_gun.total_ammo -= (World.player_gun.clip_size-World.player_gun.ammo)
-		World.player_gun.ammo = World.player_gun.clip_size
+	if PlayerGun.gun.total_ammo-(PlayerGun.gun.clip_size-PlayerGun.gun.ammo) >= 0:
+		PlayerGun.gun.total_ammo -= (PlayerGun.gun.clip_size-PlayerGun.gun.ammo)
+		PlayerGun.gun.ammo = PlayerGun.gun.clip_size
 		reloading = false
-	elif World.player_gun.total_ammo != 0:
-		World.player_gun.ammo += World.player_gun.total_ammo
-		World.player_gun.total_ammo = 0
+	elif PlayerGun.gun.total_ammo != 0:
+		PlayerGun.gun.ammo += PlayerGun.gun.total_ammo
+		PlayerGun.gun.total_ammo = 0
 		reloading = false
 	return
 
@@ -127,5 +125,5 @@ func is_reloading() -> bool:
 	return true if reloading else false
 
 func fill_ammo():
-	World.player_gun.ammo = World.player_gun.clip_size
-	World.player_gun.total_ammo = World.player_gun.max_ammo
+	PlayerGun.gun.ammo = PlayerGun.gun.clip_size
+	PlayerGun.gun.total_ammo = PlayerGun.gun.max_ammo
