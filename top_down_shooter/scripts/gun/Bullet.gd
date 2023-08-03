@@ -12,7 +12,6 @@ func _ready():
 	if bullet_res.texture != null:
 		sprite.texture = bullet_res.texture
 	
-	#rotate(get_angle_to(get_global_mouse_position()))
 	rotate(aim_rotation_rad)
 	
 func _physics_process(_delta):
