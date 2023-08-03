@@ -11,7 +11,7 @@ signal player_exited_range
 
 func _process(_delta):
 	if player_in_range:
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("interact") and World.pickup_queue.size() == 0:
 			purchase()
 
 func purchase():
