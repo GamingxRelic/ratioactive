@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://ckrus8b3wgwyu"]
 
-[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_e5fh1"]
+[ext_resource type="PackedScene" uid="uid://f6q0gfxes2th" path="res://scenes/weapons/bullets/Grenade.tscn" id="1_3pjsh"]
 [ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_hsp3s"]
 [ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_n5eww"]
 [ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="2_goitx"]
@@ -26,13 +26,14 @@ name = "Mini Pistol"
 texture = ExtResource("3_r8dc5")
 position = Vector2(1, 2)
 gun_tip_position = Vector2(5, -1)
-bullet = ExtResource("1_e5fh1")
+bullet = ExtResource("1_3pjsh")
 bullet_res = SubResource("Resource_1qt1b")
 ammo = 8
 total_ammo = 64
 clip_size = 8
 max_ammo = 64
 reload_time = 1.5
+cantuna_price = 100
 bullet_spread = 0.0
 bullet_count = 1
 randomize_bullet_count = false

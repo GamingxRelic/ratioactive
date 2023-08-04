@@ -18,8 +18,6 @@ var alive := true
 ## Max distance for the gun circling the player
 var gun_dist := 3.0
 
-@onready var yellow_outline = preload("res://assets/shaders/yellow_outline.tres")
-
 @onready var immunity_frames_timer : Timer = $Immunity_Frames_Timer as Timer
 
 var damage_color_tween : Tween
@@ -54,7 +52,7 @@ func _ready():
 
 func _process(_delta):
 	if World.pickup_queue.size() != 0:
-		World.pickup_queue[0].sprite.material = yellow_outline
+		World.pickup_queue[0].sprite.material = World.yellow_outline
 
 func _physics_process(delta):
 	if alive:
@@ -123,12 +121,15 @@ func input():
 	if Input.is_action_just_pressed("throw_grenade"):
 		var grenade = preload("res://scenes/weapons/bullets/Grenade.tscn").instantiate()
 		grenade.global_position = global_position
-		grenade.rotation = get_angle_to(get_global_mouse_position())
+		grenade.aim_rotation_rad = get_angle_to(get_global_mouse_position())
 		get_node("/root/World").add_child(grenade)
 		
 	if Input.is_action_just_pressed("space"):
 		World.emit_signal("next_wave")
 		
+	if Input.is_action_just_pressed("mouse_5"):
+		World.UI.add_points(1000)
+		World.player_points += 1000
 		
 	if Input.is_action_pressed("left_click"):
 		gun.fire()
@@ -243,28 +244,6 @@ func _on_reload_prog_timer_timeout():
 		reload_prog_timer.stop()
 	return
 
-func _on_view_price_body_entered(body):
-	if body.is_in_group("buyable") and body.is_in_group("can_change_label_visibility"):
-		body.find_child("Text_Label_Component").show()
-		body.sprite.material = preload("res://assets/shaders/outline.tres")
-		
-
-func _on_view_price_body_exited(body):
-	if body.is_in_group("buyable") and body.is_in_group("can_change_label_visibility"):
-		body.find_child("Text_Label_Component").hide()
-		body.sprite.material = null
-
-func _on_view_price_area_entered(area):
-	if area.is_in_group("interactable"):
-		area.find_child("Text_Label_Component").show()
-		area.sprite.material = preload("res://assets/shaders/outline.tres")
-
-func _on_view_price_area_exited(area):
-	if area.is_in_group("interactable"):
-		area.find_child("Text_Label_Component").hide()
-		area.sprite.material = null
-
-
 # For detecting if spawners should be considered active or not
 func _on_enemy_spawner_range_area_entered(area):
 	if area.is_in_group("spawner"):
@@ -300,5 +279,6 @@ func _on_health_component_death():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "death":
-		World.kill_all_enemies.emit()
+		#World.kill_all_enemies.emit()
+		World.player_death.emit()
 		process_mode = Node.PROCESS_MODE_DISABLED

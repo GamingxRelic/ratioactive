@@ -33,6 +33,7 @@ total_ammo = 32
 clip_size = 2
 max_ammo = 32
 reload_time = 2.0
+cantuna_price = 1450
 bullet_spread = 0.3
 bullet_count = 4
 randomize_bullet_count = false

@@ -36,12 +36,14 @@ func pickup() -> void:
 		return
 	return
 
-func _on_area_entered(area) -> void:
+func _on_body_entered(area) -> void:
 	if area.is_in_group("player"):
-		player_in_range = true
+		sprite.material = World.outline
+		text_label_comp.show()
 		World.pickup_queue.append(self)
 
-func _on_area_exited(area) -> void:
+func _on_body_exited(area) -> void:
 	if area.is_in_group("player"):
-		player_in_range = false
+		sprite.material = null
+		text_label_comp.hide()
 		World.pickup_queue.erase(self)

@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://cwlwym06n0jim"]
+
+[ext_resource type="Script" path="res://scripts/buyables/Random_Weapon.gd" id="1_4bqfk"]
+[ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="2_jloxs"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="3_q66cv"]
+[ext_resource type="Texture2D" uid="uid://7xg3vh8g2nyu" path="res://assets/sprites/guns/ak47.png" id="4_j8j6v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_if7w6"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_e0m5l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pgk38"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.574349),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yrss7"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.574349, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvf1m"]
+_data = {
+"RESET": SubResource("Animation_e0m5l"),
+"fade_in": SubResource("Animation_pgk38"),
+"fade_out": SubResource("Animation_yrss7")
+}
+
+[node name="Random_Weapon" type="Node2D"]
+script = ExtResource("1_4bqfk")
+
+[node name="Buyable_Component" parent="." instance=ExtResource("2_jloxs")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buyable_Component"]
+shape = SubResource("CircleShape2D_if7w6")
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("3_q66cv")]
+z_index = 1
+text = "Test"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_j8j6v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xvf1m")
+}
+
+[connection signal="player_entered_range" from="Buyable_Component" to="." method="_on_buyable_component_player_entered_range"]
+[connection signal="player_exited_range" from="Buyable_Component" to="." method="_on_buyable_component_player_exited_range"]
+[connection signal="purchased" from="Buyable_Component" to="." method="_on_buyable_component_purchased"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,5 +1,10 @@
 extends Node2D
 
+var outline : ShaderMaterial = preload("res://assets/shaders/outline.tres")
+var yellow_outline : ShaderMaterial = preload("res://assets/shaders/yellow_outline.tres")
+var green_outline : ShaderMaterial = preload("res://assets/shaders/green_outline.tres")
+var white_outline : ShaderMaterial = preload("res://assets/shaders/white_outline.tres")
+
 var player : CharacterBody2D
 var player_pos : Vector2 
 var player_hp
@@ -35,3 +40,5 @@ signal spawn_enemies
 signal enemy_count_changed
 signal remaining_wave_enemy_count_changed
 signal kill_all_enemies
+signal player_death
+signal cantuna_cycle_weapon

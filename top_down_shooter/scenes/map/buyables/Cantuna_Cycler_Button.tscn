@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://0xj816iie2vy"]
+
+[ext_resource type="Script" path="res://scripts/buyables/Cantuna_Cycler_Button.gd" id="1_lao72"]
+[ext_resource type="Texture2D" uid="uid://dph8kwe05p5lb" path="res://assets/tiles/test_room/cantuna_button.png" id="1_qr8aj"]
+[ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="2_l4xxg"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="3_nei2h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xykxu"]
+radius = 7.0
+
+[node name="Cantuna_Cycler_Button" type="Node2D"]
+script = ExtResource("1_lao72")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qr8aj")
+
+[node name="Buyable_Component" parent="." instance=ExtResource("2_l4xxg")]
+collision_layer = 0
+collision_mask = 2
+price = 1000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buyable_Component"]
+shape = SubResource("CircleShape2D_xykxu")
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("3_nei2h")]
+offset_top = -6.0
+offset_bottom = -6.0
+
+[connection signal="player_entered_range" from="Buyable_Component" to="." method="_on_buyable_component_player_entered_range"]
+[connection signal="player_exited_range" from="Buyable_Component" to="." method="_on_buyable_component_player_exited_range"]
+[connection signal="purchased" from="Buyable_Component" to="." method="_on_buyable_component_purchased"]

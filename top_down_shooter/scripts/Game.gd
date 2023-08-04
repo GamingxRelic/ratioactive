@@ -14,6 +14,12 @@ var game_paused : bool = false:
 
 @onready var levels = $Levels
 
+func _ready():
+	World.player_death.connect(_on_player_death)
+
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("pause"):
 		game_paused = !game_paused
+
+func _on_player_death() -> void:
+	game_paused = true

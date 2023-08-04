@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://2a5hu5k24rwo"]
+[gd_scene load_steps=36 format=3 uid="uid://2a5hu5k24rwo"]
 
 [ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_0mq3o"]
 [ext_resource type="PackedScene" uid="uid://cxjymoqn8dvxr" path="res://components/scenes/Health_Component.tscn" id="2_muamj"]
@@ -385,8 +385,6 @@ nodes/run_up/node = SubResource("AnimationNodeAnimation_vjosv")
 nodes/run_up/position = Vector2(-280, 20)
 node_connections = [&"output", 0, &"MoveOrIdle", &"MoveOrIdle", 0, &"RunTimescale", &"MoveOrIdle", 1, &"idle_anim", &"RunTimescale", 0, &"run_anim", &"idle_anim", 0, &"idle_left", &"idle_anim", 1, &"idle_right", &"idle_anim", 2, &"idle_up", &"idle_anim", 3, &"idle_down", &"run_anim", 0, &"run_left", &"run_anim", 1, &"run_right", &"run_anim", 2, &"run_up", &"run_anim", 3, &"run_down"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fwpai"]
-
 [sub_resource type="Gradient" id="Gradient_fady5"]
 offsets = PackedFloat32Array(0, 0.754839)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -407,7 +405,6 @@ script = ExtResource("1_0mq3o")
 health_comp = NodePath("Health_Component")
 
 [node name="Health_Component" parent="." instance=ExtResource("2_muamj")]
-immune = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
@@ -459,13 +456,6 @@ position = Vector2(-23, -4)
 texture = ExtResource("6_7jbgf")
 centered = false
 
-[node name="View_Price" type="Area2D" parent="." groups=["player"]]
-collision_layer = 41
-collision_mask = 41
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="View_Price"]
-shape = SubResource("CircleShape2D_fwpai")
-
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="MainLight" type="PointLight2D" parent="Lights"]
@@ -474,12 +464,14 @@ shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 2.0
 texture = SubResource("GradientTexture2D_ell5p")
+texture_scale = 1.5
 
 [node name="MainLight2" type="PointLight2D" parent="Lights"]
 energy = 0.2
 shadow_filter = 1
 shadow_filter_smooth = 2.0
 texture = SubResource("GradientTexture2D_ell5p")
+texture_scale = 1.5
 
 [node name="Enemy_Spawner_Range" type="Area2D" parent="."]
 collision_layer = 0
@@ -504,10 +496,6 @@ one_shot = true
 [connection signal="death" from="Health_Component" to="." method="_on_health_component_death"]
 [connection signal="timeout" from="ReloadProgTimer" to="." method="_on_reload_prog_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="area_entered" from="View_Price" to="." method="_on_view_price_area_entered"]
-[connection signal="area_exited" from="View_Price" to="." method="_on_view_price_area_exited"]
-[connection signal="body_entered" from="View_Price" to="." method="_on_view_price_body_entered"]
-[connection signal="body_exited" from="View_Price" to="." method="_on_view_price_body_exited"]
 [connection signal="area_entered" from="Enemy_Spawner_Range" to="." method="_on_enemy_spawner_range_area_entered"]
 [connection signal="area_exited" from="Enemy_Spawner_Range" to="." method="_on_enemy_spawner_range_area_exited"]
 [connection signal="took_damage" from="Hurtbox_Component" to="." method="_on_hurtbox_component_took_damage"]

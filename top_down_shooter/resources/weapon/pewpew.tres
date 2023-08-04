@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://cs6c6qoeochpa"]
+
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_562p8"]
+[ext_resource type="Resource" uid="uid://bg6i32bt5sfv0" path="res://resources/bullet/Standard_Bullet.tres" id="2_ml6ah"]
+[ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="3_q7hti"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="4_150u5"]
+[ext_resource type="Texture2D" uid="uid://cltxwlxjp5iym" path="res://assets/sprites/guns/pewpew.png" id="5_eqet6"]
+
+[resource]
+script = ExtResource("4_150u5")
+rate_of_fire = 0.4
+damage = 14.0
+name = "Pew Pew"
+texture = ExtResource("5_eqet6")
+position = Vector2(0, 4)
+gun_tip_position = Vector2(7, -1)
+bullet = ExtResource("1_562p8")
+bullet_res = ExtResource("2_ml6ah")
+ammo = 18
+total_ammo = 144
+clip_size = 18
+max_ammo = 144
+reload_time = 2.5
+cantuna_price = 1100
+bullet_spread = 0.0
+bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
+fire_sound = ExtResource("3_q7hti")
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.901961, 0.815686, 0.4, 1)
+fire_flash_energy = 1.0

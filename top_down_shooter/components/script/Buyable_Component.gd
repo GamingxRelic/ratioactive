@@ -9,12 +9,11 @@ signal failed_purchase
 signal player_entered_range
 signal player_exited_range
 
-func _process(_delta):
-	if player_in_range:
-		if Input.is_action_just_pressed("interact") and World.pickup_queue.size() == 0:
-			purchase()
+func _process(_delta) -> void:
+	if player_in_range and Input.is_action_just_pressed("interact") and World.pickup_queue.size() == 0:
+		purchase()
 
-func purchase():
+func purchase() -> void:
 	if World.player_points >= price:
 		World.UI.subtract_points(price)
 		World.player_points -= price
@@ -22,13 +21,17 @@ func purchase():
 	else:
 		failed_purchase.emit()
 
-func _on_body_entered(body):
+func refund() -> void:
+	World.player_points += price
+	World.UI.update_points()
+
+func _on_body_entered(body) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true
 		player_entered_range.emit()
 		return
 
-func _on_body_exited(body):
+func _on_body_exited(body) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
 		player_exited_range.emit()

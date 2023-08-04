@@ -6,10 +6,12 @@ extends Control
 @onready var wave_label : Label = $CanvasLayer/WaveLabel
 
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
+@onready var tween : Tween
 
 func _ready():
 	World.UI = self
 	update_points()
+	
 
 func _process(_delta):
 	set_ammo_text(PlayerGun.gun.ammo, PlayerGun.gun.total_ammo)
@@ -28,16 +30,22 @@ func set_points_text(points : int):
 	return
 	
 func add_points(points: int):
-	var tween = create_tween()
+	if tween != null and tween.is_running():
+		tween.stop()
+	tween = create_tween()
 	tween.tween_method(set_points_text,World.player_points, World.player_points+points, 0.1)
 	return
 	
 func subtract_points(points: int):
-	var tween = create_tween()
+	if tween != null and tween.is_running():
+		tween.stop()
+	tween = create_tween()
 	tween.tween_method(set_points_text,World.player_points, World.player_points-points, 0.3)
 	return
 	
 func update_points():
+	if tween != null and tween.is_running():
+		tween.stop()
 	set_points_text(World.player_points)
 	return
 	

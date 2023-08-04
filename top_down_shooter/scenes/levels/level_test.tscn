@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bou4bx58fhv88"]
+[gd_scene load_steps=26 format=3 uid="uid://bou4bx58fhv88"]
 
 [ext_resource type="Script" path="res://scripts/levels/Level.gd" id="1_d04df"]
 [ext_resource type="Resource" uid="uid://bx213twqsep8w" path="res://resources/weapon/ak-47.tres" id="2_pb3wc"]
@@ -13,7 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://co5s2oouy6v45" path="res://scenes/map/buyables/Wall_Gun.tscn" id="11_0n20x"]
 [ext_resource type="Script" path="res://scripts/camera/Camera.gd" id="11_c6enf"]
 [ext_resource type="Resource" uid="uid://ckrus8b3wgwyu" path="res://resources/weapon/mini_pistol.tres" id="12_6nosn"]
+[ext_resource type="Resource" uid="uid://cs6c6qoeochpa" path="res://resources/weapon/pewpew.tres" id="12_pm6rv"]
 [ext_resource type="PackedScene" uid="uid://ba3xecoe67obj" path="res://scenes/UI/Game_UI.tscn" id="13_yix76"]
+[ext_resource type="PackedScene" uid="uid://0xj816iie2vy" path="res://scenes/map/buyables/Cantuna_Cycler_Button.tscn" id="14_w68qo"]
+[ext_resource type="PackedScene" uid="uid://cwlwym06n0jim" path="res://scenes/map/buyables/Random_Weapon.tscn" id="16_dqyac"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_mifvm"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -254,44 +257,83 @@ price = 1250
 position = Vector2(99, -39)
 
 [node name="Basic_Enemy_Spawner2" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(97, 2)
+position = Vector2(-138, 140)
 
 [node name="Basic_Enemy_Spawner3" parent="Ground/Spawners" instance=ExtResource("9_o11f6")]
-position = Vector2(100, 46)
+position = Vector2(216, 99)
 
 [node name="Wall_Guns" type="Node2D" parent="Ground"]
+z_index = 1
 
 [node name="Wall_Gun" parent="Ground/Wall_Guns" instance=ExtResource("11_0n20x")]
-position = Vector2(-39, -76)
+position = Vector2(-39, -85)
 weapon_res = ExtResource("2_pb3wc")
-price = 0
+price = 500
 
 [node name="Wall_Gun2" parent="Ground/Wall_Guns" instance=ExtResource("11_0n20x")]
-position = Vector2(2, -76)
+position = Vector2(2, -85)
 weapon_res = ExtResource("4_durwv")
-price = 0
 
 [node name="Wall_Gun3" parent="Ground/Wall_Guns" instance=ExtResource("11_0n20x")]
-position = Vector2(43, -76)
+position = Vector2(43, -85)
 weapon_res = ExtResource("12_6nosn")
-price = 0
+price = 75
 
 [node name="Wall_Gun4" parent="Ground/Wall_Guns" instance=ExtResource("11_0n20x")]
-position = Vector2(83, -76)
+position = Vector2(83, -85)
 weapon_res = ExtResource("5_dyddw")
-price = 0
+price = 600
 
 [node name="Wall_Gun5" parent="Ground/Wall_Guns" instance=ExtResource("11_0n20x")]
-position = Vector2(121, -75)
+position = Vector2(121, -84)
 weapon_res = ExtResource("4_jo2ff")
-price = 0
+price = 800
+
+[node name="Wall_Gun6" parent="Ground/Wall_Guns" instance=ExtResource("11_0n20x")]
+position = Vector2(135, -43)
+weapon_res = ExtResource("12_pm6rv")
+
+[node name="Sprite2D" parent="Ground/Wall_Guns/Wall_Gun6" index="0"]
+position = Vector2(-3, 0)
+rotation = 1.5708
+
+[node name="Cantuna" type="Node2D" parent="Ground"]
+
+[node name="Random_Weapon" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(135, -219)
+
+[node name="Random_Weapon2" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(114, -235)
+
+[node name="Random_Weapon3" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(111, -257)
+
+[node name="Random_Weapon4" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(134, -274)
+
+[node name="Random_Weapon5" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(209, -275)
+
+[node name="Random_Weapon6" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(232, -258)
+
+[node name="Random_Weapon7" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(232, -239)
+
+[node name="Random_Weapon8" parent="Ground/Cantuna" instance=ExtResource("16_dqyac")]
+position = Vector2(210, -217)
+
+[node name="Cantuna_Cycler_Button" parent="Ground/Cantuna" instance=ExtResource("14_w68qo")]
+position = Vector2(174, -285)
 
 [node name="Player" parent="." instance=ExtResource("10_nkvw8")]
+position = Vector2(161, -247)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(161, -247)
 zoom = Vector2(7, 7)
 script = ExtResource("11_c6enf")
 
@@ -319,4 +361,5 @@ one_shot = true
 [connection signal="timeout" from="Wave_Intermission_Timer" to="." method="_on_wave_intermission_timer_timeout"]
 [connection signal="timeout" from="Wave_Countdown_Timer" to="." method="_on_wave_countdown_timer_timeout"]
 
+[editable path="Ground/Wall_Guns/Wall_Gun6"]
 [editable path="Game_UI"]

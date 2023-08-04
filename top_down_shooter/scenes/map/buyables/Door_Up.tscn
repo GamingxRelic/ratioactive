@@ -81,5 +81,6 @@ libraries = {
 }
 
 [connection signal="failed_purchase" from="Buyable_Component" to="." method="_on_purchaseable_component_failed_purchase"]
+[connection signal="player_entered_range" from="Buyable_Component" to="." method="_on_buyable_component_player_entered_range"]
 [connection signal="purchased" from="Buyable_Component" to="." method="_on_purchaseable_component_purchased"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

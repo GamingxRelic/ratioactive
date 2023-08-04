@@ -8,6 +8,12 @@ var damage_queue : Array
 @onready var explode_timer : Timer = $Explode_Timer
 @onready var anim : AnimationPlayer = $AnimationPlayer
 
+var bullet_res : Bullet # For testing. Perhaps remove.
+var aim_rotation_rad := 0.0
+
+func _ready() -> void:
+	rotation = aim_rotation_rad
+
 func _physics_process(_delta):
 	if !stopped:
 		velocity = transform.x * speed

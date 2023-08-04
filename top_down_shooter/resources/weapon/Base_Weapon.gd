@@ -22,6 +22,9 @@ class_name Weapon
 
 @export var reload_time : float
 
+## Price at the Cantuna Shop
+@export var cantuna_price : int = 0
+
 @export_range(-1.0,1.0) var bullet_spread : float = 0.0
 
 ## Amount of bullets shot each time the gun fires
