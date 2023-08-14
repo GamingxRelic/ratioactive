@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://ckrus8b3wgwyu"]
 
-[ext_resource type="PackedScene" uid="uid://f6q0gfxes2th" path="res://scenes/weapons/bullets/Grenade.tscn" id="1_3pjsh"]
 [ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_hsp3s"]
 [ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_n5eww"]
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_rpaxl"]
 [ext_resource type="AudioStream" uid="uid://ctbsij4ialgxn" path="res://assets/audio/weapons/guns/gun_fire_1.wav" id="2_goitx"]
 [ext_resource type="Texture2D" uid="uid://bmjk86458uok4" path="res://assets/sprites/bullets/mini_pistol_bullet.png" id="2_sykax"]
 [ext_resource type="Texture2D" uid="uid://2s2r7jyvhh2c" path="res://assets/sprites/guns/mini_pistol.png" id="3_r8dc5"]
@@ -21,12 +21,12 @@ homing = false
 [resource]
 script = ExtResource("1_hsp3s")
 rate_of_fire = 0.4
-damage = 5.0
+damage = 8.0
 name = "Mini Pistol"
 texture = ExtResource("3_r8dc5")
 position = Vector2(1, 2)
 gun_tip_position = Vector2(5, -1)
-bullet = ExtResource("1_3pjsh")
+bullet = ExtResource("1_rpaxl")
 bullet_res = SubResource("Resource_1qt1b")
 ammo = 8
 total_ammo = 64

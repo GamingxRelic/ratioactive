@@ -21,11 +21,11 @@ homing = false
 [resource]
 script = ExtResource("1_u6fge")
 rate_of_fire = 0.15
-damage = 7.0
+damage = 9.0
 name = "Ruahil"
 texture = ExtResource("4_qq1ya")
-position = Vector2(3, -1)
-gun_tip_position = Vector2(6, -1)
+position = Vector2(1, 0)
+gun_tip_position = Vector2(7, 0)
 bullet = ExtResource("1_8rihx")
 bullet_res = SubResource("Resource_bcnkr")
 ammo = 25

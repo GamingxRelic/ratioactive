@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dr56jnt55wl6l"]
+
+[ext_resource type="Texture2D" uid="uid://5awddf7c7bsj" path="res://assets/menus/main_menu.png" id="1_lgnkt"]
+[ext_resource type="Script" path="res://scripts/menus/Main_Menu.gd" id="1_wbicu"]
+[ext_resource type="Texture2D" uid="uid://c7eu01wte7py7" path="res://assets/menus/play.png" id="2_kpyxw"]
+[ext_resource type="Texture2D" uid="uid://dkcxbcguetkxr" path="res://assets/menus/options.png" id="3_5mnd8"]
+[ext_resource type="Texture2D" uid="uid://cgch8bgbsf5ho" path="res://assets/menus/exit.png" id="4_icoyb"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wbicu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_lgnkt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -166.0
+offset_right = 132.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_kpyxw")
+
+[node name="Options" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_5mnd8")
+
+[node name="Exit" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_icoyb")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

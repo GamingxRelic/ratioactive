@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://tiv3237hpynr"]
+
+[ext_resource type="Script" path="res://scripts/buyables/Door.gd" id="1_5mxoo"]
+[ext_resource type="Texture2D" uid="uid://bn3evmm7e0uft" path="res://assets/tiles/test_room/Door.png" id="2_ypnv5"]
+[ext_resource type="PackedScene" uid="uid://drfgbtnplhq48" path="res://components/scenes/Buyable_Component.tscn" id="3_q62kf"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="4_2lvpd"]
+
+[sub_resource type="Animation" id="Animation_whmqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b4ga7"]
+resource_name = "remove_door"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72boj"]
+_data = {
+"RESET": SubResource("Animation_whmqv"),
+"remove_door": SubResource("Animation_b4ga7")
+}
+
+[node name="Door" type="StaticBody2D"]
+script = ExtResource("1_5mxoo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_ypnv5")
+
+[node name="Buyable_Component" parent="." instance=ExtResource("3_q62kf")]
+position = Vector2(2.86102e-05, -5.81741e-05)
+rotation = 1.5708
+
+[node name="Text_Label_Component" parent="." instance=ExtResource("4_2lvpd")]
+z_index = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_72boj")
+}
+
+[connection signal="player_entered_range" from="Buyable_Component" to="." method="_on_buyable_component_player_entered_range"]
+[connection signal="player_exited_range" from="Buyable_Component" to="." method="_on_buyable_component_player_exited_range"]
+[connection signal="purchased" from="Buyable_Component" to="." method="_on_buyable_component_purchased"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

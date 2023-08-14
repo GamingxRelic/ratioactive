@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_bl2l8")
-bullet_speed = 50.0
+bullet_speed = 70.0
 knockback_amount = 0.2
 piercing = false
 texture = ExtResource("2_vtula")

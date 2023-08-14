@@ -20,6 +20,7 @@ config/icon="res://assets/icon.svg"
 World="*res://scripts/autoload/World.gd"
 PlayerGun="*res://scripts/autoload/PlayerGun.gd"
 WeaponList="*res://scripts/autoload/WeaponList.gd"
+Menus="*res://scripts/autoload/Menus.gd"
 
 [display]
 

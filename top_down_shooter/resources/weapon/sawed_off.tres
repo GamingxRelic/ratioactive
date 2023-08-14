@@ -11,7 +11,7 @@
 script = ExtResource("1_23e5d")
 bullet_speed = 80.0
 knockback_amount = 1.2
-piercing = true
+piercing = false
 texture = ExtResource("2_0mnhl")
 collision_polygon_verticies = PackedVector2Array()
 sprite_rotating = false

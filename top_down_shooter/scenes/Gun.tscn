@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfa8y7t30127n"]
+[gd_scene load_steps=9 format=3 uid="uid://bfa8y7t30127n"]
 
 [ext_resource type="Script" path="res://scripts/gun/Gun.gd" id="1_7h4nn"]
 [ext_resource type="Texture2D" uid="uid://bfkufta0nroot" path="res://assets/environment/light.png" id="2_yc507"]
+[ext_resource type="Texture2D" uid="uid://dgev8nahcyfr6" path="res://assets/sprites/guns/sniper.png" id="3_10ncd"]
 
 [sub_resource type="Gradient" id="Gradient_ehbwv"]
 offsets = PackedFloat32Array(0, 0.540741, 1)
@@ -37,6 +38,7 @@ hue_variation_curve = SubResource("CurveTexture_yrt4r")
 script = ExtResource("1_7h4nn")
 
 [node name="Gun_Tip" type="Node2D" parent="."]
+position = Vector2(12, 0)
 
 [node name="Firing_Particles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -55,6 +57,8 @@ texture_scale = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+position = Vector2(4, 0)
+texture = ExtResource("3_10ncd")
 
 [node name="Fire_Cooldown" type="Timer" parent="."]
 

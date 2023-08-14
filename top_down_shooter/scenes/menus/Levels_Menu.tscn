@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4aqbbm6adc46"]
+
+[ext_resource type="Texture2D" uid="uid://4u0oa4vlibff" path="res://assets/menus/levels_background_background.png" id="1_jaqvh"]
+[ext_resource type="Script" path="res://scripts/menus/Levels_Menu.gd" id="1_vcffa"]
+[ext_resource type="Texture2D" uid="uid://cym7ox3w28cil" path="res://assets/menus/test_level_button.png" id="2_jc84n"]
+[ext_resource type="Texture2D" uid="uid://cmu1inifo5toj" path="res://assets/menus/kitchen_level_button.png" id="3_dy63k"]
+[ext_resource type="Texture2D" uid="uid://b1qvq13uxkq1g" path="res://assets/menus/back_level_button.png" id="4_gog6g"]
+
+[node name="Levels_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vcffa")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_jaqvh")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -266.0
+offset_top = -54.0
+offset_right = 266.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Test Level" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_jc84n")
+
+[node name="Kitchen Level" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_dy63k")
+
+[node name="Back" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = 227.0
+offset_right = 132.0
+offset_bottom = 335.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("4_gog6g")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Test Level" to="." method="_on_test_level_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Kitchen Level" to="." method="_on_kitchen_level_pressed"]
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]

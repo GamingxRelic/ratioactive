@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name level
+class_name Level
 
 @onready var anim_player : AnimationPlayer = $AnimationPlayer as AnimationPlayer
 @onready var wave_timer : Timer = $Wave_Intermission_Timer as Timer
@@ -12,8 +12,12 @@ var timer_countdown_value := 0
 
 @export var wave_enemy_amount := 0.15*(wave*wave)+0.3*(wave)+8
 
+@onready var entities = $Entities
+
 
 func _ready() -> void:
+	World.current_level = self
+	World.game_running = true
 	
 	World.max_enemy_count = max_enemy_count
 	anim_player.play("reveal_map")
@@ -37,6 +41,8 @@ func _on_next_wave() -> void:
 ## Start new wave
 func _on_wave_intermission_timer_timeout():
 	countdown_timer.stop()
+	
+	World.cantuna_cycle_weapon.emit()
 	
 	wave += 1
 	World.wave = wave
@@ -63,5 +69,7 @@ func _on_remaining_wave_enemy_count_changed() -> void:
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "reveal_map":
-		pass
-		#World.next_wave.emit()
+		#pass
+		World.next_wave.emit()
+
+

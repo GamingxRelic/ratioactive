@@ -327,13 +327,13 @@ position = Vector2(210, -217)
 position = Vector2(174, -285)
 
 [node name="Player" parent="." instance=ExtResource("10_nkvw8")]
-position = Vector2(161, -247)
+position = Vector2(11, -11)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(161, -247)
+position = Vector2(11, -11)
 zoom = Vector2(7, 7)
 script = ExtResource("11_c6enf")
 
@@ -342,6 +342,7 @@ energy = 0.79
 blend_mode = 1
 
 [node name="Game_UI" parent="." instance=ExtResource("13_yix76")]
+visible = false
 
 [node name="CanvasLayer" parent="Game_UI" index="0"]
 visible = false

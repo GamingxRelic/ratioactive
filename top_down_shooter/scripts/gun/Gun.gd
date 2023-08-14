@@ -19,22 +19,23 @@ signal reload_signal
 
 
 func _physics_process(_delta):
-	mouse_pos = get_global_mouse_position()
-	look_at(get_global_mouse_position())
-	flip_sprite()
-	if PlayerGun.gun.ammo < PlayerGun.gun.clip_size and PlayerGun.gun.total_ammo > 0 and !is_reloading():
-		can_reload = true
+	if World.game_running:
+		mouse_pos = get_global_mouse_position()
+		look_at(get_global_mouse_position())
+		flip_sprite()
+		if PlayerGun.gun.ammo < PlayerGun.gun.clip_size and PlayerGun.gun.total_ammo > 0 and !is_reloading():
+			can_reload = true
+			
+		if PlayerGun.gun.ammo == 0 and can_reload and !is_reloading():
+			reload()
 		
-	if PlayerGun.gun.ammo == 0 and can_reload and !is_reloading():
-		reload()
-	
-	firing_light.position = gun_tip.position
-	
-	if is_shooting:
-		fire_particles.emitting = true
-	else:
-		fire_particles.emitting = false
-		firing_light.energy = lerp(firing_light.energy, 0.0, 0.7)
+		firing_light.position = gun_tip.position
+		
+		if is_shooting:
+			fire_particles.emitting = true
+		else:
+			fire_particles.emitting = false
+			firing_light.energy = lerp(firing_light.energy, 0.0, 0.7)
 	
 func set_gun_res(res : Weapon):
 	PlayerGun.gun = res
@@ -85,10 +86,12 @@ func fire():
 			new_bullet.global_position = gun_tip.global_position
 			new_bullet.bullet_res = PlayerGun.gun.bullet_res
 			new_bullet.aim_rotation_rad = rotation+randf_range(-PlayerGun.gun.bullet_spread,PlayerGun.gun.bullet_spread)
-			get_node("/root/World").add_child(new_bullet)
+			World.current_level.entities.add_child(new_bullet)
+			#get_node("/root/World").add_child(new_bullet)
 			
 		can_fire = false
-		PlayerGun.gun.ammo -= 1
+		if !PlayerGun.infinite_ammo:
+			PlayerGun.gun.ammo -= 1
 		return
 	elif PlayerGun.gun.ammo == 0 and can_reload:
 		reload()

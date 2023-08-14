@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("1_ti6nr")
 rate_of_fire = 0.09
-damage = 11.0
+damage = 13.0
 name = "AK-47"
 texture = ExtResource("3_t1ocg")
 position = Vector2(0, 4)

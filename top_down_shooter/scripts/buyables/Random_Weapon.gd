@@ -8,6 +8,7 @@ var price : int
 @onready var buyable_component = $Buyable_Component
 @onready var anim : AnimationPlayer = $AnimationPlayer
 
+var cleared := false
 
 func _ready() -> void:
 	set_weapon()
@@ -19,6 +20,10 @@ func set_weapon() -> void:
 	price = weapon_res.cantuna_price
 	buyable_component.price = price
 	text_label_component.set_text("[E] - " + weapon_res.name + "\n$" +str(price))
+	
+	buyable_component.monitoring = true
+	buyable_component.monitorable = true
+	self.visible = true
 
 func _on_buyable_component_player_entered_range():
 	text_label_component.show()
@@ -36,6 +41,7 @@ func _on_buyable_component_purchased():
 		if i.name == weapon_res.name and (i.total_ammo < i.max_ammo):
 			i.total_ammo = i.max_ammo
 			PlayerGun.stop_reload.emit()
+			clear()
 			return
 		elif i.name == weapon_res.name and (i.total_ammo >= i.max_ammo):
 			buyable_component.refund()
@@ -46,11 +52,17 @@ func _on_buyable_component_purchased():
 				return
 		PlayerGun.weapons.append(weapon_res.duplicate())
 		PlayerGun.gun_added.emit()
+		clear()
 		return
-	print("error_wall_buy ", self)
+	print("error_cantuna_weapon_buy ", self)
 
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_out":
 		set_weapon()
 		anim.play("fade_in")
+
+func clear() -> void:
+	buyable_component.monitoring = false
+	buyable_component.monitorable = false
+	self.visible = false

@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Bullet" load_steps=2 format=3 uid="uid://bg6i32bt5sfv0"]
-
-[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="1_sfrkc"]
-
-[resource]
-script = ExtResource("1_sfrkc")
-bullet_type = ""
-damage = 0.0

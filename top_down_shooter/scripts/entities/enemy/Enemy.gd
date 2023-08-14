@@ -49,7 +49,7 @@ func _physics_process(_delta) -> void:
 		new_velocity = new_velocity.normalized()
 		new_velocity *= speed
 
-		velocity = new_velocity #+ knockback
+		velocity = new_velocity + knockback
 		
 		look_at(World.player_pos)
 		flip_sprite(rotation_degrees)

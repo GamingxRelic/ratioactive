@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var accel := 8.0 
 @export var decel := 10.0 
 
-@export var health_comp : Node
+@onready var health_component : Node = $Health_Component
 @onready var hurtbox_component = $Hurtbox_Component
 var alive := true
 @onready var gun = $Gun
@@ -28,7 +28,7 @@ func _ready():
 	
 	World.player = self
 	World.player_pos = position
-	World.player_hp = health_comp.health
+	World.player_hp = health_component.health
 	World.player_points = 0
 	World.player_hurtbox = hurtbox_component
 	
@@ -66,7 +66,7 @@ func _physics_process(delta):
 	#		velocity.y += lerp(knockback.y, 0.0, 0.9)
 		
 		World.player_pos = position
-		World.player_hp = health_comp.health
+		World.player_hp = health_component.health
 			
 		if reload_progress.value > reload_progress.max_value:
 			reload_progress.value = 0
@@ -122,7 +122,8 @@ func input():
 		var grenade = preload("res://scenes/weapons/bullets/Grenade.tscn").instantiate()
 		grenade.global_position = global_position
 		grenade.aim_rotation_rad = get_angle_to(get_global_mouse_position())
-		get_node("/root/World").add_child(grenade)
+		World.current_level.entities.add_child(grenade)
+		#get_node("/root/World").add_child(grenade)
 		
 	if Input.is_action_just_pressed("space"):
 		World.emit_signal("next_wave")
@@ -167,7 +168,8 @@ func drop_weapon() -> void:
 	var dropped_gun = preload("res://scenes/entities/drops/Dropped_Weapon.tscn").instantiate()
 	dropped_gun.weapon_res = PlayerGun.gun
 	dropped_gun.global_position = global_position
-	get_node("/root/World").add_child(dropped_gun)
+	World.current_level.entities.add_child(dropped_gun)
+	#get_node("/root/World").add_child(dropped_gun)
 	
 	# Remove gun from player inventory
 	PlayerGun.weapons.pop_at(PlayerGun.weapon_index)
@@ -256,11 +258,11 @@ func _on_enemy_spawner_range_area_exited(area):
 
 func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2) -> void:	
 	if alive:
-		if !health_comp.immune:
+		if !health_component.immune:
 			print("ow")
-			health_comp.take_damage(dmg_amnt)
+			health_component.take_damage(dmg_amnt)
 			velocity += knockback_amnt
-			health_comp.immune = true
+			health_component.immune = true
 			immunity_frames_timer.start()
 			damage_color_tween = get_tree().create_tween()
 			sprite.modulate = Color(1,0,0,1)
@@ -268,7 +270,7 @@ func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector
 	return
 
 func _on_immunity_frames_timer_timeout() -> void:
-	health_comp.immune = false
+	health_component.immune = false
 
 
 func _on_health_component_death():

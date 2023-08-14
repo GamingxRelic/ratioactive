@@ -16,8 +16,7 @@ func _on_remaining_wave_enemy_count_changed() -> void:
 	if World.remaining_wave_enemy_count < World.max_wave_enemy_count:
 		attempt_enemy_spawn()
 
-
-func _on_reattempt_spawn_timer_timeout():
+func _on_reattempt_spawn_timer_timeout() -> void:
 	if World.remaining_wave_enemy_count > 0 and World.enemy_count < World.max_enemy_count and active:
 		attempt_enemy_spawn()
 	else:
@@ -27,7 +26,8 @@ func attempt_enemy_spawn() -> void:
 	if !obstructed and World.player.alive and World.remaining_wave_enemy_count > 0 and World.enemy_count < World.max_enemy_count and World.total_wave_enemies_spawned < World.max_wave_enemy_count and active:
 		var new_enemy = preload("res://scenes/entities/enemies/Enemy.tscn").instantiate()
 		new_enemy.global_position = global_position
-		get_node("/root/World").call_deferred("add_child", new_enemy)#add_child(new_enemy)
+		World.current_level.entities.call_deferred("add_child", new_enemy)
+		#get_node("/root/World").call_deferred("add_child", new_enemy)#add_child(new_enemy)
 		
 		reattempt_timer.start()
 

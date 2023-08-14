@@ -15,7 +15,7 @@ script = ExtResource("1_38tfa")
 shape = SubResource("CircleShape2D_jf725")
 
 [node name="Reattempt_Spawn_Timer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 2.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

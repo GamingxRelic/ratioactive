@@ -5,6 +5,9 @@ var yellow_outline : ShaderMaterial = preload("res://assets/shaders/yellow_outli
 var green_outline : ShaderMaterial = preload("res://assets/shaders/green_outline.tres")
 var white_outline : ShaderMaterial = preload("res://assets/shaders/white_outline.tres")
 
+var game_running := false
+var current_level : Level
+
 var player : CharacterBody2D
 var player_pos : Vector2 
 var player_hp
@@ -34,6 +37,20 @@ var remaining_wave_enemy_count : int:
 	set(value):
 		remaining_wave_enemy_count = value
 		emit_signal("remaining_wave_enemy_count_changed")
+
+func reset() -> void:
+	player = null
+	player_pos = Vector2.ZERO
+	player_hp = null
+	player_hurtbox = null
+	player_points = 0
+	add_points = 0
+	pickup_queue = []
+	UI = null
+	wave = 0
+	max_enemy_count = 0
+	enemy_count = 0
+	
 
 signal next_wave
 signal spawn_enemies

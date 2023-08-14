@@ -295,7 +295,6 @@ shape = SubResource("CapsuleShape2D_c8upc")
 process_mode = 4
 path_desired_distance = 4.0
 target_desired_distance = 4.0
-path_postprocessing = 1
 
 [node name="Health_Component" parent="." instance=ExtResource("3_n25gn")]
 
