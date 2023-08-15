@@ -36,5 +36,5 @@ func _on_area_2d_body_entered(body):
 		body.hurtbox_component.damage(PlayerGun.gun.damage, velocity * bullet_res.knockback_amount)
 		if !bullet_res.piercing:
 			self.queue_free()
-	elif !body.is_in_group("player"):
+	elif !body.is_in_group("bullet_passable") and !body.is_in_group("player"):
 		self.queue_free()

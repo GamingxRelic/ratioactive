@@ -14,8 +14,9 @@ func _ready():
 	
 
 func _process(_delta):
-	set_ammo_text(PlayerGun.gun.ammo, PlayerGun.gun.total_ammo)
-	set_health_value(World.player_hp)
+	if World.game_running:
+		set_ammo_text(PlayerGun.gun.ammo, PlayerGun.gun.total_ammo)
+		set_health_value(World.player_hp)
 
 func set_ammo_text(ammo_min : int, ammo_max : int):
 	ammo_label.text = str(ammo_min) + " / " + str(ammo_max)

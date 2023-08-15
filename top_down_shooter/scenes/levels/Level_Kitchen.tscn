@@ -1,23 +1,52 @@
-[gd_scene load_steps=25 format=3 uid="uid://bpghqtecw0775"]
+[gd_scene load_steps=52 format=3 uid="uid://bpghqtecw0775"]
 
 [ext_resource type="Script" path="res://scripts/levels/Level.gd" id="1_rudie"]
 [ext_resource type="Texture2D" uid="uid://1108xk5jyuw0" path="res://assets/levels/kitchen/kitchen.png" id="2_v8u7y"]
 [ext_resource type="PackedScene" uid="uid://2a5hu5k24rwo" path="res://scenes/entities/Player/Player.tscn" id="3_e82cx"]
-[ext_resource type="PackedScene" uid="uid://5dwbbxlj7ose" path="res://scenes/entities/drops/Dropped_Weapon.tscn" id="3_xwmu5"]
 [ext_resource type="Texture2D" uid="uid://jxom078s0e1e" path="res://assets/levels/kitchen/spawn_room_door.png" id="3_yoyk7"]
-[ext_resource type="Resource" uid="uid://cr0jvxbd4rlfh" path="res://resources/weapon/dev_pistol.tres" id="4_7nxjs"]
 [ext_resource type="Script" path="res://scripts/camera/Camera.gd" id="4_l5xot"]
 [ext_resource type="PackedScene" uid="uid://ba3xecoe67obj" path="res://scenes/UI/Game_UI.tscn" id="5_jo7qs"]
-[ext_resource type="Script" path="res://scripts/levels/kitchen/Kitchen_Spawn_Room_Door.gd" id="6_bemgq"]
+[ext_resource type="Resource" uid="uid://bx213twqsep8w" path="res://resources/weapon/ak-47.tres" id="5_lud2p"]
 [ext_resource type="PackedScene" uid="uid://dpb1nr8xulbbn" path="res://scenes/map/spawners/Basic_Enemy_Spawner.tscn" id="7_8l10p"]
 [ext_resource type="PackedScene" uid="uid://co5s2oouy6v45" path="res://scenes/map/buyables/Wall_Gun.tscn" id="8_po6n5"]
-[ext_resource type="Resource" uid="uid://ckrus8b3wgwyu" path="res://resources/weapon/mini_pistol.tres" id="9_7phh0"]
+[ext_resource type="Script" path="res://scripts/levels/kitchen/Transparent_When_Player_Enters.gd" id="9_esy36"]
 [ext_resource type="Texture2D" uid="uid://dvbxdkwctdo0r" path="res://assets/levels/kitchen/broom.png" id="10_spk4s"]
 [ext_resource type="PackedScene" uid="uid://tiv3237hpynr" path="res://scenes/map/buyables/Door.tscn" id="11_0nv45"]
 [ext_resource type="Texture2D" uid="uid://dj2k0s6rm887x" path="res://assets/levels/kitchen/spawn_room_cheddar.png" id="11_on8c2"]
 [ext_resource type="Texture2D" uid="uid://c3qyhhlat86ia" path="res://assets/levels/kitchen/spawn_room_cheddar-shadow.png" id="13_rebs1"]
 [ext_resource type="Texture2D" uid="uid://ctyfpuyb8iwwq" path="res://assets/levels/kitchen/portraits.png" id="14_r106h"]
+[ext_resource type="Script" path="res://scripts/levels/kitchen/Spawn_Room_Outlet_EE.gd" id="15_0bqvj"]
 [ext_resource type="Texture2D" uid="uid://dpxff6thyo1wc" path="res://assets/levels/kitchen/outlet.png" id="15_arh0t"]
+[ext_resource type="Texture2D" uid="uid://271f8dmh1o6d" path="res://assets/levels/kitchen/shelves.png" id="16_qgsep"]
+[ext_resource type="Resource" uid="uid://dxche03huugfr" path="res://resources/weapon/sawed_off.tres" id="17_fsnp5"]
+[ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="17_td68j"]
+[ext_resource type="Texture2D" uid="uid://cpkc5buw2de8b" path="res://assets/levels/kitchen/posts.png" id="17_xf8bl"]
+[ext_resource type="Texture2D" uid="uid://c0dm6lsdd7reg" path="res://assets/levels/kitchen/ramp.png" id="18_b68yp"]
+[ext_resource type="Texture2D" uid="uid://dxblfbd437ueb" path="res://assets/levels/kitchen/posts-1.png" id="19_3fyjf"]
+[ext_resource type="Script" path="res://scripts/levels/kitchen/Kitchen_Ramp.gd" id="19_hydr6"]
+[ext_resource type="Texture2D" uid="uid://dik0skmnt0h78" path="res://assets/levels/kitchen/planks.png" id="19_j475f"]
+[ext_resource type="Texture2D" uid="uid://dba3yw1eo72d1" path="res://assets/levels/kitchen/cantuna.png" id="19_qbqro"]
+[ext_resource type="Texture2D" uid="uid://ef38kcsirsnn" path="res://assets/levels/kitchen/posts-2.png" id="20_jo4ek"]
+[ext_resource type="Texture2D" uid="uid://esiek7w7iw1e" path="res://assets/levels/kitchen/big_cheddar.png" id="20_r545u"]
+[ext_resource type="PackedScene" uid="uid://cwlwym06n0jim" path="res://scenes/map/buyables/Random_Weapon.tscn" id="20_symg8"]
+[ext_resource type="PackedScene" uid="uid://0xj816iie2vy" path="res://scenes/map/buyables/Cantuna_Cycler_Button.tscn" id="21_37d82"]
+[ext_resource type="Texture2D" uid="uid://craee4mlpoqvv" path="res://assets/levels/kitchen/tomatos.png" id="21_c6prt"]
+[ext_resource type="Texture2D" uid="uid://4n6500bs0kgj" path="res://assets/levels/kitchen/posts-3.png" id="21_mr81k"]
+[ext_resource type="Texture2D" uid="uid://c2pf67rarsml1" path="res://assets/levels/kitchen/grapes.png" id="22_by3bl"]
+[ext_resource type="Texture2D" uid="uid://c0g04u5a8a2vs" path="res://assets/levels/kitchen/posts-4.png" id="22_kf1l6"]
+[ext_resource type="Texture2D" uid="uid://d02jqrwrqi03t" path="res://assets/levels/kitchen/posts-5.png" id="23_4ydsw"]
+[ext_resource type="Texture2D" uid="uid://c7gq8rw3qfu0l" path="res://assets/levels/kitchen/bread.png" id="23_y4sjt"]
+[ext_resource type="Texture2D" uid="uid://b8oqmbogx0pxh" path="res://assets/levels/kitchen/posts-6.png" id="24_3vhdx"]
+[ext_resource type="Texture2D" uid="uid://3xqvh2q6phju" path="res://assets/levels/kitchen/mozz.png" id="24_ncyh6"]
+[ext_resource type="Texture2D" uid="uid://bd423pqxhlt0d" path="res://assets/levels/kitchen/posts-7.png" id="25_70nf5"]
+[ext_resource type="Texture2D" uid="uid://cselcbvkgprkj" path="res://assets/levels/kitchen/posts-8.png" id="26_fkd6f"]
+[ext_resource type="Texture2D" uid="uid://dk12ywriwd6qw" path="res://assets/levels/kitchen/posts-9.png" id="27_tols4"]
+[ext_resource type="Texture2D" uid="uid://dy0ixm6ujtb73" path="res://assets/levels/kitchen/posts-10.png" id="28_aqvea"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jcawh"]
+vertices = PackedVector2Array(-264, 87.0637, -264, -19, -254, -2, -242, 87, 109, -2, 161, -2, 156, 52, 100, 10, -54, 50, 82, 9, -102.212, -2.91435, 77, -2, -118, 13, -119, -3, 192, 59, 244, 59, 243, 81, 204, 83, 153, 94, 160, 60, -8, 86, -46, 75, -46, 58, 52, 60, 53, 73, 51, 87, 49, 90, 11, 128, -8, 90, 55, 98, -95, -108, 245, -109, 244, -41, 210, -41, 169, -42, -119, -92, -102, -92, -95, -42, 90, 59, 135, 104, 85, 79, -136, 71, -136, 110, -233, 110, -171, 70, -264, -22, -264, -46, -136, -46, -220, -28, 141, 115, 123, 127, 67, 99, -53, 118, -55, 162, -184, 58, -214, -13, -136, 6, -59, 167, -17, 162, 1, 165, 1, 182, -22, 192, -120, 193, -120, 71, -56, 111, -180, 67, -217, -26, -258, -18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 6, 8, 9), PackedInt32Array(10, 11, 9, 8, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(14, 17, 18, 19), PackedInt32Array(20, 21, 22, 23, 24, 25, 26), PackedInt32Array(27, 28, 20, 26, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(35, 36, 10, 13), PackedInt32Array(34, 37, 30), PackedInt32Array(34, 33, 14, 19), PackedInt32Array(38, 19, 18, 39, 40), PackedInt32Array(41, 42, 43, 3, 44), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(40, 39, 49, 50, 51), PackedInt32Array(51, 50, 27, 29), PackedInt32Array(52, 28, 27, 53), PackedInt32Array(54, 3, 2, 55, 56), PackedInt32Array(57, 58, 59, 60, 61, 62), PackedInt32Array(52, 53, 57, 62, 63, 64), PackedInt32Array(8, 64, 63, 12), PackedInt32Array(44, 12, 63, 41), PackedInt32Array(65, 44, 3), PackedInt32Array(54, 65, 3), PackedInt32Array(47, 56, 55, 66), PackedInt32Array(48, 67, 45), PackedInt32Array(47, 66, 48)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-136, -46, -264, -46, -264, -22, -258, -18, -220, -28, -217, -26, -214, -13, -254, -2, -264, -19, -264, 87.0637, -242, 87, -233, 110, -136, 110, -136, 71, -120, 71, -120, 193, -22, 192, 1, 182, 1, 165, -17, 162, -59, 167, -55, 162, 11, 128, 123, 127, 141, 115, 135, 104, 153, 94, 204, 83, 243, 81, 244, 59, 192, 59, 210, -41, 244, -41, 245, -109, -95, -108, -95, -42, 169, -42, 160, 60, 90, 59, 85, 79, 67, 99, 55, 98, 49, 90, 51, 87, 53, 73, 52, 60, -46, 58, -46, 75, -8, 86, -8, 90, -53, 118, -56, 111, -54, 50, 156, 52, 161, -2, 109, -2, 100, 10, 82, 9, 77, -2, -102.212, -2.91435, -102, -92, -119, -92, -119, -3, -118, 13, -171, 70, -180, 67, -184, 58, -136, 6)])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uam0c"]
 radius = 21.0238
@@ -25,10 +54,15 @@ radius = 21.0238
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aovuk"]
 polygon = PackedVector2Array(-173, 64, -122, 7, -121, 12, -171, 67)
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_jcawh"]
-vertices = PackedVector2Array(-264, 87.0637, -264, -19, -254, -2, -242, 87, 265, 192, -120, 193, -120, 73, 264, -93, -120, 12, -120, -93, -171, 70, -136, 73, -136, 110, -233, 110, -180, 67, -184, 58, -214, -13, -136, 6, -136, -46, -217, -26, -264, -22, -264, -46, -220, -28, -258, -18)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 7), PackedInt32Array(10, 8, 7, 6, 11), PackedInt32Array(11, 12, 13, 10), PackedInt32Array(14, 10, 13, 3), PackedInt32Array(14, 3, 2, 15), PackedInt32Array(15, 2, 16, 17), PackedInt32Array(18, 17, 16, 19), PackedInt32Array(20, 21, 18, 22), PackedInt32Array(22, 23, 20), PackedInt32Array(18, 19, 22)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-136, -46, -264, -46, -264, -22, -258, -18, -220, -28, -217, -26, -214, -13, -254, -2, -264, -19, -264, 87.0637, -242, 87, -233, 110, -136, 110, -136, 73, -120, 73, -120, 193, 265, 192, 264, -93, -120, -93, -120, 12, -171, 70, -180, 67, -184, 58, -136, 6)])
+[sub_resource type="CircleShape2D" id="CircleShape2D_34mh6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_77bfs"]
+radius = 29.1142
+height = 74.3449
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o2cyd"]
+radius = 18.2472
+height = 48.0
 
 [sub_resource type="Animation" id="Animation_il0sj"]
 length = 0.001
@@ -120,15 +154,15 @@ script = ExtResource("1_rudie")
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Dropped_Weapon" parent="Entities" instance=ExtResource("3_xwmu5")]
-position = Vector2(-213, 42)
-weapon_res = ExtResource("4_7nxjs")
-
 [node name="Ground" type="Node2D" parent="."]
 
 [node name="Floor" type="Sprite2D" parent="Ground"]
 z_index = -1
 texture = ExtResource("2_v8u7y")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Ground"]
+z_index = 10
+navigation_polygon = SubResource("NavigationPolygon_jcawh")
 
 [node name="Spawn_Room" type="Node2D" parent="Ground"]
 
@@ -138,15 +172,19 @@ texture = ExtResource("2_v8u7y")
 position = Vector2(-257, -37)
 
 [node name="Wall_Gun" parent="Ground/Spawn_Room" instance=ExtResource("8_po6n5")]
-position = Vector2(-190, -52)
-weapon_res = ExtResource("9_7phh0")
+position = Vector2(-190, -56)
+weapon_res = ExtResource("5_lud2p")
+price = 500
 
 [node name="Buyable_Component" parent="Ground/Spawn_Room/Wall_Gun" index="2"]
-position = Vector2(0, 8)
+position = Vector2(0, 10)
 
 [node name="Decor" type="Node2D" parent="Ground/Spawn_Room"]
 
 [node name="Cheese" parent="Ground/Spawn_Room/Decor" instance=ExtResource("11_0nv45")]
+collision_layer = 2
+collision_mask = 0
+price = 750
 
 [node name="Sprite2D" parent="Ground/Spawn_Room/Decor/Cheese" index="0"]
 top_level = true
@@ -168,11 +206,12 @@ offset_bottom = 70.0
 polygon = PackedVector2Array(-170, 69, -169, 75, -136, 89, -136, 73, -155, 45, -172, 63)
 
 [node name="Sprite_Shadow" type="Sprite2D" parent="Ground/Spawn_Room/Decor/Cheese"]
+position = Vector2(0, -1)
 texture = ExtResource("13_rebs1")
 
 [node name="Door" type="StaticBody2D" parent="Ground/Spawn_Room/Decor"]
 z_index = 3
-script = ExtResource("6_bemgq")
+script = ExtResource("9_esy36")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground/Spawn_Room/Decor/Door"]
 light_mask = 2
@@ -211,11 +250,331 @@ polygon = PackedVector2Array(-254, -2, -218, -12, -221, -26, -233, -46, -264, -4
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Spawn_Room/Decor/Can"]
 polygon = PackedVector2Array(-241, 101, -237, 110, -264, 110, -264, 89, -248, 89, -241, 96)
 
-[node name="Paintings" type="Sprite2D" parent="Ground/Spawn_Room/Decor"]
+[node name="Portraits" type="Sprite2D" parent="Ground/Spawn_Room/Decor"]
+visible = false
 texture = ExtResource("14_r106h")
 
-[node name="Outlet" type="Sprite2D" parent="Ground/Spawn_Room/Decor"]
+[node name="Outlet" type="Area2D" parent="Ground/Spawn_Room/Decor"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("15_0bqvj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Spawn_Room/Decor/Outlet"]
 texture = ExtResource("15_arh0t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Spawn_Room/Decor/Outlet"]
+position = Vector2(-149, -44)
+shape = SubResource("CircleShape2D_34mh6")
+
+[node name="Text_Label_Component" parent="Ground/Spawn_Room/Decor/Outlet" instance=ExtResource("17_td68j")]
+offset_left = -149.0
+offset_top = -49.0
+offset_right = -149.0
+offset_bottom = -49.0
+text = "[E]"
+
+[node name="Kitchen" type="Node2D" parent="Ground"]
+
+[node name="Shelves" type="Sprite2D" parent="Ground/Kitchen"]
+texture = ExtResource("16_qgsep")
+
+[node name="Wall_Guns" type="Node2D" parent="Ground/Kitchen"]
+
+[node name="Wall_Gun" parent="Ground/Kitchen/Wall_Guns" instance=ExtResource("8_po6n5")]
+position = Vector2(-110, -100)
+weapon_res = ExtResource("17_fsnp5")
+price = 850
+
+[node name="Posts" type="Sprite2D" parent="Ground/Kitchen"]
+texture = ExtResource("17_xf8bl")
+
+[node name="Posts1" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts1"]
+polygon = PackedVector2Array(-87, 4, -101, 4, -101, -61, -87, -61)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts1"]
+texture = ExtResource("19_3fyjf")
+
+[node name="Posts2" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts2"]
+polygon = PackedVector2Array(29, 3, 15, 3, 15, -61, 29, -61)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts2"]
+texture = ExtResource("20_jo4ek")
+
+[node name="Posts3" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts3"]
+polygon = PackedVector2Array(150, 3, 136, 3, 136, -61, 150, -61)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts3"]
+texture = ExtResource("21_mr81k")
+
+[node name="Posts4" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts4"]
+polygon = PackedVector2Array(250, 3, 236, 3, 236, -61, 250, -61)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts4"]
+texture = ExtResource("22_kf1l6")
+
+[node name="Posts5" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts5"]
+polygon = PackedVector2Array(-16, 37, -2, 37, -2, 57, -16, 57)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts5"]
+texture = ExtResource("23_4ydsw")
+
+[node name="Posts6" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts6"]
+polygon = PackedVector2Array(107, 37, 121, 37, 121, 57, 107, 57)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts6"]
+texture = ExtResource("24_3vhdx")
+
+[node name="Posts7" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts7"]
+polygon = PackedVector2Array(236, 37, 250, 37, 250, 101, 246, 101, 246, 57, 236, 57)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts7"]
+texture = ExtResource("25_70nf5")
+
+[node name="Posts8" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D14" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts8"]
+polygon = PackedVector2Array(-2, 175, -16, 175, -16, 111, -2, 111)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts8"]
+texture = ExtResource("26_fkd6f")
+
+[node name="Posts9" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D15" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts9"]
+polygon = PackedVector2Array(121, 176, 107, 176, 107, 112, 121, 112)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts9"]
+texture = ExtResource("27_tols4")
+
+[node name="Posts10" type="Area2D" parent="Ground/Kitchen/Posts"]
+z_index = 8
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D16" type="CollisionPolygon2D" parent="Ground/Kitchen/Posts/Posts10"]
+polygon = PackedVector2Array(250, 178, 236, 178, 236, 114, 250, 114)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Posts/Posts10"]
+texture = ExtResource("28_aqvea")
+
+[node name="Ramps" type="Node2D" parent="Ground/Kitchen"]
+
+[node name="B_Ramp" type="Sprite2D" parent="Ground/Kitchen/Ramps"]
+self_modulate = Color(1, 1, 1, 0.615686)
+texture = ExtResource("18_b68yp")
+script = ExtResource("19_hydr6")
+
+[node name="Door" parent="Ground/Kitchen/Ramps/B_Ramp" instance=ExtResource("11_0nv45")]
+position = Vector2(-31, 112)
+collision_layer = 2
+collision_mask = 0
+price = 1250
+
+[node name="Sprite2D" parent="Ground/Kitchen/Ramps/B_Ramp/Door" index="0"]
+visible = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground/Kitchen/Ramps/B_Ramp/Door/Buyable_Component" index="0"]
+position = Vector2(37.0002, 29.7999)
+rotation = 2.74234
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_77bfs")
+
+[node name="Text_Label_Component" parent="Ground/Kitchen/Ramps/B_Ramp/Door" index="2"]
+z_index = 8
+offset_left = -29.0
+offset_top = 31.0
+offset_right = -29.0
+offset_bottom = 31.0
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Ramps/B_Ramp/Door"]
+position = Vector2(31.2, -112)
+polygon = PackedVector2Array(-49, 121, -89, 143, -72, 171, -36, 154, -15, 144, -34, 101, -50, 110)
+
+[node name="Planks" type="Sprite2D" parent="Ground/Kitchen/Ramps"]
+self_modulate = Color(1, 1, 1, 0.615686)
+texture = ExtResource("19_j475f")
+script = ExtResource("19_hydr6")
+
+[node name="Door" parent="Ground/Kitchen/Ramps/Planks" instance=ExtResource("11_0nv45")]
+price = 1500
+
+[node name="Sprite2D" parent="Ground/Kitchen/Ramps/Planks/Door" index="0"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Kitchen/Ramps/Planks/Door/Buyable_Component" index="0"]
+position = Vector2(70.9994, -175)
+rotation = 0.154354
+shape = SubResource("CapsuleShape2D_o2cyd")
+
+[node name="Text_Label_Component" parent="Ground/Kitchen/Ramps/Planks/Door" index="2"]
+offset_left = 175.0
+offset_top = 63.0
+offset_right = 175.0
+offset_bottom = 63.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Ramps/Planks/Door"]
+polygon = PackedVector2Array(157, 73, 191, 78, 213, -41, 167, -42)
+
+[node name="Decor" type="Node2D" parent="Ground/Kitchen"]
+
+[node name="Floor_Cheddar" type="StaticBody2D" parent="Ground/Kitchen/Decor"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Decor/Floor_Cheddar"]
+z_index = 5
+position = Vector2(-169, 106)
+texture = ExtResource("11_on8c2")
+flip_h = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/Floor_Cheddar"]
+polygon = PackedVector2Array(-16, 157, -30, 179, -30, 193, 0, 181, 1, 163)
+
+[node name="B_Cheddar" type="StaticBody2D" parent="Ground/Kitchen/Decor"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Decor/B_Cheddar"]
+z_index = 4
+texture = ExtResource("20_r545u")
+script = ExtResource("9_esy36")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/B_Cheddar"]
+polygon = PackedVector2Array(-48, 57, -48, 87, -10, 87, -10, 68, -17, 57)
+
+[node name="Area2D" type="Area2D" parent="Ground/Kitchen/Decor/B_Cheddar"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/B_Cheddar/Area2D"]
+polygon = PackedVector2Array(-17, 57, -50, 57, -50, 51, -31, 42, -28, 42)
+
+[node name="Tomatos" type="StaticBody2D" parent="Ground/Kitchen/Decor"]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Decor/Tomatos"]
+texture = ExtResource("21_c6prt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/Tomatos"]
+polygon = PackedVector2Array(111, -78, 107, -80, 95, -78, 91, -69, 79, -65, 72, -58, 72, -49, 77, -39, 79, -1, 84, 7, 89, 8, 98, 8, 104, 0, 104, -10, 135, -39, 134, -61, 120, -60, 118, -71)
+
+[node name="Grapes" type="StaticBody2D" parent="Ground/Kitchen/Decor"]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Decor/Grapes"]
+z_index = 5
+texture = ExtResource("22_by3bl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/Grapes"]
+polygon = PackedVector2Array(61, 55, 53, 64, 56, 73, 53, 79, 54, 86, 52, 91, 58, 96, 67, 95, 81, 79, 84, 74, 84, 66, 89, 57, 86, 55)
+
+[node name="Bread" type="StaticBody2D" parent="Ground/Kitchen/Decor"]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Decor/Bread"]
+texture = ExtResource("23_y4sjt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/Bread"]
+polygon = PackedVector2Array(125, 129, 146, 116, 144, 111, 139, 105, 154, 96, 203, 86, 247, 83, 264, 85, 264, 129)
+
+[node name="Mozz" type="StaticBody2D" parent="Ground/Kitchen/Decor"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Decor/Mozz"]
+texture = ExtResource("24_ncyh6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground/Kitchen/Decor/Mozz"]
+polygon = PackedVector2Array(196, -93, 196, -110, 238, -110, 238, -89, 230, -81, 222, -81)
+
+[node name="Spawners" type="Node2D" parent="Ground/Kitchen"]
+
+[node name="Basic_Enemy_Spawner" parent="Ground/Kitchen/Spawners" instance=ExtResource("7_8l10p")]
+position = Vector2(-16, 179)
+
+[node name="Basic_Enemy_Spawner2" parent="Ground/Kitchen/Spawners" instance=ExtResource("7_8l10p")]
+position = Vector2(215, -99)
+
+[node name="Cantuna" type="Node2D" parent="Ground/Kitchen"]
+
+[node name="Cantuna" type="Sprite2D" parent="Ground/Kitchen/Cantuna"]
+texture = ExtResource("19_qbqro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground/Kitchen/Cantuna"]
+
+[node name="Random_Weapon" parent="Ground/Kitchen/Cantuna" instance=ExtResource("20_symg8")]
+position = Vector2(-57, -83)
+
+[node name="Random_Weapon3" parent="Ground/Kitchen/Cantuna" instance=ExtResource("20_symg8")]
+position = Vector2(-37, -102)
+
+[node name="Random_Weapon2" parent="Ground/Kitchen/Cantuna" instance=ExtResource("20_symg8")]
+position = Vector2(-20, -88)
+
+[node name="Random_Weapon4" parent="Ground/Kitchen/Cantuna" instance=ExtResource("20_symg8")]
+position = Vector2(-41, -66)
+
+[node name="Cantuna_Cycler_Button" parent="Ground/Kitchen/Cantuna" instance=ExtResource("21_37d82")]
+z_index = 4
+position = Vector2(21, -114)
+
+[node name="CollisionShape2D" parent="Ground/Kitchen/Cantuna/Cantuna_Cycler_Button/Buyable_Component" index="0"]
+position = Vector2(0, 5)
+
+[node name="Text_Label_Component" parent="Ground/Kitchen/Cantuna/Cantuna_Cycler_Button" index="2"]
+offset_top = 0.0
+offset_bottom = 0.0
 
 [node name="Wall_Colliders" type="Node2D" parent="Ground"]
 
@@ -239,25 +598,57 @@ polygon = PackedVector2Array(-136, 74, -120, 74, -120, 212, -136, 212)
 [node name="Kitchen_Walls" type="StaticBody2D" parent="Ground/Wall_Colliders"]
 
 [node name="Upper" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Kitchen_Walls"]
-polygon = PackedVector2Array(-120, -107, -120, -93, 264, -93, 264, -107, -120, -107)
+polygon = PackedVector2Array(-120, -107, -120, -93, -102, -93, -98, -93, -98, -110, 264, -110, 283, -110, 283, -120, -102, -120, -102, -107, -120, -107)
 
 [node name="Right" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Kitchen_Walls"]
-polygon = PackedVector2Array(264, -107, 264, 212, 283, 212, 283, -107)
+polygon = PackedVector2Array(264, -110, 264, 212, 283, 212, 283, -110)
 
 [node name="Lower" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Kitchen_Walls"]
 polygon = PackedVector2Array(264, 192, 264, 212, -120, 212, -120, 192)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Ground"]
-navigation_polygon = SubResource("NavigationPolygon_jcawh")
+[node name="Shelves" type="StaticBody2D" parent="Ground/Wall_Colliders" groups=["bullet_passable"]]
+
+[node name="B_Lower" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(-16, 144, 11, 130, 250, 129, 250, 178, 236, 178, 236, 163, 121, 163, 121, 176, 107, 176, 107, 163, -2, 163, -2, 175, -16, 175)
+
+[node name="B_Left" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(-50, 110, -9, 87, -48, 87, -48, 57, -50, 57)
+
+[node name="B_Under_Ramp" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(-16, 144, -55, 165, -16, 158)
+
+[node name="B_Upper_L" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves" groups=["bullet_passable"]]
+polygon = PackedVector2Array(-50, 55, -50, 57, 158, 57, 158, 55)
+
+[node name="B_Right" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(246, 131, 250, 131, 250, 55, 246, 55)
+
+[node name="B_Upper_R" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(195, 55, 195, 57, 246, 57, 246, 55)
+
+[node name="Planks_L" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves" groups=["bullet_passable"]]
+polygon = PackedVector2Array(157, 55, 165, -37, 167, -37, 159, 55)
+
+[node name="Planks_R" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves" groups=["bullet_passable"]]
+polygon = PackedVector2Array(213, -39, 215, -39, 197, 57, 195, 57)
+
+[node name="U_Lower" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves" groups=["bullet_passable"]]
+polygon = PackedVector2Array(167, -39, -101, -39, -101, -4, -101, 4, -87, 4, -87.2156, -4, 14.8391, -4, 15, 3, 29, 3, 29.092, -4, 136.037, -4, 136, 3, 150, 3, 150, -4, 162, -4, 167, -37)
+
+[node name="U_Right" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(246, -110, 247, -110, 247, -3, 207, -3, 213, -39, 246, -39)
+
+[node name="U_Left" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
+polygon = PackedVector2Array(-98, -110, -102, -110, -102, -67, -99, -67.2556, -99, -4, -98, -4)
 
 [node name="Player" parent="." instance=ExtResource("3_e82cx")]
-position = Vector2(-225, 60)
+position = Vector2(-230, 42)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-225, 60)
+position = Vector2(-230, 42)
 zoom = Vector2(7, 7)
 script = ExtResource("4_l5xot")
 
@@ -278,12 +669,45 @@ one_shot = true
 
 [node name="Wave_Countdown_Timer" type="Timer" parent="."]
 
-[connection signal="body_entered" from="Ground/Spawn_Room/Decor/Door/Area2D" to="Ground/Spawn_Room/Decor/Door" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Ground/Spawn_Room/Decor/Door/Area2D" to="Ground/Spawn_Room/Decor/Door" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Ground/Spawn_Room/Decor/Door/Area2D" to="Ground/Spawn_Room/Decor/Door" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Spawn_Room/Decor/Door/Area2D" to="Ground/Spawn_Room/Decor/Door" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Spawn_Room/Decor/Outlet" to="Ground/Spawn_Room/Decor/Outlet" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Spawn_Room/Decor/Outlet" to="Ground/Spawn_Room/Decor/Outlet" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts1" to="Ground/Kitchen/Posts/Posts1" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts1" to="Ground/Kitchen/Posts/Posts1" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts2" to="Ground/Kitchen/Posts/Posts2" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts2" to="Ground/Kitchen/Posts/Posts2" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts3" to="Ground/Kitchen/Posts/Posts3" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts3" to="Ground/Kitchen/Posts/Posts3" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts4" to="Ground/Kitchen/Posts/Posts4" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts4" to="Ground/Kitchen/Posts/Posts4" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts5" to="Ground/Kitchen/Posts/Posts5" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts5" to="Ground/Kitchen/Posts/Posts5" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts6" to="Ground/Kitchen/Posts/Posts6" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts6" to="Ground/Kitchen/Posts/Posts6" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts7" to="Ground/Kitchen/Posts/Posts7" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts7" to="Ground/Kitchen/Posts/Posts7" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts8" to="Ground/Kitchen/Posts/Posts8" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts8" to="Ground/Kitchen/Posts/Posts8" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts9" to="Ground/Kitchen/Posts/Posts9" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts9" to="Ground/Kitchen/Posts/Posts9" method="_on_body_exited"]
+[connection signal="body_entered" from="Ground/Kitchen/Posts/Posts10" to="Ground/Kitchen/Posts/Posts10" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Posts/Posts10" to="Ground/Kitchen/Posts/Posts10" method="_on_body_exited"]
+[connection signal="player_entered_range" from="Ground/Kitchen/Ramps/B_Ramp/Door/Buyable_Component" to="Ground/Kitchen/Ramps/B_Ramp" method="_on_buyable_component_player_entered_range"]
+[connection signal="player_exited_range" from="Ground/Kitchen/Ramps/B_Ramp/Door/Buyable_Component" to="Ground/Kitchen/Ramps/B_Ramp" method="_on_buyable_component_player_exited_range"]
+[connection signal="purchased" from="Ground/Kitchen/Ramps/B_Ramp/Door/Buyable_Component" to="Ground/Kitchen/Ramps/B_Ramp" method="_on_buyable_component_purchased"]
+[connection signal="player_entered_range" from="Ground/Kitchen/Ramps/Planks/Door/Buyable_Component" to="Ground/Kitchen/Ramps/Planks" method="_on_buyable_component_player_entered_range"]
+[connection signal="player_exited_range" from="Ground/Kitchen/Ramps/Planks/Door/Buyable_Component" to="Ground/Kitchen/Ramps/Planks" method="_on_buyable_component_player_exited_range"]
+[connection signal="purchased" from="Ground/Kitchen/Ramps/Planks/Door/Buyable_Component" to="Ground/Kitchen/Ramps/Planks" method="_on_buyable_component_purchased"]
+[connection signal="body_entered" from="Ground/Kitchen/Decor/B_Cheddar/Area2D" to="Ground/Kitchen/Decor/B_Cheddar/Sprite2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Ground/Kitchen/Decor/B_Cheddar/Area2D" to="Ground/Kitchen/Decor/B_Cheddar/Sprite2D" method="_on_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Wave_Intermission_Timer" to="." method="_on_wave_intermission_timer_timeout"]
 [connection signal="timeout" from="Wave_Countdown_Timer" to="." method="_on_wave_countdown_timer_timeout"]
 
 [editable path="Ground/Spawn_Room/Wall_Gun"]
 [editable path="Ground/Spawn_Room/Decor/Cheese"]
+[editable path="Ground/Kitchen/Ramps/B_Ramp/Door"]
+[editable path="Ground/Kitchen/Ramps/Planks/Door"]
+[editable path="Ground/Kitchen/Cantuna/Cantuna_Cycler_Button"]
 [editable path="Game_UI"]

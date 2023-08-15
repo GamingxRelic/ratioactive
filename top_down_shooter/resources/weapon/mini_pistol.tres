@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_1qt1b"]
 script = ExtResource("1_n5eww")
 bullet_speed = 50.0
-knockback_amount = 0.5
+knockback_amount = 0.8
 piercing = false
 texture = ExtResource("2_sykax")
 collision_polygon_verticies = PackedVector2Array()

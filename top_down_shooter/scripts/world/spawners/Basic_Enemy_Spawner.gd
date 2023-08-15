@@ -28,9 +28,7 @@ func attempt_enemy_spawn() -> void:
 		new_enemy.global_position = global_position
 		World.current_level.entities.call_deferred("add_child", new_enemy)
 		#get_node("/root/World").call_deferred("add_child", new_enemy)#add_child(new_enemy)
-		
 		reattempt_timer.start()
-
 
 func _on_body_entered(body):
 	if body.is_in_group("enemy") or body.is_in_group("player"):

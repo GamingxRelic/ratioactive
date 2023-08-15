@@ -51,8 +51,8 @@ func _physics_process(_delta) -> void:
 
 		velocity = new_velocity + knockback
 		
-		look_at(World.player_pos)
-		flip_sprite(rotation_degrees)
+		#look_at(World.player_pos)
+		flip_sprite(rad_to_deg(get_angle_to(World.player_pos)))
 
 		move_and_slide()
 
@@ -65,9 +65,9 @@ func set_movement_target(movement_target : Vector2) -> void:
 
 func flip_sprite(angle) -> void:
 	if angle < -90 or angle > 90:
-		sprite.scale.y = -1
+		sprite.scale.x = -1
 	else:
-		sprite.scale.y = 1
+		sprite.scale.x = 1
 
 func _on_health_component_death() -> void:
 	alive = false
@@ -102,6 +102,9 @@ func _on_navigation_timer_timeout() -> void:
 
 func _on_animation_player_animation_finished(anim_name) -> void:
 	match anim_name:
+		"spawn":
+			anim.play("run")
+			return
 		"death":
 			World.enemy_count -= 1
 			World.remaining_wave_enemy_count -= 1

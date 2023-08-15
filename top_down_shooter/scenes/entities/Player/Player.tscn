@@ -450,12 +450,12 @@ parameters/run_anim/current_index = 0
 [node name="Gun" parent="." instance=ExtResource("4_2s6eo")]
 
 [node name="Tail" type="Sprite2D" parent="."]
-z_index = -1
 position = Vector2(-23, -4)
 texture = ExtResource("6_7jbgf")
 centered = false
 
 [node name="Lights" type="Node2D" parent="."]
+visible = false
 
 [node name="MainLight" type="PointLight2D" parent="Lights"]
 energy = 0.2
@@ -473,6 +473,7 @@ texture = SubResource("GradientTexture2D_ell5p")
 texture_scale = 1.5
 
 [node name="Enemy_Spawner_Range" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 64
 monitorable = false

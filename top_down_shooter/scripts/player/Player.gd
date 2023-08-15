@@ -29,7 +29,7 @@ func _ready():
 	World.player = self
 	World.player_pos = position
 	World.player_hp = health_component.health
-	World.player_points = 0
+	World.player_points = 500
 	World.player_hurtbox = hurtbox_component
 	
 	# Give mini pistol

@@ -9,6 +9,7 @@ process_mode = 3
 script = ExtResource("1_u0b0e")
 
 [node name="Levels" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="UI" parent="." node_paths=PackedStringArray("GM") instance=ExtResource("3_gcasm")]
 visible = false
