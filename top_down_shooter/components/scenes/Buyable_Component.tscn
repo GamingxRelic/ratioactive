@@ -1,11 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://drfgbtnplhq48"]
+[gd_scene load_steps=3 format=3 uid="uid://drfgbtnplhq48"]
 
 [ext_resource type="Script" path="res://components/script/Buyable_Component.gd" id="1_jru6w"]
+[ext_resource type="AudioStream" uid="uid://do0kloshiv20a" path="res://assets/audio/buyables/kaching.mp3" id="2_f8n4b"]
 
 [node name="Buyable_Component" type="Area2D"]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_jru6w")
 
+[node name="Kaching_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_f8n4b")
+volume_db = 3.467
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="finished" from="Kaching_Sound" to="." method="_on_kaching_sound_finished"]

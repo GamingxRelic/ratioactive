@@ -1,6 +1,9 @@
 extends Area2D
 
 @export var price : int = 0
+
+@onready var kaching_sound : AudioStreamPlayer2D = $Kaching_Sound
+
 var player_in_range := false
 
 signal purchased

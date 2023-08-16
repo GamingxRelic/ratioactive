@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://jmqb5mugjjfu"]
+[gd_scene load_steps=7 format=3 uid="uid://jmqb5mugjjfu"]
 
 [ext_resource type="Script" path="res://scripts/ui/Pause_Menu_UI.gd" id="1_s7clg"]
+[ext_resource type="Texture2D" uid="uid://chhb0s0apkfhl" path="res://assets/menus/button_card.png" id="2_11y2d"]
+[ext_resource type="AudioStream" uid="uid://483xe5isho0c" path="res://assets/audio/menus/button_hover.mp3" id="3_0r2gm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sj72l"]
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_wynge"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7me1"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_s7clg")
@@ -24,6 +31,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 2
+offset_left = 691.0
+offset_top = 223.0
+offset_right = 1225.0
+offset_bottom = 290.0
+text = "Paused"
+label_settings = SubResource("LabelSettings_sj72l")
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = 8
@@ -31,26 +48,64 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -269.0
-offset_top = -317.0
-offset_right = 265.0
-offset_bottom = 318.0
+offset_left = -267.0
+offset_top = -211.0
+offset_right = 267.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Paused"
-label_settings = SubResource("LabelSettings_sj72l")
-horizontal_alignment = 1
-
 [node name="ResumeButton" type="Button" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("2_11y2d")
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/ResumeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -17.5
+offset_right = 96.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Resume"
+label_settings = SubResource("LabelSettings_wynge")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+icon = ExtResource("2_11y2d")
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/MainMenuButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -9.5
+offset_right = 72.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Main Menu"
+label_settings = SubResource("LabelSettings_e7me1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0r2gm")
 
 [connection signal="button_down" from="Control/Panel/VBoxContainer/ResumeButton" to="." method="_on_resume_button_button_down"]
+[connection signal="mouse_entered" from="Control/Panel/VBoxContainer/ResumeButton" to="." method="_on_resume_button_mouse_entered"]
+[connection signal="mouse_entered" from="Control/Panel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_mouse_entered"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

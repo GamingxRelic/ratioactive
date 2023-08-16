@@ -40,6 +40,7 @@ func _on_buyable_component_purchased():
 	for i in PlayerGun.weapons:
 		if i.name == weapon_res.name and (i.total_ammo < i.max_ammo):
 			i.total_ammo = i.max_ammo
+			World.kaching_sound.emit()
 			PlayerGun.stop_reload.emit()
 			clear()
 			return
@@ -50,6 +51,7 @@ func _on_buyable_component_purchased():
 		for i in PlayerGun.weapons:
 			if i.name == weapon_res.name:
 				return
+		World.kaching_sound.emit()
 		PlayerGun.weapons.append(weapon_res.duplicate())
 		PlayerGun.gun_added.emit()
 		clear()

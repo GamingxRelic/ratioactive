@@ -36,7 +36,10 @@ func exit_level() -> void:
 	
 
 func _on_player_death() -> void:
-	game_paused = true
+	get_tree().paused = true
+	World.game_running = false
+	var death_screen = preload("res://scenes/menus/Death_Screen.tscn").instantiate()
+	menus.add_child(death_screen)
 
 func _on_main_menu_selected() -> void:
 	var menu = preload("res://scenes/menus/Main_Menu.tscn").instantiate()
@@ -58,10 +61,3 @@ func _on_level_kitchen() -> void:
 	var lvl = preload("res://scenes/levels/Level_Kitchen.tscn").instantiate()
 	levels.add_child(lvl)
 	
-## Menus
-#signal main_menu_selected
-#signal levels_menu_selected
-#
-## Levels
-#signal level_test
-#signal level_kitchen

@@ -14,6 +14,8 @@ var timer_countdown_value := 0
 
 @onready var entities = $Entities
 
+# Audio
+@onready var kaching_sound : AudioStreamPlayer2D = $Audio/Kaching_Sound
 
 func _ready() -> void:
 	World.current_level = self
@@ -24,6 +26,8 @@ func _ready() -> void:
 	World.connect("next_wave", _on_next_wave)
 	
 	World.remaining_wave_enemy_count_changed.connect(_on_remaining_wave_enemy_count_changed)
+	
+	World.kaching_sound.connect(_on_kaching_sound)
 
 func _on_next_wave() -> void:
 	if wave == 0:
@@ -41,7 +45,7 @@ func _on_next_wave() -> void:
 ## Start new wave
 func _on_wave_intermission_timer_timeout():
 	countdown_timer.stop()
-	
+	# I gotta set up the $Attempt_Enemy_Spawns
 	World.cantuna_cycle_weapon.emit()
 	
 	wave += 1
@@ -72,4 +76,9 @@ func _on_animation_player_animation_finished(anim_name):
 		#pass
 		World.next_wave.emit()
 
+func _on_attempt_enemy_spawns_timeout():
+	if wave_timer.is_stopped():
+		World.spawn_enemies.emit()
 
+func _on_kaching_sound() -> void:
+	kaching_sound.play()

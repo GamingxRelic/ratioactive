@@ -15,6 +15,9 @@ var alive := true
 @onready var anim_tree : AnimationTree = $AnimationTree
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 
+@onready var damage_sound : AudioStreamPlayer2D = $Audio/Damage_Sound
+@onready var equip_weapon_sound : AudioStreamPlayer2D = $Audio/Equip_Weapon_Sound
+
 ## Max distance for the gun circling the player
 var gun_dist := 3.0
 
@@ -118,19 +121,18 @@ func animation():
 # first frame of the idle animation. maybe, see how it looks.-=
 
 func input():
-	if Input.is_action_just_pressed("throw_grenade"):
-		var grenade = preload("res://scenes/weapons/bullets/Grenade.tscn").instantiate()
-		grenade.global_position = global_position
-		grenade.aim_rotation_rad = get_angle_to(get_global_mouse_position())
-		World.current_level.entities.add_child(grenade)
-		#get_node("/root/World").add_child(grenade)
+#	if Input.is_action_just_pressed("throw_grenade"):
+#		var grenade = preload("res://scenes/weapons/bullets/Grenade.tscn").instantiate()
+#		grenade.global_position = global_position
+#		grenade.aim_rotation_rad = get_angle_to(get_global_mouse_position())
+#		World.current_level.entities.add_child(grenade)
 		
-	if Input.is_action_just_pressed("space"):
-		World.emit_signal("next_wave")
+#	if Input.is_action_just_pressed("space"):
+#		World.emit_signal("next_wave")
 		
-	if Input.is_action_just_pressed("mouse_5"):
-		World.UI.add_points(1000)
-		World.player_points += 1000
+#	if Input.is_action_just_pressed("mouse_5"):
+#		World.UI.add_points(1000)
+#		World.player_points += 1000
 		
 	if Input.is_action_pressed("left_click"):
 		gun.fire()
@@ -169,7 +171,6 @@ func drop_weapon() -> void:
 	dropped_gun.weapon_res = PlayerGun.gun
 	dropped_gun.global_position = global_position
 	World.current_level.entities.add_child(dropped_gun)
-	#get_node("/root/World").add_child(dropped_gun)
 	
 	# Remove gun from player inventory
 	PlayerGun.weapons.pop_at(PlayerGun.weapon_index)
@@ -196,6 +197,7 @@ func select_weapon(selection : int):
 		gun.reload_timer.stop()
 		gun.fire_cooldown.start()
 		set_reload_prog_timer()
+		equip_weapon_sound.play()
 
 func next_weapon() -> void:
 	if PlayerGun.weapon_index == PlayerGun.weapons.size()-1 and PlayerGun.weapons.size() > 1:
@@ -259,7 +261,7 @@ func _on_enemy_spawner_range_area_exited(area):
 func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2) -> void:	
 	if alive:
 		if !health_component.immune:
-			print("ow")
+			damage_sound.play()
 			health_component.take_damage(dmg_amnt)
 			velocity += knockback_amnt
 			health_component.immune = true

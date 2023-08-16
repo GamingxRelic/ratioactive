@@ -63,6 +63,7 @@ texture = ExtResource("3_10ncd")
 [node name="Fire_Cooldown" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 9.707
 
 [node name="Reload_Timer" type="Timer" parent="."]
 one_shot = true

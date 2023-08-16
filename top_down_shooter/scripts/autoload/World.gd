@@ -20,6 +20,7 @@ var pickup_queue : Array
 var UI : Control
 
 var wave : int
+var total_kills := 0
 
 var max_enemy_count : int
 var enemy_count : int:
@@ -50,7 +51,7 @@ func reset() -> void:
 	wave = 0
 	max_enemy_count = 0
 	enemy_count = 0
-	
+	total_kills = 0
 
 signal next_wave
 signal spawn_enemies
@@ -59,3 +60,4 @@ signal remaining_wave_enemy_count_changed
 signal kill_all_enemies
 signal player_death
 signal cantuna_cycle_weapon
+signal kaching_sound

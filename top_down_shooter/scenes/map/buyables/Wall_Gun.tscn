@@ -8,6 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_o5dt3"]
 
 [node name="Wall_Gun" type="Node2D"]
+z_index = 1
 script = ExtResource("1_64phi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

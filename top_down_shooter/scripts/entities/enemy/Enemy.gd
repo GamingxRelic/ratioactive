@@ -75,6 +75,7 @@ func _on_health_component_death() -> void:
 	World.player_points+=30
 	health_bar.visible = false
 	hurtbox_component.set_process(false)
+	World.total_kills += 1
 	anim.play("death")
 
 func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2) -> void:

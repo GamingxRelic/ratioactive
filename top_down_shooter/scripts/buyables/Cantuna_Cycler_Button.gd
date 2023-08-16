@@ -18,3 +18,4 @@ func _on_buyable_component_player_exited_range() -> void:
 	
 func _on_buyable_component_purchased():
 	World.cantuna_cycle_weapon.emit()
+	World.kaching_sound.emit()

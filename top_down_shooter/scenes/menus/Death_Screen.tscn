@@ -1,0 +1,174 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbyqycj84y1oe"]
+
+[ext_resource type="Script" path="res://scripts/menus/Death_Screen.gd" id="1_f7rxg"]
+[ext_resource type="Texture2D" uid="uid://dqfq2pwufj0w5" path="res://assets/menus/yellow_button_card.png" id="2_sl5qv"]
+[ext_resource type="AudioStream" uid="uid://483xe5isho0c" path="res://assets/audio/menus/button_hover.mp3" id="3_x1a0x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fabv8"]
+line_spacing = 0.0
+font_size = 80
+font_color = Color(0.662745, 0.231373, 0.231373, 1)
+outline_color = Color(0.188235, 0.172549, 0.180392, 1)
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aj01i"]
+font_size = 48
+font_color = Color(0.956863, 0.705882, 0.105882, 1)
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_goeae"]
+font_size = 48
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvxjm"]
+font_size = 48
+font_color = Color(0.956863, 0.705882, 0.105882, 1)
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yy4ve"]
+font_size = 48
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqayy"]
+font_size = 32
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_muieo"]
+font_size = 32
+shadow_size = 8
+shadow_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[node name="Death_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f7rxg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.0740741
+anchor_right = 0.75
+anchor_bottom = 0.907407
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.639216)
+metadata/_edit_use_anchors_ = true
+
+[node name="Game Over" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.3125
+anchor_top = 0.122222
+anchor_right = 0.6875
+anchor_bottom = 0.196296
+offset_left = 72.0
+offset_right = -72.0
+offset_bottom = -16.0
+grow_horizontal = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_fabv8")
+metadata/_edit_use_anchors_ = true
+
+[node name="You Survived" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.3375
+anchor_top = 0.227778
+anchor_right = 0.6625
+anchor_bottom = 0.275
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "You Survived:"
+label_settings = SubResource("LabelSettings_aj01i")
+metadata/_edit_use_anchors_ = true
+
+[node name="Waves_Survived" type="Label" parent="CanvasLayer/You Survived"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.192308
+anchor_top = 1.45098
+anchor_right = 0.807692
+anchor_bottom = 2.45098
+grow_horizontal = 2
+text = "10 Waves
+"
+label_settings = SubResource("LabelSettings_goeae")
+metadata/_edit_use_anchors_ = true
+
+[node name="You Killed" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.3625
+anchor_top = 0.394444
+anchor_right = 0.6375
+anchor_bottom = 0.441667
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Killed:"
+label_settings = SubResource("LabelSettings_bvxjm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Enemies_Killed" type="Label" parent="CanvasLayer/You Killed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.136364
+anchor_top = 1.31373
+anchor_right = 0.863636
+anchor_bottom = 3.31373
+offset_bottom = -51.0
+text = "10 Enemies"
+label_settings = SubResource("LabelSettings_yy4ve")
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Main_Menu_Button" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.402083
+anchor_top = 0.604167
+anchor_right = 0.597917
+anchor_bottom = 0.724537
+offset_top = 30.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("2_sl5qv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Main_Menu" type="Label" parent="CanvasLayer/Main_Menu_Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12234
+anchor_top = 0.35
+anchor_right = 0.888298
+anchor_bottom = 0.619231
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_nqayy")
+metadata/_edit_use_anchors_ = true
+
+[node name="Thanks For Playing!" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.341667
+anchor_top = 0.84537
+anchor_right = 0.658333
+anchor_bottom = 0.877778
+grow_horizontal = 2
+grow_vertical = 2
+text = "Thanks For Playing!"
+label_settings = SubResource("LabelSettings_muieo")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button_Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_x1a0x")
+
+[connection signal="mouse_entered" from="CanvasLayer/Main_Menu_Button" to="." method="_on_main_menu_button_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/Main_Menu_Button" to="." method="_on_main_menu_button_pressed"]

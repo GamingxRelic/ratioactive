@@ -34,6 +34,10 @@ window/stretch/mode="viewport"
 
 import/blender/enabled=false
 
+[gui]
+
+theme/custom_font="res://assets/fonts/PressStart2P-Regular.ttf"
+
 [input]
 
 move_left={

@@ -24,5 +24,6 @@ func _on_buyable_component_player_exited_range():
 	sprite.material = null
 
 func _on_buyable_component_purchased():
+	World.kaching_sound.emit()
 	anim_player.play("remove_door")
 	col_shape.disabled = true

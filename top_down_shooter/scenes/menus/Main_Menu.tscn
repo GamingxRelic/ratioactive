@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dr56jnt55wl6l"]
+[gd_scene load_steps=11 format=3 uid="uid://dr56jnt55wl6l"]
 
-[ext_resource type="Texture2D" uid="uid://5awddf7c7bsj" path="res://assets/menus/main_menu.png" id="1_lgnkt"]
 [ext_resource type="Script" path="res://scripts/menus/Main_Menu.gd" id="1_wbicu"]
-[ext_resource type="Texture2D" uid="uid://c7eu01wte7py7" path="res://assets/menus/play.png" id="2_kpyxw"]
-[ext_resource type="Texture2D" uid="uid://dkcxbcguetkxr" path="res://assets/menus/options.png" id="3_5mnd8"]
-[ext_resource type="Texture2D" uid="uid://cgch8bgbsf5ho" path="res://assets/menus/exit.png" id="4_icoyb"]
+[ext_resource type="Texture2D" uid="uid://b6ii0d88me03d" path="res://assets/menus/main_menu/titlescreen.png" id="2_av5dj"]
+[ext_resource type="Texture2D" uid="uid://bfdmqakcqvnxo" path="res://assets/menus/main_menu/play.png" id="3_02yci"]
+[ext_resource type="Texture2D" uid="uid://mj5ubqyaygui" path="res://assets/menus/main_menu/play_highlighted.png" id="4_ppsj0"]
+[ext_resource type="Texture2D" uid="uid://7klhyocpk2q0" path="res://assets/menus/main_menu/options.png" id="5_nqdpf"]
+[ext_resource type="Texture2D" uid="uid://1hdr6qxp5n4s" path="res://assets/menus/main_menu/options_highlighted.png" id="6_wltw5"]
+[ext_resource type="Texture2D" uid="uid://cytxxuagbarr" path="res://assets/menus/main_menu/credits.png" id="7_c7mgy"]
+[ext_resource type="Texture2D" uid="uid://dw67r62tvjgyo" path="res://assets/menus/main_menu/exit.png" id="7_llas1"]
+[ext_resource type="Texture2D" uid="uid://cxivbjfg1m745" path="res://assets/menus/main_menu/exit_highlighted.png" id="8_lq8q6"]
+[ext_resource type="AudioStream" uid="uid://483xe5isho0c" path="res://assets/audio/menus/button_hover.mp3" id="10_70ua6"]
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -20,7 +25,7 @@ script = ExtResource("1_wbicu")
 [node name="Background" type="TextureRect" parent="CanvasLayer"]
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_lgnkt")
+texture = ExtResource("2_av5dj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
@@ -28,25 +33,46 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.0
-offset_top = -166.0
-offset_right = 132.0
-offset_bottom = 166.0
+offset_left = -805.0
+offset_top = -176.0
+offset_right = -477.0
+offset_bottom = 154.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Play" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("2_kpyxw")
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_02yci")
+texture_hover = ExtResource("4_ppsj0")
 
-[node name="Options" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Options" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
+visible = false
 layout_mode = 2
-icon = ExtResource("3_5mnd8")
+texture_normal = ExtResource("5_nqdpf")
+texture_hover = ExtResource("6_wltw5")
 
-[node name="Exit" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Exit" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-icon = ExtResource("4_icoyb")
+texture_normal = ExtResource("7_llas1")
+texture_hover = ExtResource("8_lq8q6")
 
+[node name="Credits" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_c7mgy")
+
+[node name="Button_Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_70ua6")
+
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

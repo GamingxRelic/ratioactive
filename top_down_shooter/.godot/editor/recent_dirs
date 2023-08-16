@@ -1,6 +1,8 @@
+res://scripts/menus
+res://assets/menus/main_menu
+res://assets/fonts
 res://scripts/levels/kitchen
 res://scripts/buyables
-res://scripts/menus
 res://scripts/autoload
 res://scripts/levels
 res://resources/weapon
@@ -18,5 +20,3 @@ res://resources/labels
 res://scripts/entities/drops
 res://assets/sprites/guns
 res://components/scenes
-res://scenes/entities/Player
-res://scripts/player

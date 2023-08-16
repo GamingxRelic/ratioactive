@@ -27,6 +27,7 @@ func _on_buyable_component_purchased():
 			i.total_ammo = i.max_ammo
 			#i.ammo = i.clip_size # This is for filling the magazine as well.
 			PlayerGun.stop_reload.emit()
+			World.kaching_sound.emit()
 			return
 		elif i.name == weapon_res.name and (i.total_ammo >= i.max_ammo):
 			buyable_component.refund()
@@ -36,6 +37,7 @@ func _on_buyable_component_purchased():
 			if i.name == weapon_res.name:
 				#print("gun exists")
 				return
+		World.kaching_sound.emit()
 		PlayerGun.weapons.append(weapon_res.duplicate())
 		PlayerGun.gun_added.emit()
 		return

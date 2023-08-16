@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://bpghqtecw0775"]
+[gd_scene load_steps=56 format=3 uid="uid://bpghqtecw0775"]
 
 [ext_resource type="Script" path="res://scripts/levels/Level.gd" id="1_rudie"]
 [ext_resource type="Texture2D" uid="uid://1108xk5jyuw0" path="res://assets/levels/kitchen/kitchen.png" id="2_v8u7y"]
+[ext_resource type="Texture2D" uid="uid://qtfnw5y6yy8a" path="res://assets/levels/kitchen/walls.png" id="3_8gci3"]
 [ext_resource type="PackedScene" uid="uid://2a5hu5k24rwo" path="res://scenes/entities/Player/Player.tscn" id="3_e82cx"]
 [ext_resource type="Texture2D" uid="uid://jxom078s0e1e" path="res://assets/levels/kitchen/spawn_room_door.png" id="3_yoyk7"]
 [ext_resource type="Script" path="res://scripts/camera/Camera.gd" id="4_l5xot"]
@@ -19,8 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://dpxff6thyo1wc" path="res://assets/levels/kitchen/outlet.png" id="15_arh0t"]
 [ext_resource type="Texture2D" uid="uid://271f8dmh1o6d" path="res://assets/levels/kitchen/shelves.png" id="16_qgsep"]
 [ext_resource type="Resource" uid="uid://dxche03huugfr" path="res://resources/weapon/sawed_off.tres" id="17_fsnp5"]
+[ext_resource type="AudioStream" uid="uid://c1mb4uip8co6p" path="res://assets/audio/levels/kitchen/switch_on.mp3" id="17_qi6wn"]
 [ext_resource type="PackedScene" uid="uid://cm5vm8qwx84jv" path="res://components/scenes/Text_Label_Component.tscn" id="17_td68j"]
 [ext_resource type="Texture2D" uid="uid://cpkc5buw2de8b" path="res://assets/levels/kitchen/posts.png" id="17_xf8bl"]
+[ext_resource type="AudioStream" uid="uid://dhhsenw8l4h58" path="res://assets/audio/levels/kitchen/switch_off.mp3" id="18_aotog"]
 [ext_resource type="Texture2D" uid="uid://c0dm6lsdd7reg" path="res://assets/levels/kitchen/ramp.png" id="18_b68yp"]
 [ext_resource type="Texture2D" uid="uid://dxblfbd437ueb" path="res://assets/levels/kitchen/posts-1.png" id="19_3fyjf"]
 [ext_resource type="Script" path="res://scripts/levels/kitchen/Kitchen_Ramp.gd" id="19_hydr6"]
@@ -42,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://cselcbvkgprkj" path="res://assets/levels/kitchen/posts-8.png" id="26_fkd6f"]
 [ext_resource type="Texture2D" uid="uid://dk12ywriwd6qw" path="res://assets/levels/kitchen/posts-9.png" id="27_tols4"]
 [ext_resource type="Texture2D" uid="uid://dy0ixm6ujtb73" path="res://assets/levels/kitchen/posts-10.png" id="28_aqvea"]
+[ext_resource type="AudioStream" uid="uid://do0kloshiv20a" path="res://assets/audio/buyables/kaching.mp3" id="46_1pknb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jcawh"]
 vertices = PackedVector2Array(-264, 87.0637, -264, -19, -254, -2, -242, 87, 109, -2, 161, -2, 156, 52, 100, 10, -54, 50, 82, 9, -102.212, -2.91435, 77, -2, -118, 13, -119, -3, 192, 59, 244, 59, 243, 81, 204, 83, 153, 94, 160, 60, -8, 86, -46, 75, -46, 58, 52, 60, 53, 73, 51, 87, 49, 90, 11, 128, -8, 90, 55, 98, -95, -108, 245, -109, 244, -41, 210, -41, 169, -42, -119, -92, -102, -92, -95, -42, 90, 59, 135, 104, 85, 79, -136, 71, -136, 110, -233, 110, -171, 70, -264, -22, -264, -46, -136, -46, -220, -28, 141, 115, 123, 127, 67, 99, -53, 118, -55, 162, -184, 58, -214, -13, -136, 6, -59, 167, -17, 162, 1, 165, 1, 182, -22, 192, -120, 193, -120, 71, -56, 111, -180, 67, -217, -26, -258, -18)
@@ -160,6 +164,9 @@ script = ExtResource("1_rudie")
 z_index = -1
 texture = ExtResource("2_v8u7y")
 
+[node name="Walls" type="Sprite2D" parent="Ground"]
+texture = ExtResource("3_8gci3")
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Ground"]
 z_index = 10
 navigation_polygon = SubResource("NavigationPolygon_jcawh")
@@ -272,6 +279,14 @@ offset_top = -49.0
 offset_right = -149.0
 offset_bottom = -49.0
 text = "[E]"
+
+[node name="Switch_On" type="AudioStreamPlayer2D" parent="Ground/Spawn_Room/Decor/Outlet"]
+stream = ExtResource("17_qi6wn")
+volume_db = 6.933
+
+[node name="Switch_Off" type="AudioStreamPlayer2D" parent="Ground/Spawn_Room/Decor/Outlet"]
+stream = ExtResource("18_aotog")
+volume_db = 11.787
 
 [node name="Kitchen" type="Node2D" parent="Ground"]
 
@@ -427,7 +442,6 @@ visible = false
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground/Kitchen/Ramps/B_Ramp/Door/Buyable_Component" index="0"]
 position = Vector2(37.0002, 29.7999)
 rotation = 2.74234
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_77bfs")
 
 [node name="Text_Label_Component" parent="Ground/Kitchen/Ramps/B_Ramp/Door" index="2"]
@@ -569,7 +583,7 @@ position = Vector2(-41, -66)
 z_index = 4
 position = Vector2(21, -114)
 
-[node name="CollisionShape2D" parent="Ground/Kitchen/Cantuna/Cantuna_Cycler_Button/Buyable_Component" index="0"]
+[node name="CollisionShape2D" parent="Ground/Kitchen/Cantuna/Cantuna_Cycler_Button/Buyable_Component" index="1"]
 position = Vector2(0, 5)
 
 [node name="Text_Label_Component" parent="Ground/Kitchen/Cantuna/Cantuna_Cycler_Button" index="2"]
@@ -639,7 +653,7 @@ polygon = PackedVector2Array(167, -39, -101, -39, -101, -4, -101, 4, -87, 4, -87
 polygon = PackedVector2Array(246, -110, 247, -110, 247, -3, 207, -3, 213, -39, 246, -39)
 
 [node name="U_Left" type="CollisionPolygon2D" parent="Ground/Wall_Colliders/Shelves"]
-polygon = PackedVector2Array(-98, -110, -102, -110, -102, -67, -99, -67.2556, -99, -4, -98, -4)
+polygon = PackedVector2Array(-98, -110, -102, -110, -102, -67, -102, -62, -101, -3, -98, -3, -98, -66.8737)
 
 [node name="Player" parent="." instance=ExtResource("3_e82cx")]
 position = Vector2(-230, 42)
@@ -653,6 +667,9 @@ zoom = Vector2(7, 7)
 script = ExtResource("4_l5xot")
 
 [node name="Game_UI" parent="." instance=ExtResource("5_jo7qs")]
+
+[node name="PointsLabel" parent="Game_UI/CanvasLayer" index="2"]
+anchor_top = -0.0518519
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.05
@@ -668,6 +685,15 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Wave_Countdown_Timer" type="Timer" parent="."]
+
+[node name="Attempt_Enemy_Spawns" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Kaching_Sound" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("46_1pknb")
 
 [connection signal="body_entered" from="Ground/Spawn_Room/Decor/Door/Area2D" to="Ground/Spawn_Room/Decor/Door" method="_on_body_entered"]
 [connection signal="body_exited" from="Ground/Spawn_Room/Decor/Door/Area2D" to="Ground/Spawn_Room/Decor/Door" method="_on_body_exited"]
@@ -704,6 +730,7 @@ one_shot = true
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Wave_Intermission_Timer" to="." method="_on_wave_intermission_timer_timeout"]
 [connection signal="timeout" from="Wave_Countdown_Timer" to="." method="_on_wave_countdown_timer_timeout"]
+[connection signal="timeout" from="Attempt_Enemy_Spawns" to="." method="_on_attempt_enemy_spawns_timeout"]
 
 [editable path="Ground/Spawn_Room/Wall_Gun"]
 [editable path="Ground/Spawn_Room/Decor/Cheese"]

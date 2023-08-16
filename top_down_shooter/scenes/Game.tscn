@@ -18,3 +18,5 @@ GM = NodePath("..")
 [node name="Menus" type="Node2D" parent="."]
 
 [node name="Main_Menu" parent="Menus" instance=ExtResource("3_70gbb")]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
