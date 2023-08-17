@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://dnm717hxka14d"]
+
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_cntfo"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_p0dgk"]
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="2_irkag"]
+[ext_resource type="Texture2D" uid="uid://d1cdmvakakoxd" path="res://assets/sprites/bullets/snake_bullet.png" id="3_c1wif"]
+[ext_resource type="AudioStream" uid="uid://doi8bbayci1n0" path="res://assets/audio/weapons/guns/snake_gun_fire.wav" id="3_sd2eb"]
+[ext_resource type="Texture2D" uid="uid://cew2o7735q60k" path="res://assets/sprites/guns/snake_gun.png" id="5_5gvv7"]
+
+[sub_resource type="Resource" id="Resource_gdg3e"]
+script = ExtResource("2_irkag")
+bullet_speed = 90.0
+knockback_amount = 0.8
+piercing = true
+texture = ExtResource("3_c1wif")
+collision_polygon_verticies = PackedVector2Array()
+randomize_textures = false
+randomized_textures_array = Array[Texture]([])
+sprite_rotating = false
+sprite_rotate_speed = 0.0
+homing = false
+
+[resource]
+script = ExtResource("1_p0dgk")
+rate_of_fire = 3.5
+damage = 300.0
+name = "Cowboy Boot"
+texture = ExtResource("5_5gvv7")
+position = Vector2(0, 0)
+gun_tip_position = Vector2(8, -2)
+bullet = ExtResource("1_cntfo")
+bullet_res = SubResource("Resource_gdg3e")
+ammo = 1
+total_ammo = 8
+clip_size = 1
+max_ammo = 8
+reload_time = 4.0
+cantuna_price = 3500
+bullet_spread = 0.014
+bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
+fire_sound = ExtResource("3_sd2eb")
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.321569, 0.815686, 0.4, 1)
+fire_flash_energy = 1.8

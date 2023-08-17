@@ -9,7 +9,10 @@ func _ready():
 	
 	if bullet_res.shader_mat != null:
 		material = bullet_res.shader_mat
-	if bullet_res.texture != null:
+	if bullet_res.randomize_textures:
+		var rand_index := randi_range(0,bullet_res.randomized_textures_array.size()-1)
+		sprite.texture = bullet_res.randomized_textures_array[rand_index] if bullet_res.randomized_textures_array[rand_index] != null else bullet_res.texture
+	elif bullet_res.texture != null:
 		sprite.texture = bullet_res.texture
 	
 	rotate(aim_rotation_rad)
@@ -36,5 +39,5 @@ func _on_area_2d_body_entered(body):
 		body.hurtbox_component.damage(PlayerGun.gun.damage, velocity * bullet_res.knockback_amount)
 		if !bullet_res.piercing:
 			self.queue_free()
-	elif !body.is_in_group("bullet_passable") and !body.is_in_group("player"):
+	elif (!body.is_in_group("bullet_passable") and !body.is_in_group("player")) or body.is_in_group("bullet_impassable"):
 		self.queue_free()

@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://b0lty3nlx1jdu"]
+
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_apgl0"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_xgb0y"]
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="2_l7ava"]
+[ext_resource type="Texture2D" uid="uid://5mf0x2dtldme" path="res://assets/sprites/bullets/rat_gun_bullet.png" id="3_org6s"]
+[ext_resource type="AudioStream" uid="uid://nr1qrbl1e6rg" path="res://assets/audio/weapons/guns/rat_gun_sound.wav" id="4_ar8y6"]
+[ext_resource type="Texture2D" uid="uid://twocvyxkaiep" path="res://assets/sprites/guns/rat_gun.png" id="6_nolxi"]
+
+[sub_resource type="Resource" id="Resource_21cof"]
+script = ExtResource("2_l7ava")
+bullet_speed = 60.0
+knockback_amount = 0.6
+piercing = false
+texture = ExtResource("3_org6s")
+collision_polygon_verticies = PackedVector2Array()
+randomize_textures = false
+randomized_textures_array = Array[Texture]([])
+sprite_rotating = false
+sprite_rotate_speed = 0.0
+homing = false
+
+[resource]
+script = ExtResource("1_xgb0y")
+rate_of_fire = 0.6
+damage = 35.0
+name = "Rat Gun"
+texture = ExtResource("6_nolxi")
+position = Vector2(0, 0)
+gun_tip_position = Vector2(10, 1)
+bullet = ExtResource("1_apgl0")
+bullet_res = SubResource("Resource_21cof")
+ammo = 4
+total_ammo = 20
+clip_size = 4
+max_ammo = 20
+reload_time = 2.0
+cantuna_price = 1050
+bullet_spread = 0.014
+bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
+fire_sound = ExtResource("4_ar8y6")
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.521569, 0.458824, 0.152941, 1)
+fire_flash_energy = 1.0

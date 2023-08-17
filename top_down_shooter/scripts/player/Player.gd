@@ -17,6 +17,8 @@ var alive := true
 
 @onready var damage_sound : AudioStreamPlayer2D = $Audio/Damage_Sound
 @onready var equip_weapon_sound : AudioStreamPlayer2D = $Audio/Equip_Weapon_Sound
+@onready var heal_sound : AudioStreamPlayer2D = $Audio/Heal_Sound
+@onready var fill_ammo_sound : AudioStreamPlayer2D = $Audio/Fill_Ammo_Sound
 
 ## Max distance for the gun circling the player
 var gun_dist := 3.0
@@ -32,7 +34,8 @@ func _ready():
 	World.player = self
 	World.player_pos = position
 	World.player_hp = health_component.health
-	World.player_points = 500
+	World.player_max_hp = health_component.max_health
+	World.player_points = 250
 	World.player_hurtbox = hurtbox_component
 	
 	# Give mini pistol
@@ -52,6 +55,7 @@ func _ready():
 	gun.reload_signal.connect(gun_reload)
 	PlayerGun.stop_reload.connect(stop_reload_prog)
 	PlayerGun.gun_added.connect(_on_gun_added)
+	PlayerGun.ammo_filled.connect(_on_ammo_filled)
 
 func _process(_delta):
 	if World.pickup_queue.size() != 0:
@@ -108,17 +112,6 @@ func animation():
 	elif input_direction.x > 0 and input_direction.y == 0: 
 		anim_tree.set("parameters/run_anim/transition_request", "run_right")
 		anim_tree.set("parameters/idle_anim/transition_request", "idle_right")
-# This part acts kinda weird when you start by walking down or up and then moving side to side. 
-#	elif input_direction.y > 0 and input_direction.x == 0: 
-#		anim_tree.set("parameters/run_anim/transition_request", "run_down")
-#		anim_tree.set("parameters/idle_anim/transition_request", "idle_down")
-#	elif input_direction.y < 0 and input_direction.x == 0: 
-#		anim_tree.set("parameters/run_anim/transition_request", "run_up")
-#		anim_tree.set("parameters/idle_anim/transition_request", "idle_up")
-
-# Last working on making it so that if the player is 
-# idle but shooting, the idle animation shouldnt play. it should just be the 
-# first frame of the idle animation. maybe, see how it looks.-=
 
 func input():
 #	if Input.is_action_just_pressed("throw_grenade"):
@@ -274,12 +267,20 @@ func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector
 func _on_immunity_frames_timer_timeout() -> void:
 	health_component.immune = false
 
+func heal() -> void:
+	health_component.health = health_component.max_health
+	World.player_hp = World.player_max_hp
+	heal_sound.play()
 
 func _on_health_component_death():
 	alive = false
 	anim_tree.active = false
 	World.player_hp = 0.0
 	anim_player.play("death")
+
+func _on_ammo_filled() -> void:
+	fill_ammo_sound.play()
+	return
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "death":

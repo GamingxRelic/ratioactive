@@ -47,7 +47,6 @@ texture_normal = ExtResource("3_02yci")
 texture_hover = ExtResource("4_ppsj0")
 
 [node name="Options" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
-visible = false
 layout_mode = 2
 texture_normal = ExtResource("5_nqdpf")
 texture_hover = ExtResource("6_wltw5")

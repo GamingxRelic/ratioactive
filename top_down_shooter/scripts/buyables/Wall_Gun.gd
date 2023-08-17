@@ -35,11 +35,12 @@ func _on_buyable_component_purchased():
 	if PlayerGun.weapons.size() < PlayerGun.max_weapon_count:
 		for i in PlayerGun.weapons:
 			if i.name == weapon_res.name:
-				#print("gun exists")
+				buyable_component.refund()
 				return
 		World.kaching_sound.emit()
 		PlayerGun.weapons.append(weapon_res.duplicate())
 		PlayerGun.gun_added.emit()
 		return
-	
-	print("error_wall_buy ", self)
+	else:
+		buyable_component.refund()
+		return

@@ -10,7 +10,8 @@ var current_level : Level
 
 var player : CharacterBody2D
 var player_pos : Vector2 
-var player_hp
+var player_hp : float
+var player_max_hp : float
 var player_hurtbox : Area2D
 var player_points : int
 var add_points : int
@@ -42,7 +43,8 @@ var remaining_wave_enemy_count : int:
 func reset() -> void:
 	player = null
 	player_pos = Vector2.ZERO
-	player_hp = null
+	player_hp = 0.0
+	player_max_hp = 0.0
 	player_hurtbox = null
 	player_points = 0
 	add_points = 0

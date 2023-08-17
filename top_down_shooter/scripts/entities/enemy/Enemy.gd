@@ -76,7 +76,21 @@ func _on_health_component_death() -> void:
 	health_bar.visible = false
 	hurtbox_component.set_process(false)
 	World.total_kills += 1
+	attempt_spawn_powerup()
 	anim.play("death")
+
+func attempt_spawn_powerup() -> void:
+	var rand = randi_range(0,100)
+	if rand in range(0,8):
+		var health_drop = preload("res://scenes/entities/drops/powerups/Health_Drop.tscn").instantiate()
+		health_drop.position = position
+		World.current_level.entities.call_deferred("add_child", health_drop)
+		return
+	elif rand in range(9,15):
+		var ammo_drop = preload("res://scenes/entities/drops/powerups/Ammo_Drop.tscn").instantiate()
+		ammo_drop.position = position
+		World.current_level.entities.call_deferred("add_child", ammo_drop)
+		return
 
 func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector2) -> void:
 	if alive:
@@ -99,7 +113,6 @@ func _on_hurtbox_component_took_damage(dmg_amnt : float, knockback_amnt : Vector
 
 func _on_navigation_timer_timeout() -> void:
 	set_movement_target(World.player_pos)
-
 
 func _on_animation_player_animation_finished(anim_name) -> void:
 	match anim_name:
@@ -126,7 +139,8 @@ func _on_attackbox_component_area_exited(area) -> void:
 		attempt_player_damage_timer.stop()
 
 func _on_attempt_player_damage_timer_timeout() -> void:
-	World.player_hurtbox.damage(damage, velocity*knockback_amount)
+	if World.game_running:
+		World.player_hurtbox.damage(damage, velocity*knockback_amount)
 
 func _on_kill_all_enemies() -> void:
 	queue_free()

@@ -9,6 +9,7 @@
 radius = 5.0
 
 [node name="Dropped_Weapon" type="Area2D" groups=["interactable"]]
+z_index = 1
 collision_layer = 32
 collision_mask = 34
 script = ExtResource("1_82l5x")
@@ -25,7 +26,8 @@ offset_top = -8.0
 offset_bottom = -8.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.06
+z_index = -1
+energy = 0.1
 blend_mode = 1
 texture = ExtResource("3_5hjji")
 texture_scale = 0.05

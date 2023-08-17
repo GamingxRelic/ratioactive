@@ -123,6 +123,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PointsLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
+anchor_top = -0.0518519
 anchor_right = 0.0697917
 anchor_bottom = -0.0518519
 offset_left = 49.0

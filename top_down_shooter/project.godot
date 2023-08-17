@@ -150,6 +150,7 @@ throw_grenade={
 2d_physics/layer_5="Tail"
 2d_physics/layer_6="Interactable"
 2d_physics/layer_7="Spawner"
+2d_physics/layer_8="Bullet Impassable"
 
 [rendering]
 

@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=11 format=3 uid="uid://bamv422s6nhe2"]
+
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_b56e7"]
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_di77s"]
+[ext_resource type="Texture2D" uid="uid://cp4wx0o8kj1x4" path="res://assets/sprites/guns/fish_barrel.png" id="2_2k25t"]
+[ext_resource type="Texture2D" uid="uid://ps36xtyal2gy" path="res://assets/sprites/bullets/fish_barrel_bullet_1.png" id="2_8rd0w"]
+[ext_resource type="Texture2D" uid="uid://3ejimqax1mc6" path="res://assets/sprites/bullets/fish_barrel_bullet_2.png" id="3_6jgqa"]
+[ext_resource type="Texture2D" uid="uid://bqbd804l1tl42" path="res://assets/sprites/bullets/fish_barrel_bullet_3.png" id="4_my2xf"]
+[ext_resource type="Texture2D" uid="uid://bcy3jrg1ymfat" path="res://assets/sprites/bullets/fish_barrel_bullet_4.png" id="5_gsrdl"]
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="6_6lply"]
+[ext_resource type="AudioStream" uid="uid://bul55tpw0ioyw" path="res://assets/audio/weapons/guns/water_splash.mp3" id="7_udcln"]
+
+[sub_resource type="Resource" id="Resource_lfxar"]
+script = ExtResource("6_6lply")
+bullet_speed = 80.0
+knockback_amount = 0.45
+piercing = false
+collision_polygon_verticies = PackedVector2Array()
+randomize_textures = true
+randomized_textures_array = Array[Texture]([ExtResource("2_8rd0w"), ExtResource("3_6jgqa"), ExtResource("4_my2xf"), ExtResource("5_gsrdl")])
+sprite_rotating = false
+sprite_rotate_speed = 0.0
+homing = false
+
+[resource]
+script = ExtResource("1_di77s")
+rate_of_fire = 0.7
+damage = 35.0
+name = "Fish Barrel"
+texture = ExtResource("2_2k25t")
+position = Vector2(0, 0)
+gun_tip_position = Vector2(10, 0)
+bullet = ExtResource("1_b56e7")
+bullet_res = SubResource("Resource_lfxar")
+ammo = 12
+total_ammo = 60
+clip_size = 12
+max_ammo = 60
+reload_time = 1.2
+cantuna_price = 950
+bullet_spread = 0.083
+bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
+fire_sound = ExtResource("7_udcln")
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.0117647, 0.933333, 0.870588, 1)
+fire_flash_energy = 1.0

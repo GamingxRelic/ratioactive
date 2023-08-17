@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://diogxj07t7nb2"]
+
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_0fvuv"]
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_2dqyy"]
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="2_pkvj6"]
+[ext_resource type="Texture2D" uid="uid://b1oh7lqnvd1fq" path="res://assets/sprites/bullets/pencil_bullet.png" id="3_xwpqe"]
+[ext_resource type="AudioStream" uid="uid://cswilsphysplc" path="res://assets/audio/weapons/guns/pencil_gun_fire.wav" id="4_7eh5t"]
+[ext_resource type="Texture2D" uid="uid://bhvealxtragx1" path="res://assets/sprites/guns/pencil.png" id="6_8dkyr"]
+
+[sub_resource type="Resource" id="Resource_nqswk"]
+script = ExtResource("2_pkvj6")
+bullet_speed = 85.0
+knockback_amount = 1.2
+piercing = false
+texture = ExtResource("3_xwpqe")
+collision_polygon_verticies = PackedVector2Array()
+sprite_rotating = false
+sprite_rotate_speed = 0.0
+homing = false
+
+[resource]
+script = ExtResource("1_0fvuv")
+rate_of_fire = 0.6
+damage = 40.0
+name = "Pencil"
+texture = ExtResource("6_8dkyr")
+randomize_textures = false
+randomized_textures_array = Array[Texture]([])
+position = Vector2(0, 0)
+gun_tip_position = Vector2(9, -1)
+bullet = ExtResource("1_2dqyy")
+bullet_res = SubResource("Resource_nqswk")
+ammo = 6
+total_ammo = 32
+clip_size = 6
+max_ammo = 24
+reload_time = 3.2
+cantuna_price = 900
+bullet_spread = 0.042
+bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
+fire_sound = ExtResource("4_7eh5t")
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.901961, 0.815686, 0.4, 1)
+fire_flash_energy = 1.0

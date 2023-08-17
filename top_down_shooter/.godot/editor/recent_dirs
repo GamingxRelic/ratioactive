@@ -1,3 +1,6 @@
+D:/Godot/Godot_4/projects/exports
+res://resources/weapon
+res://scripts/entities/drops/powerups
 res://scripts/menus
 res://assets/menus/main_menu
 res://assets/fonts
@@ -5,7 +8,6 @@ res://scripts/levels/kitchen
 res://scripts/buyables
 res://scripts/autoload
 res://scripts/levels
-res://resources/weapon
 res://assets/shaders
 res://scripts/gun
 res://scenes/weapons/bullets
@@ -18,5 +20,3 @@ res://scripts/world
 res://scripts/world/spawners
 res://resources/labels
 res://scripts/entities/drops
-res://assets/sprites/guns
-res://components/scenes

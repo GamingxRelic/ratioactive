@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://c1i82vopuw5uy"]
+
+[ext_resource type="Script" path="res://resources/weapon/Base_Weapon.gd" id="1_h3dpk"]
+[ext_resource type="PackedScene" uid="uid://cdg603v00ec1w" path="res://scenes/weapons/bullets/Standard_Bullet.tscn" id="1_tkvwc"]
+[ext_resource type="Script" path="res://resources/bullet/Bullet_Res.gd" id="2_18tfp"]
+[ext_resource type="Texture2D" uid="uid://b78vhd76l6r7o" path="res://assets/sprites/bullets/pea_shooter_bullet.png" id="3_cgn44"]
+[ext_resource type="AudioStream" uid="uid://dkpq3rxpy7e22" path="res://assets/audio/weapons/guns/pea_shooter.wav" id="4_bp6bv"]
+[ext_resource type="Texture2D" uid="uid://crbm6ethxdhns" path="res://assets/sprites/guns/pea_shooter.png" id="6_nx7mb"]
+
+[sub_resource type="Resource" id="Resource_qgnu7"]
+script = ExtResource("2_18tfp")
+bullet_speed = 70.0
+knockback_amount = 0.2
+piercing = false
+texture = ExtResource("3_cgn44")
+collision_polygon_verticies = PackedVector2Array()
+randomize_textures = false
+randomized_textures_array = Array[Texture]([])
+sprite_rotating = false
+sprite_rotate_speed = 0.0
+homing = false
+
+[resource]
+script = ExtResource("1_h3dpk")
+rate_of_fire = 0.1
+damage = 6.0
+name = "Pea Shooter"
+texture = ExtResource("6_nx7mb")
+position = Vector2(0, 0)
+gun_tip_position = Vector2(8, -1)
+bullet = ExtResource("1_tkvwc")
+bullet_res = SubResource("Resource_qgnu7")
+ammo = 30
+total_ammo = 270
+clip_size = 30
+max_ammo = 270
+reload_time = 1.4
+cantuna_price = 650
+bullet_spread = 0.042
+bullet_count = 1
+randomize_bullet_count = false
+randomized_bullet_count_min = 1
+randomized_bullet_count_max = 1
+fire_sound = ExtResource("4_bp6bv")
+fire_flash_scale = 0.05
+fire_flash_color = Color(0.211765, 0.564706, 0.270588, 1)
+fire_flash_energy = 1.0

@@ -16,6 +16,8 @@ var game_paused : bool = false:
 @onready var menus = $Menus
 
 func _ready():
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), 0)
+	
 	World.player_death.connect(_on_player_death)
 	Menus.main_menu_selected.connect(_on_main_menu_selected)
 	Menus.levels_menu_selected.connect(_on_levels_menu_selected)

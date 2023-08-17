@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c23hkt5ahtdl7"]
+[gd_scene load_steps=9 format=3 uid="uid://c23hkt5ahtdl7"]
 
 [ext_resource type="Script" path="res://scripts/menus/Options_Menu.gd" id="1_nktoh"]
-[ext_resource type="Texture2D" uid="uid://b4b6lht36on74" path="res://assets/menus/options_background.png" id="2_jyeda"]
-[ext_resource type="Texture2D" uid="uid://b1qvq13uxkq1g" path="res://assets/menus/back_level_button.png" id="3_x58r6"]
+[ext_resource type="Texture2D" uid="uid://d0yjito6nt5mq" path="res://assets/menus/options/options.png" id="2_iym67"]
+[ext_resource type="Texture2D" uid="uid://bvp2gld00rwlv" path="res://assets/menus/options/back_button.png" id="3_3bd85"]
+[ext_resource type="Texture2D" uid="uid://cigncxpwj5wri" path="res://assets/menus/options/back_button_highlighted.png" id="4_qpl1l"]
+[ext_resource type="AudioStream" uid="uid://b81rctyrafctp" path="res://assets/audio/entities/enemies/enemy_damage_1.wav" id="4_wdipv"]
+[ext_resource type="AudioStream" uid="uid://483xe5isho0c" path="res://assets/audio/menus/button_hover.mp3" id="6_p2ley"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fx5mv"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_5dpnp"]
+font_size = 32
 
 [node name="Options_Menu" type="Control"]
 layout_mode = 3
@@ -18,21 +27,93 @@ script = ExtResource("1_nktoh")
 [node name="Background" type="TextureRect" parent="CanvasLayer"]
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("2_jyeda")
+texture = ExtResource("2_iym67")
 metadata/_edit_use_anchors_ = true
 
-[node name="Back" type="Button" parent="CanvasLayer"]
+[node name="Back" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.0
-offset_top = 227.0
-offset_right = 132.0
-offset_bottom = 335.0
+offset_left = -92.0
+offset_top = 305.0
+offset_right = 92.0
+offset_bottom = 369.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("3_x58r6")
+texture_normal = ExtResource("3_3bd85")
+texture_hover = ExtResource("4_qpl1l")
 
+[node name="Sound" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -17.5
+offset_right = -109.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sound Volume:"
+label_settings = SubResource("LabelSettings_fx5mv")
+
+[node name="Sound_Slider" type="HSlider" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -23.5
+offset_right = 347.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -80.0
+max_value = 24.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="Sound_Test_Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 367.0
+offset_top = -22.0
+offset_right = 508.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sound_Test" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 375.0
+offset_top = -17.5
+offset_right = 503.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Test"
+label_settings = SubResource("LabelSettings_5dpnp")
+
+[node name="Test_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wdipv")
+volume_db = 24.0
+
+[node name="Button_Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_p2ley")
+
+[connection signal="mouse_entered" from="CanvasLayer/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Sound_Slider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="mouse_entered" from="CanvasLayer/Sound_Test_Button" to="." method="_on_sound_test_button_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/Sound_Test_Button" to="." method="_on_sound_test_button_pressed"]

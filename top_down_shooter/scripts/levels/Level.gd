@@ -33,7 +33,7 @@ func _on_next_wave() -> void:
 	if wave == 0:
 		wave_timer.wait_time = 3
 	else:
-		wave_timer.wait_time = 1
+		wave_timer.wait_time = 15
 	timer_countdown_value = int(wave_timer.wait_time)
 	World.UI.set_wave_label("New Wave In " + str(timer_countdown_value))
 	World.UI.play_animation("show_wave_label")

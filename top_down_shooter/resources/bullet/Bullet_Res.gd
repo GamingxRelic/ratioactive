@@ -10,6 +10,9 @@ var damage : float
 @export var texture : Texture
 @export var collision_polygon_verticies : PackedVector2Array
 
+@export var randomize_textures := false
+@export var randomized_textures_array : Array[Texture]
+
 ## If the bullet should be spinning in circles as it moves
 @export var sprite_rotating : bool = false
 @export var sprite_rotate_speed : float = 0.0

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://q0pye6x6jgl" path="res://assets/sprites/enemies/cheddar/cheddar_enemy.png" id="2_bapx2"]
 [ext_resource type="PackedScene" uid="uid://cxjymoqn8dvxr" path="res://components/scenes/Health_Component.tscn" id="3_n25gn"]
 [ext_resource type="PackedScene" uid="uid://cn7f8fv4egtsq" path="res://components/scenes/Hurtbox_Component.tscn" id="4_80d3p"]
-[ext_resource type="AudioStream" uid="uid://d13f5evpunwgw" path="res://assets/audio/entities/enemies/enemy1_1.wav" id="5_xjlie"]
-[ext_resource type="AudioStream" uid="uid://c08ao58xcao3h" path="res://assets/audio/weapons/guns/fart.mp3" id="6_4qv54"]
+[ext_resource type="AudioStream" uid="uid://b81rctyrafctp" path="res://assets/audio/entities/enemies/enemy_damage_1.wav" id="5_lpphl"]
+[ext_resource type="AudioStream" uid="uid://ccqbwu6wcbh3e" path="res://assets/audio/entities/enemies/enemy_death_1.wav" id="6_uhrgm"]
 [ext_resource type="PackedScene" uid="uid://d4ab403iyuxsk" path="res://components/scenes/Attackbox_Component.tscn" id="7_3ewax"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8upc"]
@@ -44,55 +44,55 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_xjlie")]
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/path = NodePath(".:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:modulate")
+tracks/4/path = NodePath("NavigationAgent2D:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [4]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("NavigationAgent2D:process_mode")
+tracks/5/path = NodePath("Hurtbox_Component:monitoring")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Hurtbox_Component:monitoring")
+tracks/6/path = NodePath("Hurtbox_Component:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -104,7 +104,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Hurtbox_Component:monitorable")
+tracks/7/path = NodePath(".:active")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -116,50 +116,50 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath(".:active")
+tracks/8/path = NodePath("Attackbox_Component:monitoring")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Attackbox_Component:monitoring")
+tracks/9/path = NodePath("Sprite2D:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Sprite2D:frame")
+tracks/10/path = NodePath("Sprite2D:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Sprite2D:position")
+tracks/11/path = NodePath("AudioStreamPlayer2D:stream")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [ExtResource("5_lpphl")]
 }
 
 [sub_resource type="Animation" id="Animation_f41kl"]
@@ -199,7 +199,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_4qv54")]
+"values": [ExtResource("6_uhrgm")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -390,8 +390,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_xjlie")
-volume_db = 4.16
+stream = ExtResource("5_lpphl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
